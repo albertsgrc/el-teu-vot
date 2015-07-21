@@ -11,5 +11,5 @@ header.fullWidth(layout="row", layout-align="space-between start")
        a(ng-click="setLanguage('ca')", ng-if="!isCompact") català
        span(ng-if="!isCompact") &nbsp;|&nbsp;
        a(ng-click="setLanguage('es')", ng-if="!isCompact") castellano
-       md-button#menuButton.md-icon-button(ng-if="isCompact")
+       md-button#menuButton.md-icon-button(ng-if="isCompact", ng-click="toggleNav()")
            i.mdi.mdi-menu

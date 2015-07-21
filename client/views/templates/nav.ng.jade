@@ -1,4 +1,6 @@
-footer#mainNav(layout="row", layout-align="center center")
-    md-button(ng-click="goTo('yourVote')") {{ 'navYourVote' | translate }}
-    md-button(ng-click="goTo('methodology')") {{ 'navMethodology' | translate }}
-    md-button(ng-click="goTo('whoAreWe')") {{ 'navWhoAreWe' | translate }}
+md-sidenav.md-sidenav-right.md-whiteframe-z2.animateShow(md-component-id="right")
+   div(ng-controller="NavCtrl")
+      div.md-toolbar-tools#sideNavToolbar(layout="row", layout-align="end center")
+         md-button.md-icon-button#sideNavCloseButton(ng-click="close()")
+            i.mdi.mdi-close#sideNavCloseIcon
+      md-content(layout-padding="")

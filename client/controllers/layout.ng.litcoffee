@@ -1,6 +1,6 @@
 # Layout controller
 
-    LayoutCtrl = ($scope, $translate, $rootScope, $state, $window) ->
+    LayoutCtrl = ($scope, $translate, $rootScope, $state, $window, $mdSidenav, $mdUtil) ->
         $scope.socialClick = (socialMedia) ->
             switch socialMedia
                 when "facebook" then $window.open 'http://www.facebook.com'
@@ -21,5 +21,15 @@
 
         $scope.goTo = (state) -> $state.go(state)
 
+        buildToggler = (navID) ->
+            debounceFn = $mdUtil.debounce((->
+                $mdSidenav(navID)
+                .toggle()
+            ), 300)
 
-    app.controller('LayoutCtrl', ['$scope', '$translate', '$rootScope', '$state', '$window', LayoutCtrl])
+            return debounceFn
+
+        $scope.toggleNav = buildToggler('right')
+
+
+    app.controller('LayoutCtrl', ['$scope', '$translate', '$rootScope', '$state', '$window', '$mdSidenav','$mdUtil', LayoutCtrl])
