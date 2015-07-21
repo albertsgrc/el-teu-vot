@@ -1,0 +1,48 @@
+@import "client/stylesheets/utilities/variables"
+
+$socialButtonsSize: 20px
+
+$welcomeLogoWidth: 200px
+
+$reducedSizeWelcomeLogoWidth: 125px
+
+$footerHeight: 50px
+
+$menuButtonSize: 30px
+
+#socialButtons i
+    font-size: $socialButtonsSize
+
+#socialButtons button
+    margin-top: -10px
+
+#socialButtons button:first-child
+    margin-right: -20px
+    margin-left: -15px
+
+#mainHeaderLogo
+    width: $welcomeLogoWidth
+    height: 2/3 * $welcomeLogoWidth
+
+#mainNav
+    height: $footerHeight
+    min-height: $footerHeight
+    background-color: $blue
+
+    button
+        height: 100%
+        margin-top: 0 !important
+        margin-bottom: 0 !important
+
+.reducedLogoSize
+    width: $reducedSizeWelcomeLogoWidth !important
+    height: 2/3 * $reducedSizeWelcomeLogoWidth !important
+
+#menuButton i
+    font-size: $menuButtonSize
+
+header
+    padding: $pagePadding $pagePadding 0 $pagePadding
+
+#contentWrapper
+    padding: 0 $pagePadding 0 $pagePadding
