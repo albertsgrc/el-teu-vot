@@ -1,3 +1,4 @@
-div#welcomeContent(layout="column", layout-align="start center")
+div#welcomeContent(layout="column", layout-align="start center", flex="")
     p#welcomeIntroText {{ 'welcomeIntroText' | translate }}
-    md-button#welcomeStartButton(ng-click="goTo('questions')") {{ 'welcomeStart' | translate }}
+    md-button#welcomeStartButton(ng-click="goTo('questions')")
+        span {{ 'welcomeStart' | translate }}

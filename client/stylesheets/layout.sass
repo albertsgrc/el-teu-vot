@@ -12,6 +12,14 @@ $menuButtonSize: 30px
 
 $sidenavWidth: 250px
 
+$contentBottomMargin: 5%
+$contentTopMargin: 3%
+$contentLeftRightMargin: 3%
+
+$headerLeftRightMargin: $contentLeftRightMargin
+$headerTopMargin: $contentLeftRightMargin
+$headerBottomMargin: 0
+
 #socialButtons i
     font-size: $socialButtonsSize
 
@@ -26,9 +34,7 @@ $sidenavWidth: 250px
     width: $welcomeLogoWidth
     height: 2/3 * $welcomeLogoWidth
 
-#mainNav
-    height: $footerHeight
-    min-height: $footerHeight
+footer
     background-color: $blue
 
     button
@@ -44,10 +50,10 @@ $sidenavWidth: 250px
     font-size: $menuButtonSize
 
 header
-    padding: $pagePadding $pagePadding 0 $pagePadding
+    padding: $headerTopMargin $headerLeftRightMargin $headerBottomMargin $headerLeftRightMargin
 
-#contentWrapper
-    padding: 0 $pagePadding 0 $pagePadding
+main
+    margin: $contentTopMargin $contentLeftRightMargin $contentBottomMargin $contentLeftRightMargin
 
 #sideNavCloseIcon
     color: white
@@ -67,3 +73,4 @@ md-sidenav
     max-width: $sidenavWidth
     min-width: $sidenavWidth !important
     width: $sidenavWidth !important
+

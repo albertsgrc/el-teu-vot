@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b426374-577f-48cd-8a18-520146477939" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/templates/footer.ng.jade" afterPath="$PROJECT_DIR$/client/views/templates/footer.ng.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/templates/header.ng.jade" afterPath="$PROJECT_DIR$/client/views/templates/header.ng.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/index.jade" afterPath="$PROJECT_DIR$/client/views/index.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/partials/layout.ng.jade" afterPath="$PROJECT_DIR$/client/views/partials/layout.ng.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/stylesheets/layout.sass" afterPath="$PROJECT_DIR$/client/stylesheets/layout.sass" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/stylesheets/main.sass" afterPath="$PROJECT_DIR$/client/stylesheets/main.sass" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/stylesheets/utilities/variables.sass" afterPath="$PROJECT_DIR$/client/stylesheets/utilities/variables.sass" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/partials/welcome.ng.jade" afterPath="$PROJECT_DIR$/client/views/partials/welcome.ng.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/stylesheets/welcome.sass" afterPath="$PROJECT_DIR$/client/stylesheets/welcome.sass" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/partials/whoAreWe.ng.jade" afterPath="$PROJECT_DIR$/client/views/partials/whoAreWe.ng.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ETV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +37,24 @@
         <entry file="file://$PROJECT_DIR$/client/views/partials/layout.ng.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footer.ng.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/views/templates/footer.ng.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding>
+                <marker date="1438023643360" expanded="true" signature="6:352" placeholder="..." />
+                <marker date="1438023643360" expanded="true" signature="14:352" placeholder="..." />
+                <marker date="1438023643360" expanded="true" signature="76:154" placeholder="..." />
+                <marker date="1438023643360" expanded="true" signature="172:256" placeholder="..." />
+                <marker date="1438023643360" expanded="true" signature="274:352" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -38,58 +63,45 @@
         <entry file="file://$PROJECT_DIR$/client/views/partials/welcome.ng.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="95" selection-start-line="2" selection-start-column="95" selection-end-line="2" selection-end-column="95" />
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/index.jade">
+      <file leaf-file-name="welcome.sass" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/stylesheets/welcome.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.1534091">
+              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.ng.jade" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/views/templates/header.ng.jade">
+      <file leaf-file-name="whoWeAre.sass" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/stylesheets/whoWeAre.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5910448">
-              <caret line="11" column="50" selection-start-line="11" selection-start-column="50" selection-end-line="11" selection-end-column="50" />
+            <state vertical-scroll-proportion="-1.862069">
+              <caret line="6" column="6" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nav.ng.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/templates/nav.ng.jade">
+      <file leaf-file-name="whoAreWe.ng.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/views/partials/whoAreWe.ng.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="5" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layout.ng.litcoffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/controllers/layout.ng.litcoffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nav.ng.litcoffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/controllers/nav.ng.litcoffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-              <folding />
+            <state vertical-scroll-proportion="-6.827586">
+              <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+              <folding>
+                <marker date="1438028624198" expanded="true" signature="3:556" placeholder="..." />
+                <marker date="1438028624198" expanded="true" signature="50:556" placeholder="..." />
+                <marker date="1438028624198" expanded="true" signature="135:304" placeholder="..." />
+                <marker date="1438028624198" expanded="true" signature="207:304" placeholder="..." />
+                <marker date="1438028624198" expanded="true" signature="339:556" placeholder="..." />
+                <marker date="1438028624198" expanded="true" signature="412:556" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,8 +109,18 @@
       <file leaf-file-name="main.sass" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/stylesheets/main.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.6666665">
-              <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+            <state vertical-scroll-proportion="-1.2413793">
+              <caret line="4" column="40" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.ng.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/views/templates/header.ng.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -107,18 +129,18 @@
       <file leaf-file-name="layout.sass" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/stylesheets/layout.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.074074">
-              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state vertical-scroll-proportion="-5.3703704">
+              <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nav.ng.litcoffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/directives/nav.ng.litcoffee">
+      <file leaf-file-name="variables.sass" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/stylesheets/utilities/variables.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+            <state vertical-scroll-proportion="-0.6666667">
+              <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -154,7 +176,6 @@
         <option value="$PROJECT_DIR$/client/stylesheets/_main.sass" />
         <option value="$PROJECT_DIR$/client/controllers/headerCtrl.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/stylesheets/Amain.sass" />
-        <option value="$PROJECT_DIR$/client/stylesheets/utilities/variables.sass" />
         <option value="$PROJECT_DIR$/client/stylesheets/header.sass" />
         <option value="$PROJECT_DIR$/client/lib/app.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/views/index.ng.jade" />
@@ -167,9 +188,7 @@
         <option value="$PROJECT_DIR$/client/directives/footer.jade" />
         <option value="$PROJECT_DIR$/client/directives/footer.litcoffee" />
         <option value="$PROJECT_DIR$/client/directives/header.ng.litcoffee" />
-        <option value="$PROJECT_DIR$/client/views/templates/footer.ng.jade" />
         <option value="$PROJECT_DIR$/client/controllers/header.ng.litcoffee" />
-        <option value="$PROJECT_DIR$/client/stylesheets/welcome.sass" />
         <option value="$PROJECT_DIR$/client/controllers/questions.coffee" />
         <option value="$PROJECT_DIR$/client/translations.litcoffee" />
         <option value="$PROJECT_DIR$/client/routes.ng.litcoffee" />
@@ -180,19 +199,22 @@
         <option value="$PROJECT_DIR$/client/controllers/welcome.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/translations.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/stylesheets/whoWeAre.sass" />
-        <option value="$PROJECT_DIR$/client/views/partials/welcome.ng.jade" />
-        <option value="$PROJECT_DIR$/client/views/partials/whoAreWe.ng.jade" />
-        <option value="$PROJECT_DIR$/client/views/index.jade" />
         <option value="$PROJECT_DIR$/client/directives/footer.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/directives/nav.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/controllers/nav.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/controllers/layout.ng.litcoffee" />
         <option value="$PROJECT_DIR$/client/views/partials/questions.ng.jade" />
-        <option value="$PROJECT_DIR$/client/views/partials/layout.ng.jade" />
         <option value="$PROJECT_DIR$/client/views/templates/nav.ng.jade" />
-        <option value="$PROJECT_DIR$/client/stylesheets/layout.sass" />
-        <option value="$PROJECT_DIR$/client/stylesheets/main.sass" />
+        <option value="$PROJECT_DIR$/client/views/partials/layout.ng.jade" />
+        <option value="$PROJECT_DIR$/client/views/index.jade" />
+        <option value="$PROJECT_DIR$/client/views/templates/footer.ng.jade" />
         <option value="$PROJECT_DIR$/client/views/templates/header.ng.jade" />
+        <option value="$PROJECT_DIR$/client/stylesheets/main.sass" />
+        <option value="$PROJECT_DIR$/client/views/partials/welcome.ng.jade" />
+        <option value="$PROJECT_DIR$/client/views/partials/whoAreWe.ng.jade" />
+        <option value="$PROJECT_DIR$/client/stylesheets/utilities/variables.sass" />
+        <option value="$PROJECT_DIR$/client/stylesheets/layout.sass" />
+        <option value="$PROJECT_DIR$/client/stylesheets/welcome.sass" />
       </list>
     </option>
   </component>
@@ -345,6 +367,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ETV" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ETV" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utilities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -417,26 +461,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1280" height="776" extended-state="7" />
+    <frame x="0" y="24" width="1280" height="776" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24184567" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21002387" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980111" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4632353" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3529412" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -478,7 +522,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="5" selection-end-column="35" />
-          <folding />
+          <folding>
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -494,7 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -510,7 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -557,7 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -628,14 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/stylesheets/utilities/variables.sass">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/startup/main.litcoffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -699,40 +737,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/partials/methodology.ng.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/partials/whoAreWe.ng.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/partials/yourVote.ng.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/stylesheets/welcome.sass">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/templates/footer.ng.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,18 +758,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/stylesheets/whoWeAre.sass">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="11.925926">
-          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/partials/questions.ng.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -769,7 +769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -789,6 +788,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/templates/nav.ng.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="5" selection-end-column="35" />
+          <folding>
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1437500359599" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/directives/nav.ng.litcoffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -797,34 +809,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/partials/methodology.ng.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+          <caret line="8" column="63" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/templates/nav.ng.jade">
+    <entry file="file://$PROJECT_DIR$/client/views/templates/footer.ng.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="5" selection-end-column="35" />
-          <folding />
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <marker date="1438023643360" expanded="true" signature="6:352" placeholder="..." />
+            <marker date="1438023643360" expanded="true" signature="14:352" placeholder="..." />
+            <marker date="1438023643360" expanded="true" signature="76:154" placeholder="..." />
+            <marker date="1438023643360" expanded="true" signature="172:256" placeholder="..." />
+            <marker date="1438023643360" expanded="true" signature="274:352" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/stylesheets/layout.sass">
+    <entry file="file://$PROJECT_DIR$/client/views/templates/header.ng.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.074074">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/stylesheets/main.sass">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6666665">
-          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -832,7 +850,54 @@
     <entry file="file://$PROJECT_DIR$/client/views/partials/layout.ng.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/partials/whoAreWe.ng.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.827586">
+          <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+          <folding>
+            <marker date="1438028624198" expanded="true" signature="3:556" placeholder="..." />
+            <marker date="1438028624198" expanded="true" signature="50:556" placeholder="..." />
+            <marker date="1438028624198" expanded="true" signature="135:304" placeholder="..." />
+            <marker date="1438028624198" expanded="true" signature="207:304" placeholder="..." />
+            <marker date="1438028624198" expanded="true" signature="339:556" placeholder="..." />
+            <marker date="1438028624198" expanded="true" signature="412:556" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/stylesheets/whoWeAre.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.862069">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/stylesheets/main.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2413793">
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/stylesheets/utilities/variables.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6666667">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/stylesheets/layout.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.3703704">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -840,15 +905,15 @@
     <entry file="file://$PROJECT_DIR$/client/views/partials/welcome.ng.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="95" selection-start-line="2" selection-start-column="95" selection-end-line="2" selection-end-column="95" />
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/templates/header.ng.jade">
+    <entry file="file://$PROJECT_DIR$/client/stylesheets/welcome.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5910448">
-          <caret line="11" column="50" selection-start-line="11" selection-start-column="50" selection-end-line="11" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.1534091">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding />
         </state>
       </provider>
