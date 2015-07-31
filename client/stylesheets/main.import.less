@@ -10,14 +10,38 @@
     height: auto;
 }
 
-button.selected {
-    background-color: @orange;
+// Utils
+
+.fullHeight {
+    height: 100%;
 }
 
-button.active, button:hover {
-    font-weight: bold;
+.center-child {
+    text-align: center;
 }
 
-.center {
-    margin: 0 auto;
+.inline {
+    display: inline-block;
+}
+
+// Styling
+
+body {
+
+    button {
+        border: none !important;
+        outline: none !important;
+    }
+
+    button.selected, button.selected:hover, button.selected:active {
+        background-color: @orange !important;
+    }
+
+    button, button:active, button:hover {
+        background-color: @blue !important;
+    }
+
+    button.active, button:hover {
+        font-weight: bold;
+    }
 }
