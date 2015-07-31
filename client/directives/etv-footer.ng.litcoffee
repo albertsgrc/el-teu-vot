@@ -3,6 +3,6 @@
     footerDirective = ->
         replace: true,
         restrict: 'E',
-        templateUrl: "client/views/templates/footer.html"
+        templateUrl: "client/views/components/etv-footer.html"
 
     app.directive('etvFooter', footerDirective)

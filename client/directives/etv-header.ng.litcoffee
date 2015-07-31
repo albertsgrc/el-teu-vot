@@ -3,6 +3,6 @@
     headerDirective = ->
         replace: true,
         restrict: 'E',
-        templateUrl: "client/views/templates/header.html"
+        templateUrl: "client/views/components/etv-header.html"
 
     app.directive('etvHeader', headerDirective)

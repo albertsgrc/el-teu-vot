@@ -8,29 +8,43 @@
                 templateUrl: 'client/views/partials/layout.html',
                 controller: 'LayoutCtrl'
             )
-            .state('welcome',
+            .state('elTeuVot',
                 parent: 'layout',
                 url: '/',
-                templateUrl: 'client/views/partials/welcome.html',
-                controller: 'WelcomeCtrl'
+                templateUrl: 'client/views/partials/el-teu-vot.html',
+                controller: 'ElTeuVotCtrl'
             )
             .state('questions',
                 parent: 'layout',
+                abstract: true
                 url: '/preguntes',
-                templateUrl: 'client/views/partials/questions.html',
                 controller: 'QuestionsCtrl'
             )
-            .state('methodology',
-                parent: 'layout',
-                url: '/metodologia',
-                templateUrl: 'client/views/partials/methodology.html'
-                controller: 'MethodologyCtrl'
+            .state('politicalQuestions',
+                parent: 'questions',
+                url: '/politica'
             )
-            .state('whoAreWe',
+            .state('personalQuestions',
+                parent: 'questions',
+                url: '/personals'
+            )
+            .state('howItsDone',
+                parent: 'layout',
+                url: '/com-ho-fem',
+                templateUrl: 'client/views/partials/how-its-done.html'
+                controller: 'HowItsDoneCtrl'
+            )
+            .state('whoWeAre',
                 parent: 'layout',
                 url: '/quisom',
-                templateUrl: 'client/views/partials/whoAreWe.html'
-                controller: 'WhoAreWeCtrl'
+                templateUrl: 'client/views/partials/who-we-are.html'
+                controller: 'WhoWeAreCtrl'
+            )
+            .state('results',
+                parent: 'layout',
+                url: '/resultats',
+                templateUrl: 'client/views/partials/resultats.html'
+                controller: 'ResultsCtrl'
             )
 
         $urlRouterProvider.otherwise('/');
