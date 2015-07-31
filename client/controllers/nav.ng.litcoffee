@@ -1,6 +1,12 @@
 # Side navigation controller
 
-    NavCtrl = ($scope, $mdSidenav) ->
-        $scope.close = -> $mdSidenav('right').close()
+    NavCtrl = ($scope, $mdSidenav, $state) ->
+        $scope.close = ->
+            $mdSidenav('right').close()
 
-    app.controller('NavCtrl', ['$scope', '$mdSidenav', NavCtrl])
+        $scope.goTo = (state) ->
+            $("md-backdrop").remove()
+            $scope.close()
+            $state.go(state)
+
+    app.controller('NavCtrl', ['$scope', '$mdSidenav', '$state', NavCtrl])

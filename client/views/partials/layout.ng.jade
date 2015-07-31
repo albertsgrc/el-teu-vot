@@ -1,6 +1,6 @@
 etv-header
 
-main(flex="" layout="row" ui-view="")
+main(flex="" layout="row" ui-view="" ng-class="{ 'isCompact': isLogoCompact, 'isNonCompact': !isLogoCompact, 'headerFixed': isHeaderFixed }")
 
 etv-footer(ng-if="!isCompact")
 

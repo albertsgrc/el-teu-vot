@@ -4,6 +4,7 @@
 body
     p, i, h1, h2, h3, h4, h5, h6, a, span.text
         color: $blue
+        max-width: 100%
 
     p, h1, h2, h3, h4, h5, h6, a, button, span.text
         font-family: 'Roboto', sans-serif
@@ -17,8 +18,8 @@ body
     [data-ng-click],
     [x-ng-click]
         cursor: pointer
-        border: none
-        outline: none
+        border: 0 none !important
+        outline: 0 none !important
 
     button, button a
         color: white !important
@@ -32,6 +33,15 @@ body
 button
     span
         font-weight: 400
+
+button.noCursor
+    cursor: default
+
+.whiteText *
+    color: white !important
+
+.noMarginContent *
+    margin: 0 !important
 
 
 

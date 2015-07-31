@@ -49,10 +49,10 @@
         );
 
         $translateProvider.translations('es',
-            welcomeIntroText: 'Descubre tu posición en el mapa político catalán y decide cual será Tu Voto'
-            welcomeStart: 'Empieza'
-            navYourVote: 'Tu voto'
-            navMethodology: 'Metodologia'
+            welcomeIntroText: 'Descubre tu posición dentro del mapa político catalán y decide cual será tu voto'
+            welcomeStart: 'Empezar'
+            navYourVote: 'El teu vot'
+            navMethodology: 'Metodología'
             navWhoAreWe: 'Quienes somos'
 
             whoWeAreLeftText: 'El teu Vot és un recomanador de vot d’àmbit català, creat

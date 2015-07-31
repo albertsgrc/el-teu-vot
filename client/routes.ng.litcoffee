@@ -20,12 +20,6 @@
                 templateUrl: 'client/views/partials/questions.html',
                 controller: 'QuestionsCtrl'
             )
-            .state('yourVote',
-                parent: 'layout',
-                url: '/elteuvot',
-                templateUrl: 'client/views/partials/yourVote.html'
-                controller: 'YourVoteCtrl'
-            )
             .state('methodology',
                 parent: 'layout',
                 url: '/metodologia',
