@@ -12,6 +12,8 @@ Main translations
             howItsDone: "Com ho hem fet"
             whoWeAre: "Qui som"
 
+            soonText: "Pròximament"
+
 Welcome page
 
             welcomeText: "Descobreix la teva posició dins del mapa polític català<br/>i decideix quin serà El teu Vot"
@@ -168,6 +170,8 @@ How it's done page
             elTeuVot: "El teu vot"
             howItsDone: "Cómo está hecho"
             whoWeAre: "Quienes somos"
+
+            soonText: "Próximamente"
 
             whoWeAreMainText: "El teu Vot és una Aplicació d’Orientació del Vot (Voting Advice Application) d’àmbit català, creat en el marc
                 de les eleccions al Parlament de Catalunya del 27 de setembre de 2015. Les Aplicacions d’Orientació del
