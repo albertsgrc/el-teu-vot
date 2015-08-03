@@ -1,1 +1,20 @@
+#sideNavContainer
+    .closeButton
+        .closeButtonWrapper
+            a(href="" ng-click="toggleSidenav()")
+                i.mdi.mdi-close
 
+    .sideNavButtons
+        .sideNavButtonWrapper
+            button(ui-sref="elTeuVot" ui-sref-active="active")
+                span.text-uppercase(translate="{{ 'elTeuVot' }}")
+            button(ui-sref="howItsDone" ui-sref-active="active")
+                span.text-uppercase(translate="{{ 'howItsDone' }}")
+            button(ui-sref="whoWeAre" ui-sref-active="active")
+                span.text-uppercase(translate="{{ 'whoWeAre' }}")
+
+    .sideNavLanguageSelector
+        .sideNavLanguageSelectorWrapper
+            a(href="" ng-click="setLanguage('ca')") català
+            span &nbsp;|&nbsp;
+            a(href="" ng-click="setLanguage('es')") castellano

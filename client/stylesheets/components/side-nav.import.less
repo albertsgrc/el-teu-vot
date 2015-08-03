@@ -1,0 +1,123 @@
+#sideNavContainer {
+    position: fixed;
+
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    z-index: 300;
+
+    background-color: @blue;
+
+    display: none;
+    width: 20%;
+    max-width: 370px;
+    min-width: 200px;
+
+    overflow-y: auto;
+
+    .closeButton {
+        width: 100%;
+        height: 15%;
+        min-height: 50px;
+
+        .closeButtonWrapper {
+            position: relative;
+            top: 25%;
+            left: 75%;
+            display: inline-block;
+        }
+
+        i {
+            color: white;
+            font-size: 40px;
+        }
+    }
+
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) and (min-height: 500px) {
+        .sideNavButtons button span {
+            font-size: 16px;
+        }
+
+        .closeButton i {
+            padding-right: 5px;
+            font-size: 45px;
+        }
+
+        .sideNavLanguageSelector {
+            span, a {
+                font-size: 16px;
+            }
+        }
+    }
+
+    @media (min-width: @screen-lg-min) and (min-height: 500px) {
+        .sideNavButtons button span {
+            font-size: 18px;
+        }
+
+        .closeButton  i {
+            padding-right: 10px;
+            font-size: 50px;
+        }
+
+        .sideNavLanguageSelector {
+            span, a {
+                font-size: 18px;
+            }
+        }
+    }
+
+    .sideNavButtons {
+        min-height: 100px;
+        height: 70%;
+
+        button {
+            height: 35px;
+            line-height: 35px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .sideNavButtonWrapper {
+            position: relative;
+            top: 50%;
+
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+    }
+
+    .sideNavLanguageSelector {
+
+        a, span {
+            color: white !important;
+        }
+
+        font-size: 15px;
+        height: 15%;
+        min-height: 50px;
+        text-align: center;
+
+        .sideNavLanguageSelectorWrapper {
+            position: relative;
+            top: 50%;
+        }
+
+        @media(max-height: 450px) {
+            .sideNavLanguageSelectorWrapper {
+                top: 30%;
+            }
+        }
+
+        @media(max-height: 330px) {
+            .sideNavLanguageSelectorWrapper {
+                top: 15%;
+            }
+        }
+
+    }
+}

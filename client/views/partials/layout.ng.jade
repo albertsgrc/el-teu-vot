@@ -1,5 +1,7 @@
 etv-header
 
-#main(ui-view="")
+#main(ui-view="" ng-class="{ 'fixedHeader': !$state.includes('elTeuVot') }")
 
-etv-footer
+etv-footer(ng-if="!$state.includes('questions') && !$state.includes('results')")
+
+etv-side-nav(ng-if="$state.includes('questions') || $state.includes('results')")

@@ -8,3 +8,18 @@ html {
 body {
     margin-bottom: @footer-height;
 }
+
+// Styling
+
+body {
+    min-height: @min-page-height;
+    min-width: @min-page-width;
+}
+
+footer {
+    min-width: @min-page-width;
+}
+
+body #main:not(.fixedHeader) {
+    padding-top: 0 !important;
+}

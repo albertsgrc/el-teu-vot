@@ -1,1 +1,88 @@
-@-ms-viewport       { width: device-width; }
+#howItsDoneContainer {
+    .howItsDoneExampleButtonsContainer {
+        margin-bottom: 20px;
+    }
+
+    .howItsDoneExampleButtonsContainer button {
+        cursor: default;
+    }
+
+    .howItsDoneExampleButtonsContainer button:hover {
+        font-weight: normal !important;
+    }
+
+    .textLeftImage {
+        max-width: 70px;
+        width: 100%;
+    }
+
+    .imageTextContainer {
+        margin-bottom: 20px;
+    }
+
+    @media(min-width: @screen-md-min) {
+        .textImageContainer {
+            padding-right: 0;
+        }
+
+        .textImageTextContainer {
+            padding-left: 0;
+        }
+    }
+
+    @media(max-width: @screen-xxs-max) {
+        .textImageContainer {
+            margin-bottom: 20px;
+        }
+    }
+
+    div.largeTable {
+        tbody tr:last-child {
+            td {
+                height: 50px;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .howItsDoneTable {
+        width: 100%;
+        border-color: @orange;
+        border-width: 2px;
+
+        th, td {
+            border-color: @orange;
+            border-width: 2px;
+        }
+
+        td {
+            width: 16.66666%;
+            text-align: center;
+        }
+
+        th {
+            text-align: center;
+        }
+    }
+
+    @media(max-width: 500px) {
+        .smallTable {
+            display: inherit;
+        }
+
+        .largeTable {
+            display: none;
+        }
+    }
+
+    @media(min-width: 500px) {
+        .smallTable {
+            display: none;
+        }
+
+        .largeTable {
+            display: inherit;
+        }
+    }
+}
+

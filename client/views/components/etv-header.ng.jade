@@ -1,4 +1,4 @@
-header.container-fluid
+header.container-fluid(ng-class="{ 'fixedHeader': !$state.includes('elTeuVot') }")
     .row
         .col-xs-4.socialMedia
             a(href="https://www.facebook.com/elteuvot" target="_blank")
@@ -9,9 +9,15 @@ header.container-fluid
                 i.mdi.mdi-twitter
 
         .col-xs-4
-            img#logo.center-block(src="/images/logo.png" alt="Logo ETV")
+            a(ui-sref="elTeuVot")
+                img#logo.center-block(src="/images/logo.png" alt="Logo ETV" ng-class="{ 'compactLogo': !$state.includes('elTeuVot') }")
 
-        .col-xs-4.languageSelection
-            a(href="") català
-            span &nbsp;|&nbsp;
-            a(href="") castellano
+        .col-xs-4.languageSelection(ng-if="!$state.includes('questions') && !$state.includes('results')")
+            a(href="" ng-click="setLanguage('ca')") català
+            span.showOnNonxxs &nbsp;|&nbsp;
+            br.showOnxxs
+            a(href="" ng-click="setLanguage('es')") castellano
+
+        .col-xs-4.menuButtonContainer(ng-if="$state.includes('questions') || $state.includes('results')")
+            a#menuButton(href="" ng-click="toggleSidenav()")
+                i.mdi.mdi-menu

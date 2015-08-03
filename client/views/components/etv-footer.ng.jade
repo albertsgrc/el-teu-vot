@@ -1,9 +1,9 @@
 footer
-    div.center-child.fullHeight
-        div.inline.fullHeight
-            button.btn-primary.fullHeight
-                span.text-uppercase El Teu Vot
-            button.btn-primary.fullHeight
-                span.text-uppercase Com ho hem fet
-            button.btn-primary.fullHeight
-                span.text-uppercase Qui som
+    div.center-text.fullHeight
+        div.inline.fullHeight#footerButtonContainer
+            button(ui-sref="elTeuVot" ui-sref-active="active")
+                span.text-uppercase(translate="{{ 'elTeuVot' }}")
+            button(ui-sref="howItsDone" ui-sref-active="active")
+                span.text-uppercase(translate="{{ 'howItsDone' }}")
+            button(ui-sref="whoWeAre" ui-sref-active="active")
+                span.text-uppercase(translate="{{ 'whoWeAre' }}")

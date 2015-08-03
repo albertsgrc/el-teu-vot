@@ -1,5 +1,5 @@
 # Who are we page controller
 
-    WhoAreWeCtrl = ($scope) ->
+    WhoWeAreCtrl = ($scope) ->
 
-    app.controller('WhoAreWeCtrl', ['$scope', WhoAreWeCtrl])
+    app.controller('WhoWeAreCtrl', ['$scope', WhoWeAreCtrl])
