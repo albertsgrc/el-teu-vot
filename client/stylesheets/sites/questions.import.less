@@ -1,0 +1,214 @@
+
+
+#politicalQuestionsContainer {
+    #politicalQuestionsListContainer {
+        .globalPoliticalQuestionContainer:not(:first-child) .politicalQuestionContainer {
+            opacity: 0.5;
+        }
+
+        .globalPoliticalQuestionContainer:not(:first-child):not(:nth-child(2)) .divider {
+            opacity: 0.5;
+        }
+    }
+}
+
+#politicalQuestionsContainer {
+
+    @media (max-width: @screen-xxs-max) {
+        #politicalQuestionsListContainer {
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+
+        .answerButton {
+            width: 155px;
+            height: 30px;
+            font-size: 10px;
+            line-height: 30px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        .politicalQuestionContainer {
+            margin-top: 30px;
+            margin-bottom: 28px;
+
+            position: relative;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .numberContainer {
+            position: absolute;
+            font-size: 30px;
+            left: 10px;
+            top: 0;
+            line-height: 30px;
+        }
+
+        .typeContainer, .textContainer {
+            margin-bottom: 25px;
+        }
+
+        .typeContainer {
+            font-size: 12px;
+        }
+
+        .textContainer {
+            font-size: 14px;
+        }
+
+        #endTestButton {
+            margin-top: 50px;
+            width: 200px;
+            height: 40px;
+            font-size: 18px;
+        }
+    }
+
+    @media(max-width: 630px) {
+        .answerButton {
+            width: 148px !important;
+            font-size: 11px !important;
+        }
+    }
+
+    @media (min-width: @screen-xxs-max) and (max-width: @screen-md-max) {
+        #politicalQuestionsListContainer {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        .answerButton {
+            width: 190px;
+            height: 38px;
+            font-size: 14px;
+            line-height: 38px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        .politicalQuestionContainer {
+            margin-top: 40px;
+            margin-bottom: 38px;
+
+            position: relative;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .numberContainer {
+            position: absolute;
+            font-size: 45px;
+            left: 30px;
+            top: 0;
+            line-height: 30px;
+        }
+
+        .typeContainer, .textContainer {
+            margin-bottom: 40px;
+        }
+
+        .typeContainer {
+            font-size: 16px;
+        }
+
+        .textContainer {
+            font-size: 18px;
+        }
+
+        #endTestButton {
+            margin-top: 70px;
+            width: 250px;
+            height: 55px;
+            font-size: 22px;
+        }
+    }
+
+    @media (min-width: @screen-lg-min) {
+        #politicalQuestionsListContainer {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .politicalQuestionContainer {
+            margin-top: 50px;
+            margin-bottom: 48px;
+
+            position: relative;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .numberContainer {
+            position: absolute;
+            font-size: 60px;
+            left: 50px;
+            top: 0;
+            line-height: 30px;
+        }
+
+        .typeContainer, .textContainer {
+            margin-bottom: 40px;
+        }
+
+        .typeContainer {
+            font-size: 19px;
+        }
+
+        .textContainer {
+            font-size: 22px;
+        }
+
+        #endTestButton {
+            margin-top: 90px;
+            width: 300px;
+            height: 65px;
+            font-size: 27px;
+        }
+    }
+
+    @media (min-width: @screen-lg-min) and (max-width: 1300px) {
+        .answerButton {
+            width: 145px;
+            height: 35px;
+            font-size: 10px;
+            line-height: 35px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+    }
+
+    @media (min-width: 1300px) and (max-width: 1400px) {
+        .answerButton {
+            width: 162px;
+            height: 38px;
+            font-size: 12px;
+            line-height: 38px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+    }
+
+    @media (min-width: 1400px) and (max-width: 1600px) {
+        .answerButton {
+            width: 176px;
+            height: 40px;
+            font-size: 13px;
+            line-height: 40px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        .answerButton {
+            width: 210px;
+            height: 45px;
+            font-size: 16px;
+            line-height: 45px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+    }
+}

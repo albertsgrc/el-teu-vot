@@ -19,18 +19,19 @@
                 abstract: true
                 url: '/preguntes'
                 controller: 'QuestionsCtrl'
+                template: "<ui-view/>"
             )
             .state('politicalQuestions',
                 controller: 'PoliticalQuestionsCtrl'
                 parent: 'questions'
                 url: '/politica'
-                templateUrl: '/client/views/partials/political-questions.html'
+                templateUrl: 'client/views/partials/political-questions.html'
             )
             .state('personalQuestions',
                 controller: 'PersonalQuestionsCtrl'
                 parent: 'questions'
                 url: '/personals'
-                templateUrl: '/client/views/partials/personal-questions.html'
+                templateUrl: 'client/views/partials/personal-questions.html'
             )
             .state('howItsDone',
                 parent: 'layout'

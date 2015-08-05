@@ -15,30 +15,36 @@ Logo sizing
 
 Opening and closing sidenav
 
-        $scope.toggleSidenav = ->
+        toggle = ->
+            $("#sideNavContainer").animate({ width: "toggle", "max-width": "toggle", "min-width": "toggle" }, 150, "linear");
+            return true
 
-            # TODO: This is a bug source and needs to be reorganized
+        $scope.closeSidenav = ->
+            return if $("#sideNavContainer").css("display") is "none"
 
-            toggle = _.debounce( ->
-                $("#sideNavContainer").animate({ width: "toggle", "max-width": "toggle", "min-width": "toggle" }, 150, "linear");
-            , 200)
+            $(document).unbind("click")
+            toggle()
 
-
-            hideDiv = (e) ->
-                $(document).unbind("click")
-                if $(e.target).is("button")
-                    $("#sideNavContainer").css({ "display": "none" })
-                    return
-
-                if not ($(e.target).is("#sideNavContainer") or $(e.target).is("#menuButton")) and not ($(e.target).parents().is("#sideNavContainer") || $(e.target).parents().is("#menuButton"))
-                    toggle()
-
+        $scope.openSidenav = ->
+            return if $("#sideNavContainer").css("display") isnt "none"
 
             toggle()
 
-            $(document).unbind("click").on("click", (e) ->
-                hideDiv(e)
-            )
+            setCloseListener = ->
+                $(document).unbind("click").on("click", (e) ->
+                    if not ($(e.target).is("#sideNavContainer") or $(e.target).is("#menuButton")) and not ($(e.target).parents().is("#sideNavContainer") || $(e.target).parents().is("#menuButton"))
+                        $scope.closeSidenav()
+                )
+
+            setCloseListener()
+
+            return true
+
+        $scope.hideSidenav = ->
+            return if $("#sideNavContainer").css("display") is "none"
+
+            $(document).unbind("click")
+            $("#sideNavContainer").css({ "display": "none" })
             return true
 
     app.controller('LayoutCtrl', ['$scope', '$translate', '$state', '$rootScope', LayoutCtrl])

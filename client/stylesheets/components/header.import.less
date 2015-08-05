@@ -49,6 +49,8 @@ header {
         .languageSelection {
             font-size: @lang-sel-sz !important;
         }
+
+        padding: @hd-pd/2 !important;
     }
 }
 
@@ -96,7 +98,7 @@ header {
     }
 }
 
-@media (max-height: 600px) {  header { padding: @hd-pd !important; #logo { .img-size(@logo-sz) !important; } } }
+@media (max-height: 600px) {  header { padding: @hd-pd/2 !important; #logo { .img-size(@logo-sz) !important; } } }
 
 @media (min-height: 600px) and (max-height: 800px) { header { padding: @hd-pd !important; #logo { .img-size(@logo-sz-f*@logo-sz) !important; } } }
 
@@ -116,5 +118,5 @@ header.fixedHeader {
 
 
 .menuButtonContainer {
-    text-align: end;
+    text-align: right;
 }

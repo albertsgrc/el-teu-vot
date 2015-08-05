@@ -19,5 +19,5 @@ header.container-fluid(ng-class="{ 'fixedHeader': !$state.includes('elTeuVot') }
             a(href="" ng-click="setLanguage('es')") castellano
 
         .col-xs-4.menuButtonContainer(ng-if="$state.includes('questions') || $state.includes('results')")
-            a#menuButton(href="" ng-click="toggleSidenav()")
+            a#menuButton(href="" ng-click="openSidenav()")
                 i.mdi.mdi-menu

@@ -1,16 +1,16 @@
 #sideNavContainer
     .closeButton
         .closeButtonWrapper
-            a(href="" ng-click="toggleSidenav()")
+            a(href="" ng-click="closeSidenav()")
                 i.mdi.mdi-close
 
     .sideNavButtons
         .sideNavButtonWrapper
-            button(ui-sref="elTeuVot" ui-sref-active="active")
+            button(ui-sref="elTeuVot" ui-sref-active="active" ng-click="hideSidenav()")
                 span.text-uppercase(translate="{{ 'elTeuVot' }}")
-            button(ui-sref="howItsDone" ui-sref-active="active")
+            button(ui-sref="howItsDone" ui-sref-active="active" ng-click="hideSidenav()")
                 span.text-uppercase(translate="{{ 'howItsDone' }}")
-            button(ui-sref="whoWeAre" ui-sref-active="active")
+            button(ui-sref="whoWeAre" ui-sref-active="active" ng-click="hideSidenav()")
                 span.text-uppercase(translate="{{ 'whoWeAre' }}")
 
     .sideNavLanguageSelector

@@ -1,0 +1,42 @@
+#politicalQuestionsContainer(center-questions-vertically="")
+
+    #politicalQuestionsListContainer
+        .globalPoliticalQuestionContainer(ng-repeat="question in politicalQuestions")
+            .divider
+
+            .politicalQuestionContainer
+                .numberContainer
+                    p {{ $index + 1 }}:
+
+                .typeContainer.text-center.text-uppercase
+                    p {{ question.type }}
+
+                .textContainer.text-center
+                    p {{ question.text }}
+
+                span(ng-switch="question.answerType")
+                    .row.center-text(ng-switch-when="1")
+                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
+                            button.answerButton
+                                span Completament en desacord
+                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
+                            button.answerButton
+                                span En desacord
+                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
+                            button.answerButton
+                                span Ni d'acord ni en desacord
+                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
+                            button.answerButton
+                                span D'acord
+                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
+                            button.answerButton
+                                span Completament d'acord
+                        .col-lg-12.col-md-4.col-xs-6.col-xxs-12
+                            button.answerButton
+                                span No sap / No contesta
+
+            .divider(ng-if="$last")
+
+    #endTestButtonContainer.text-center
+        button#endTestButton
+            span.text-uppercase(translate="{{ 'endTest' }}")

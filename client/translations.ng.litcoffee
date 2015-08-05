@@ -147,6 +147,8 @@ How it's done page
                 subjectiva que els hi doni. Es farà el mateix amb les diferents candidatures. Aquesta darrera pregunta ponderarà els
                 diferents blocs segons la importància que l’usuari els doni (veure <u>operacionalització</u> dels resultats) i permetrà definir
                 millor la proximitat entre partit i elector."
+
+            endTest: "Finalitza el test"
         );
 
 
@@ -173,39 +175,41 @@ How it's done page
 
             soonText: "Próximamente"
 
-            whoWeAreMainText: "El teu Vot és una Aplicació d’Orientació del Vot (Voting Advice Application) d’àmbit català, creat en el marc
-                de les eleccions al Parlament de Catalunya del 27 de setembre de 2015. Les Aplicacions d’Orientació del
-                Vot (AOV) són eines electròniques que permeten ubicar a l’elector dins d’un sistema de partits determinat.
-                Aquest tipus d’aplicació no busca determinar el vot de l’elector sinó oferir un posicionament concret segons
-                les seves respostes de manera precisa i d’acord amb les propostes i accions de les diferents candidatures.<br/><br/>
-                El teu Vot, amb forma de pàgina web, es basa en un qüestionari que ubica l’usuari o usuària ideològicament
-                en blocs temàtics concrets respecte a les candidatures que concorren a les eleccions del 27 de setembre
-                de 2015 al Parlament de Catalunya. Un cop el completi, l’usuari obtindrà una sèrie de resultats que li
-                permetran veure de manera gràfica i intuïtiva quina és la candidatura que més s’apropa a les seves
-                preferències. El teu Vot és una iniciativa que es construeix des del rigor metodològic i la total
-                independència respecte partits i institucions públiques, dos trets distintius essencials per tal de garantir
-                uns resultats fidedignes als nostres usuaris.<br/><br/>
-                El teu Vot és un projecte que neix de la col·laboració entre <strong>El teu Parlament</strong> i <strong>apps4citizens</strong>. Aquesta
-                aliança ha permès treballar des de l’experiència de l’equip d’apps4citizens al mateix temps que comptàvem
-                amb el bagatge en la creació de plataformes d’eines digitals d’El teu Parlament."
+            whoWeAreMainText: "El teu Vot es una Aplicación de Orientación de Voto (Voting Advice Application) \
+                de ámbito catalán, creada en el marco de las elecciones al Parlament de Cataluña del \
+                27 de Septiembre de 2015. Las Aplicaciones de Orientación de Voto (AOV) son herramientas \
+                electrónicas que permiten ubicar al elector dentro de un sistema de partidos concreto. \
+                Este tipo de aplicaciones no buscan determinar el voto, sino ofrecer un posicionamiento \
+                concreto según las respuestas, de forma precisa i de acuerdo con las propuestas y acciones \
+                de las diferentes candidaturas.<br/><br/>
+                El teu Vot, que toma la forma de página web, se basa en un cuestionario que ubica al usuario \
+                o usuaria ideológicamente en bloques temáticos concretos respecto a las candidaturas que participan\
+                en las elecciones del 27 de septiembre de 2015 al Parlament de Cataluña. Una vez completado el \
+                cuestionario, el usuario obtendrá una serie de resultados que le permitirán ver de manera gráfica \
+                e intuitiva cuál es la candidatura que más se aproxima a sus preferencias. El teu Vot es una \
+                iniciativa que se construye des del rigor metodológico y la total independencia respecto a los \
+                partidos e instituciones públicas, dos peculiaridades distintivas esenciales para poder garantizar \
+                unos resultados veraces para nuestros usuarios.<br/><br/>
+                El teu Vot es un proyecto que nace de la colaboración entre <strong>El teu Parlament</strong> \
+                y <strong>apps4citizens</strong>. Esta alianza ha permitido unir la experiencia del equipo de apps4citizens \
+                y el bagaje en la creación de herramientas digitales de El Teu Parlament."
 
-            whoWeAreEtpText: "El teu Parlament és una organització de monitoratge parlamentari (OMP)
-                impulsada per quatre politòlegs de la Universitat Pompeu Fabra. Com a OMP, El
-                teu Parlament és una organització independent i sense ànim de lucre que té
-                per objectiu la millora de la transparència de la institució que monitoritza; el
-                Parlament de Catalunya. Mitjançant la creació d’eines electròniques, El teu
-                Parlament vol promoure la cultura de la transparència per tal d’aconseguir un
-                debat públic més profund i de major qualitat, que ajudi a millorar la cultura
-                política ciutadana a la recerca d’un sistema democràtic de més qualitat."
+            whoWeAreEtpText: "El teu Parlament es una Organización de Monitoreo Parlamentario (OMP) de " +
+                "ámbito catalán, impulsada por cuatro politólogos de la Universidad Pompeu Fabra. Como OMP," +
+                " El teu Parlament es una organización independiente y sin ánimo de lucro, que tiene como " +
+                "objetivo la mejora de la transparencia  de la institución que monitorea, el Parlament de " +
+                "Cataluña. Mediante la creación de una herramienta electrónica, El teu Parlament pretende " +
+                "promover la cultura de la transparencia para conseguir un debate público más profundo y " +
+                "de mejor calidad, que ayude a mejorar la cultura política ciudadana, con el objetivo de " +
+                "mejorar la calidad de nuestro sistema democrático."
 
-            whoWeAreapps4citizensText: "apps4citizens és una plataforma que té com a objectiu principal promoure, per
-                una banda, l’ús d’aplicacions mòbils com un instrument útil per a millorar la
-                qualitat democràtica dels processos de presa de decisions a través del
-                compromís social i polític, i de l’apoderament dels propis ciutadans; i, per l’altra,
-                acompanyar les organitzacions en la implementació de models de
-                desenvolupament tecnològic diferents, sustentats en la intel·ligència i el talent
-                compartits (crowd) i basats en la innovació i el compromís social dels agents que
-                intervenen."
+            whoWeAreapps4citizensText: "apps4citizens es una plataforma que tiene como objetivo promover " +
+                "por un lado el uso de aplicaciones móvil como instrumento útil para mejorar la calidad " +
+                "democrática de los procesos de toma de decisiones a través del compromiso social y político," +
+                " el apoderamiento de los propios ciudadanos, y por otro lado, acompañar a diferentes organizaciones" +
+                " en la implementación de modelos de desarrollo tecnológico, sustentados en la inteligencia y el" +
+                " talento compartidos (crowd) y basados en la innovación y el compromiso social de los agentes que " +
+                "intervienen."
 
             howItsDoneMainText: "El projecte d’El teu Vot es construeix sobre dos pilars fonamentals:<br/>
                 <strong>la metodologia</strong>, és a dir, la manera com s’ha creat aquesta aplicació d’orientació del vot;<br/>
@@ -298,6 +302,8 @@ How it's done page
                 subjectiva que els hi doni. Es farà el mateix amb les diferents candidatures. Aquesta darrera pregunta ponderarà els
                 diferents blocs segons la importància que l’usuari els doni (veure <u>operacionalització</u> dels resultats) i permetrà definir
                 millor la proximitat entre partit i elector."
+
+            endTest: "Finaliza el test"
         );
 
         $translateProvider.preferredLanguage('ca');
