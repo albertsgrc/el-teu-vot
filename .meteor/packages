@@ -13,9 +13,10 @@ aldeed:collection2
 angularui:angular-ui-router
 dburles:collection-helpers
 planettraining:angular-translate
-fastclick
-meteorhacks:fast-render
 nemo64:bootstrap
 dapearce:material-icons
 less
 angular:angular-sanitize
+meteorhacks:fast-render
+fastclick
+linto:jquery-ui

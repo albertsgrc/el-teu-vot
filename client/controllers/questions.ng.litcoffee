@@ -5,7 +5,7 @@
             {
                 type: "Economia"
                 text: "La adopción del euro fue positiva para España"
-                answerType: 1
+                answerType: 2
             }
             {
                 type: "Economia"

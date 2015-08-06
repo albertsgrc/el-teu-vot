@@ -1,5 +1,4 @@
 
-
 #politicalQuestionsContainer {
     #politicalQuestionsListContainer {
         .globalPoliticalQuestionContainer:not(:first-child) .politicalQuestionContainer {
@@ -12,50 +11,71 @@
     }
 }
 
+@media (max-width: 500px) {
+    .sliderContainer {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+@media (min-width: 501px) {
+    .sliderContainer {
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+}
 #politicalQuestionsContainer {
 
     @media (max-width: @screen-xxs-max) {
         #politicalQuestionsListContainer {
-            padding-left: 15%;
-            padding-right: 15%;
+            padding-left: 15px;
+            padding-right: 15px;
         }
 
         .answerButton {
-            width: 155px;
-            height: 30px;
-            font-size: 10px;
+            width: 260px;
+            height: 50px;
+            font-size: 15px;
             line-height: 30px;
-            margin-top: 10px;
-            margin-bottom: 8px;
+            margin-top: 2px;
+            margin-bottom: 1px;
+        }
+
+        .doesntKnowDoesntAnswerButton {
+            margin-top: 50px;
         }
 
         .politicalQuestionContainer {
-            margin-top: 30px;
+            margin-top: 15px;
             margin-bottom: 28px;
 
             position: relative;
-            margin-left: 5%;
-            margin-right: 5%;
+            margin-left: 10px;
+            margin-right: 10px;
         }
 
         .numberContainer {
             position: absolute;
-            font-size: 30px;
-            left: 10px;
-            top: 0;
+            font-size: 48px;
+            left: -10px;
+            top: 5px;
             line-height: 30px;
         }
 
-        .typeContainer, .textContainer {
-            margin-bottom: 25px;
+        .textContainer {
+            margin-bottom: 50px;
+            font-size: 15px;
+            padding-left: 15%;
+            padding-right: 15%;
         }
 
         .typeContainer {
-            font-size: 12px;
-        }
+            margin-bottom: 5px;
+            font-size: 19px;
 
-        .textContainer {
-            font-size: 14px;
+            p {
+                margin-bottom: 7px !important;
+            }
         }
 
         #endTestButton {
@@ -66,7 +86,7 @@
         }
     }
 
-    @media(max-width: 630px) {
+    @media (min-width: @screen-xxs-max) and (max-width: 630px) {
         .answerButton {
             width: 148px !important;
             font-size: 11px !important;

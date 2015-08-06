@@ -1,20 +1,22 @@
 # Center questions vertically directive
 
-    CenterQuestionsVerticallyDirective = ($timeout, $window) ->
+    CenterQuestionsVerticallyDirective = ($timeout, $window, $rootScope) ->
         restrict: 'A'
         link: (scope, element) ->
-            setQuestionsMargins = ->
+            $rootScope.setQuestionsMargins = setQuestionsMargins = ->
                 computeMargins = ->
                     INCLUDE_MARGIN = true
 
                     windowHeight = $(window).height()
-                    mainTopPadding = $("#main").css("padding-top").replace("px", "")
-                    questionHeight = $(".politicalQuestionContainer").outerHeight(INCLUDE_MARGIN)
+                    windowWidth = $(window).width()
+                    mainTopPadding = Number($("#main").css("padding-top").replace("px", ""))
+                    firstQuestionHeight = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:first-child .politicalQuestionContainer").outerHeight(INCLUDE_MARGIN)
+                    lastQuestionHeight = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:last-child .politicalQuestionContainer").outerHeight(INCLUDE_MARGIN)
                     dividerHeight = $(".divider").height()
-                    endButtonHeight = $("#endButton").outerHeight(INCLUDE_MARGIN)
+                    endButtonHeight = $("#endTestButtonContainer").height()
 
-                    topMargin = Math.max(20, (windowHeight - 2*mainTopPadding - (questionHeight + 2*dividerHeight))/2)
-                    bottomMargin = Math.max(40, topMargin - endButtonHeight)
+                    topMargin = Math.max(40, (windowHeight - 2*mainTopPadding - (firstQuestionHeight + 2*dividerHeight))/2)
+                    bottomMargin = Math.max(40, (windowHeight - 2*mainTopPadding - (lastQuestionHeight + 2*dividerHeight))/2 + mainTopPadding - endButtonHeight)
 
                     return { top: topMargin, bottom: bottomMargin }
 
@@ -28,4 +30,4 @@
             angular.element($window).on('resize', setQuestionsMargins)
             scope.$on('$destroy', -> angular.element($window).off('resize'))
 
-    app.directive('centerQuestionsVertically', ['$timeout', '$window', CenterQuestionsVerticallyDirective])
+    app.directive('centerQuestionsVertically', ['$timeout', '$window', '$rootScope', CenterQuestionsVerticallyDirective])

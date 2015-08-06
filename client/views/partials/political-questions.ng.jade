@@ -1,7 +1,7 @@
 #politicalQuestionsContainer(center-questions-vertically="")
 
     #politicalQuestionsListContainer
-        .globalPoliticalQuestionContainer(ng-repeat="question in politicalQuestions")
+        .globalPoliticalQuestionContainer(ng-repeat="question in politicalQuestions" index="{{$index}}")
             .divider
 
             .politicalQuestionContainer
@@ -31,9 +31,12 @@
                         .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
                             button.answerButton
                                 span Completament d'acord
-                        .col-lg-12.col-md-4.col-xs-6.col-xxs-12
+                        .col-lg-12.col-md-4.col-xs-6.col-xxs-12.doesntKnowDoesntAnswerButton
                             button.answerButton
                                 span No sap / No contesta
+
+                    .sliderContainer(ng-switch-when="2")
+                        etv-slider(left-text="'Extrema esquerra'" right-text="'Extrema dreta'")
 
             .divider(ng-if="$last")
 
