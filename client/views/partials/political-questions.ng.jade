@@ -1,5 +1,7 @@
 #politicalQuestionsContainer(center-questions-vertically="")
 
+    etv-question-navigation
+
     #politicalQuestionsListContainer
         .globalPoliticalQuestionContainer(ng-repeat="question in politicalQuestions" index="{{$index}}")
             .divider
@@ -36,10 +38,10 @@
                                 span No sap / No contesta
 
                     .sliderContainer(ng-switch-when="2")
-                        etv-slider(left-text="'Extrema esquerra'" right-text="'Extrema dreta'")
+                        etv-slider(left-text="extrema esquerra" right-text="extrema dreta" value-holder="sliderValue")
 
             .divider(ng-if="$last")
 
     #endTestButtonContainer.text-center
-        button#endTestButton
+        button#endTestButton(ui-sref="personalQuestions")
             span.text-uppercase(translate="{{ 'endTest' }}")

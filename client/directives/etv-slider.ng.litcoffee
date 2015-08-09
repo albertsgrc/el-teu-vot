@@ -4,12 +4,11 @@
         replace: true,
         restrict: 'E',
         templateUrl: "client/views/components/etv-slider.html"
-        scope: {
-            leftText: '='
-            rightText: '='
-        }
+        scope: false
 
         link: (scope, element, attrs) ->
+            scope._etvSliderLeftText = attrs.leftText;
+            scope._etvSliderRightText = attrs.rightText;
             setSlider =  ->
                 width = window.innerWidth
 
@@ -23,6 +22,11 @@
                 .slider("pips", {
                         rest: "label"
                 })
+                .on('slidechange', (elem, ui) ->
+                    scope[attrs.valueObjectHolder][attrs.valueProperty] = ui.value
+                )
+
+                scope[attrs.valueObjectHolder][attrs.valueProperty] = 0
 
                 $rootScope.setQuestionsMargins()
                 $rootScope.highlightCurrentQuestion()
