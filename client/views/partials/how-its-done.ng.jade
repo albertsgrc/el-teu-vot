@@ -1,7 +1,7 @@
 #howItsDoneContainer.container.globalTextContainer
 
     #howItsDoneTitleContainer.mainTitleContainer
-        p#howItsDoneTitle.text-uppercase.mainTitle(translate="{{ 'howItsDone' }}")
+        p#howItsDoneTitle.text-uppercase.mainTitle(translate="{{ 'howItsDoneTitle' }}")
 
     #howItsDoneMainTextContainer.paddedText.bottomPadding
         p#howItsDoneMainText(translate="{{ 'howItsDoneMainText' }}")
@@ -25,22 +25,22 @@
         .row.howItsDoneExampleButtonsContainer.answerButtonContainer.center-text.paddedText
             .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
                 button.demoAnswerButton
-                    span Completament en desacord
+                    span(translate="{{ 'totallyDisagree' }}")
             .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
                 button.demoAnswerButton
-                    span En desacord
+                    span(translate="{{ 'disagree' }}")
             .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
                 button.demoAnswerButton
-                    span Ni d'acord ni en desacord
+                    span(translate="{{ 'nonAgreeNonDisagree' }}")
             .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
                 button.demoAnswerButton
-                    span D'acord
+                    span(translate="{{ 'agree' }}")
             .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
                 button.demoAnswerButton
-                    span Completament d'acord
+                    span(translate="{{ 'totallyAgree' }}")
             .col-lg-12.col-md-4.col-xs-6.col-xxs-12
                 button.demoAnswerButton
-                    span No sap / No contesta
+                    span(translate="{{ 'doesntKnowDoesntAnswer' }}")
         p.text-smaller.paddedText(translate="{{ 'howItsDoneExplanationText212' }}")
 
     br

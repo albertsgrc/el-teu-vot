@@ -1,4 +1,6 @@
-.questionNavigationContainer
-    .questionNavigationItem(ng-repeat="question in politicalQuestions")
-        span.questionNavigationNumber {{ $index + 1 }}
-        span.questionNavigationCircle
+#questionNavigationContainer
+    .relativePositioner
+        .absoluteContainer
+            .questionNavigationItem(ng-repeat="question in politicalQuestions")
+                span.questionNavigationNumber {{ $index + 1 }}
+                .questionNavigationCircle
