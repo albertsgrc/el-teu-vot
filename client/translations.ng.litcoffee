@@ -149,6 +149,8 @@ How it's done page
                 millor la proximitat entre partit i elector."
 
             endTest: "Finalitza el test"
+
+            soonText: "Pròximament"
         );
 
 
@@ -304,6 +306,8 @@ How it's done page
                 millor la proximitat entre partit i elector."
 
             endTest: "Finaliza el test"
+
+            soonText: "Próximamente"
         );
 
         $translateProvider.preferredLanguage('ca');
