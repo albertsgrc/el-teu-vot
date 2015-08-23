@@ -1,0 +1,250 @@
+#resultsContainer {
+    margin-top: 15px;
+
+    p:first-child {
+        margin-bottom: 10px !important;
+    }
+
+    #graphsContainer {
+        margin-top: 20px;
+    }
+
+    .graphMinGlobalContainer {
+        margin-top: 20px;
+    }
+
+    .graphContainer {
+        border: solid @blue 1px;
+        text-align: center;
+        padding-top: 2.5%;
+    }
+
+    .graphGlobalContainer {
+        margin-top: 35px;
+        margin-bottom: 15px;
+
+        .divider:first-child {
+            margin-bottom: 15px;
+        }
+
+        .divider:last-child {
+            margin-top: 15px;
+        }
+
+        .shareButtons {
+            @media (min-width: @screen-sm-min) {
+                position: absolute;
+                right: 15px;
+                top: 17px;
+            }
+
+            @media (max-width: 380px) {
+                .downloadContainer {
+                   display: block;
+                }
+
+                .shareContainer {
+                    margin-top: 15px;
+                }
+            }
+
+            margin-bottom: 15px;
+
+            font-size: 15px;
+
+            i {
+                font-size: 1.5em;
+                line-height: 15px;
+                position: relative;
+                top: 2px;
+            }
+
+            i:last-child {
+                margin-left: 5px;
+            }
+
+            i.mdi.mdi-arrow-down-bold-circle-outline {
+                font-size: 1.9em;
+                line-height: 15px;
+                margin-right: 15px;
+                position: relative;
+                top: 5px;
+            }
+
+            span:not(.text-divider) {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .graphGlobalContainer.hidden {
+        display: none;
+    }
+
+    #resultsCodeContainer {
+        margin-top: 50px;
+    }
+
+    .graphMinContainer {
+        text-align: center;
+    }
+
+    .imgContainer {
+        display: inline-block;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 218px;
+        max-width: 218px;
+        height: 218px;
+    }
+
+    .imgContainer:hover {
+        cursor: pointer;
+    }
+
+    #partyCoincidenceGraph .imgContainer {
+        background-image: url('/images/graph_min_party_coincidence_bg.png')
+    }
+
+    #topicCoincidenceGraph .imgContainer {
+        background-image: url('/images/graph_min_topic_coincidence_bg.png')
+    }
+
+    #locationGraph .imgContainer {
+        background-image: url('/images/graph_min_location_bg.png')
+    }
+
+    #parlamentaryRepresentationGraph .imgContainer {
+        background-image: url('/images/graph_min_parlamentary_representation_bg.png')
+    }
+
+    #partyCoincidenceGraph .imgContainer:hover {
+        background-image: url('/images/graph_min_party_coincidence.png')
+    }
+
+    #topicCoincidenceGraph .imgContainer:hover {
+        background-image: url('/images/graph_min_topic_coincidence.png')
+    }
+
+    #locationGraph .imgContainer:hover {
+        background-image: url('/images/graph_min_location.png')
+    }
+
+    #parlamentaryRepresentationGraph .imgContainer:hover {
+        background-image: url('/images/graph_min_parlamentary_representation.png')
+    }
+
+    .resultsCode {
+        word-wrap: break-word;
+    }
+
+
+    // GRAPHS PART
+
+    // GENERAL
+
+    .legendPartyContainer {
+        @legendHeight: 25px;
+
+        text-align: initial;
+        display: inline-block;
+        min-width: 100px;
+        height: @legendHeight;
+        border-bottom: solid 1px @strongGrey;
+
+        p {
+            display: inline-block;
+            line-height: @legendHeight;
+        }
+
+        p.legendPartyName {
+            color: @strongGrey;
+            margin-right: 15px !important;
+        }
+
+        p.legendPercentage, svg {
+            float: right;
+        }
+    }
+
+    // LOCATION GRAPH
+
+    #locationGraphContainer {
+        @media (max-width: @screen-xxs-max){
+            margin-top: 90px;
+            margin-bottom: 50px;
+        }
+
+        @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+            margin-top: 70px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: @screen-sm-min) {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .axisIndicator {
+        &.left {
+            .translate(-100%, -50%);
+
+            @media (max-width: 550px) {
+                .transform(translate(-25px, -50%) rotate(-90deg));
+            }
+        }
+
+        &.right {
+            .translate(100%, -50%);
+
+            @media (max-width: 550px) {
+                .transform(translate(18px, -50%) rotate(-90deg));
+            }
+        }
+
+        &.top {
+            .translate(-50%, -100%);
+        }
+
+        &.bottom {
+            .translate(-50%, 100%);
+        }
+
+        &.left, &.right {
+            top: 50%;
+        }
+
+        &.top, &.bottom {
+            left: 50%;
+        }
+    }
+
+    // PARLAMENTARY REPRESENTATION GRAPH
+
+    #parlamentaryRepresentationContainer {
+        @media(max-width: @screen-xs-max) {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media(min-width: @screen-sm-min) {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+    }
+
+    #parlamentaryRepresentationLegend {
+        @media (min-width: @screen-md-min) {
+            max-width: 199px;
+            float: right;
+            margin-top: 0 !important;
+
+            .legendPartyContainer {
+                float: right;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+.etv-alert.modal(role="dialog")
+    .vertical-alignment-helper
+        .modal-dialog.modal-md.vertical-align-center
+            .modal-content.text-center
+                p
+                    i.mdi.mdi-close.closeButton(data-dismiss="modal")
+                p.bigExclamation !
+                p(ng-bind-html="text")

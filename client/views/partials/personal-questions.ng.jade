@@ -1,3 +1,43 @@
-//
-   Created by albert on 31/07/15.
+#personalQuestionsContainer.container
+   .divider
 
+   p.center-block#personalQuestionsInfo(translate="{{ 'personalQuestionsInfo' }}")
+
+   .divider
+
+   .personalMandatoryQuestionsContainer
+      .personalQuestionContainer(ng-repeat="question in personalQuestions.mandatory" ng-class="{ 'invalid': !question.valid && question.blurred }")
+         p.text-uppercase(ng-class="{ 'focusable': question.answerType == 'input' }" translate="{{ question.id }}")
+
+         span(ng-switch="question.answerType")
+
+            .personalQuestionsButtonContainer(ng-switch-when="buttons")
+               button(ng-repeat="button in question.answers" ng-click="setAnswer('personal-mandatory', question, button)" ng-class="{ 'selected': question.answer == button }")
+                  span(translate="{{ button }}")
+
+            input(type="text" ng-change="question.valid = question.answer != null && question.validate.test(question.answer)" ng-model="question.answer" ng-blur="setBlurred(question)" onFocus="$('.focusable').addClass('focused')" onBlur="$('.focusable').removeClass('focused');" ng-switch-when="input")
+            p.inline.errorMessage(ng-if="question.answerType == 'input' && question.blurred && !question.valid" translate="{{ question.errorMessage }}")
+
+   .divider
+
+   p#personalQuestionsOptionalIntro(translate="{{ 'personalQuestionsOptionalIntro' }}")
+
+   .personalQuestionContainer(ng-repeat="question in personalQuestions.optional")
+      p.text-uppercase(ng-class="{ 'focusable': question.answerType == 'input' }" translate="{{ question.id }}")
+
+      span(ng-switch="question.answerType")
+
+         .personalQuestionsButtonContainer(ng-switch-when="buttons")
+            button(ng-repeat="button in question.answers" ng-click="setAnswer('personal-optional', question, button)" ng-class="{ 'selected': question.answer == button }")
+               span(translate="{{ button }}")
+
+         input(type="text" ng-model="question.answer" onFocus="$('.focusable').addClass('focused')" onBlur="$('.focusable').removeClass('focused')" ng-switch-when="input")
+
+
+   #endOfQuestionaire.text-center
+      p(translate="{{ 'endQuestionaireText' }}")
+
+      button(ng-click="goToResults()")
+         span.text-uppercase(translate="{{ 'seeResults' }}")
+
+   etv-alert(text="{{ 'personalQuestionsAlert' | translate}}")

@@ -1,6 +1,11 @@
+.device-xs.visible-xs
+.device-sm.visible-sm
+.device-md.visible-md
+.device-lg.visible-lg
+
 etv-header
 
-#main(ui-view="" autoscroll="true" ng-class="{ 'fixedHeader': !$state.includes('elTeuVot') }")
+#main(ui-view="" autoscroll="true" ng-class="{ 'fixedHeader': !$state.includes('elTeuVot') }" etv-pad-header="")
 
 etv-footer(ng-if="!$state.includes('questions') && !$state.includes('results')")
 

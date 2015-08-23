@@ -1,6 +1,6 @@
 #questionNavigationContainer
-    .relativePositioner
-        .absoluteContainer
-            .questionNavigationItem(ng-repeat="question in politicalQuestions")
-                span.questionNavigationNumber {{ $index + 1 }}
-                .questionNavigationCircle
+    #questionNavigationWrapper
+        .questionNavigationItem(ng-repeat="question in politicalQuestions" ng-click="goToQuestion($index + 1)" ng-class="{ answered: question.answer != null }")
+            .questionNavigationNumber
+                span {{ $index + 1 }}
+            .questionNavigationCircle

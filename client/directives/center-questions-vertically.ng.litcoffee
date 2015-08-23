@@ -9,25 +9,31 @@
 
                     windowHeight = $(window).height()
                     windowWidth = $(window).width()
-                    mainTopPadding = Number($("#main").css("padding-top").replace("px", ""))
+                    mainTopPadding = $("header").outerHeight(true)
+
                     firstQuestionHeight = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:first-child .politicalQuestionContainer").outerHeight(INCLUDE_MARGIN)
                     lastQuestionHeight = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:last-child .politicalQuestionContainer").outerHeight(INCLUDE_MARGIN)
+                    navigationHeight = $("#questionNavigationWrapper").outerHeight(INCLUDE_MARGIN)
                     dividerHeight = $(".divider").height()
                     endButtonHeight = $("#endTestButtonContainer").height()
 
-                    topMargin = Math.max(40, (windowHeight - 2*mainTopPadding - (firstQuestionHeight + 2*dividerHeight))/2)
-                    bottomMargin = Math.max(40, (windowHeight - 2*mainTopPadding - (lastQuestionHeight + 2*dividerHeight))/2 + mainTopPadding - endButtonHeight)
+                    questionsTopMargin = Math.max(30, (windowHeight - 2*mainTopPadding - (firstQuestionHeight + 2*dividerHeight))/2)
+                    questionsBottomMargin = Math.max(40, (windowHeight - 2*mainTopPadding - (lastQuestionHeight + 2*dividerHeight))/2 + mainTopPadding - endButtonHeight)
 
-                    return { top: topMargin, bottom: bottomMargin }
+                    navigationTopMargin = Math.max(60, (windowHeight - navigationHeight)/2)
+
+                    return { questions: { top: questionsTopMargin, bottom: questionsBottomMargin }, navigation: { top: navigationTopMargin } }
 
                 margins = computeMargins();
 
-                $("#politicalQuestionsContainer").css({ "margin-top": margins.top + "px", "margin-bottom": margins.bottom })
+                $("#politicalQuestionsContainer").css({ "margin-top": margins.questions.top + "px", "margin-bottom": margins.questions.bottom })
+                $("#questionNavigationContainer").css({ "margin-top": margins.navigation.top })
 
-
+                $("#politicalQuestionsContainer").css({ visibility: "visible" })
 
             $timeout(setQuestionsMargins)
+            angular.element($window).on('load', setQuestionsMargins)
             angular.element($window).on('resize', setQuestionsMargins)
-            scope.$on('$destroy', -> angular.element($window).off('resize'))
+            scope.$on('$destroy', -> angular.element($window).off('resize load', setQuestionsMargins))
 
     app.directive('centerQuestionsVertically', ['$timeout', '$window', '$rootScope', CenterQuestionsVerticallyDirective])

@@ -1,3 +1,52 @@
-//
-   Created by albert on 31/07/15.
+#resultsContainer.container
+    #resultsIntroContainer.text-center
+        p.text-uppercase.text-l.text-bold(translate="yourResultsTitle")
+        p(translate="yourResultsText")
 
+    #graphsContainer.row
+
+        .graphGlobalContainer.col-xs-12(ng-class="{ hidden: openedGraph == null }")
+            .divider
+            p.text-uppercase.text-bold.text-xl.inline(translate="{{ openedGraph }}")
+            div.shareButtons
+                .downloadContainer.inline
+                    span(translate="download")
+                    i.mdi.mdi-arrow-down-bold-circle-outline
+                //span.text-divider &nbsp;&nbsp;|&nbsp;&nbsp;
+                .shareContainer.inline
+                    span(translate="share")
+                    i.mdi.mdi-facebook
+                    i.mdi.mdi-twitter
+            span(ng-switch="openedGraph")
+                .graphContainer(ng-switch-when="partyCoincidence" party-coincidence-graph="")
+                .graphContainer(ng-switch-when="topicCoincidence" topic-coincidence-graph="")
+                .graphContainer(ng-switch-when="location" location-graph="")
+                .graphContainer(ng-switch-when="parlamentaryRepresentation" parlamentary-representation-graph="")
+            .divider
+
+
+        .graphMinGlobalContainer.col-xs-12.col-sm-6#partyCoincidenceGraph
+            p.text-uppercase.text-bold.text-xl.text-center(translate="partyCoincidence")
+            .graphMinContainer.center-block(ng-click="openGraph('partyCoincidence')")
+                .imgContainer
+
+        .graphMinGlobalContainer.col-xs-12.col-sm-6#topicCoincidenceGraph.insertPoint
+            p.text-uppercase.text-bold.text-xl.text-center(translate="topicCoincidence")
+            .graphMinContainer.center-block(ng-click="openGraph('topicCoincidence')")
+                .imgContainer
+
+        .graphMinGlobalContainer.col-xs-12.col-sm-6#locationGraph
+            p.text-uppercase.text-bold.text-xl.text-center(translate="location")
+            .graphMinContainer.center-block(ng-click="openGraph('location')")
+                .imgContainer
+
+        .graphMinGlobalContainer.col-xs-12.col-sm-6#parlamentaryRepresentationGraph.insertPoint
+            p.text-uppercase.text-bold.text-xl.text-center(translate="parlamentaryRepresentation")
+            .graphMinContainer.center-block(ng-click="openGraph('parlamentaryRepresentation')")
+                .imgContainer
+
+    #resultsCodeContainer
+        p.resultsCodeText.text-center(translate="resultsCodeText")
+        p.resultsCode.text-bold.text-xl.text-center https://mail.google.com/mail/u/0/#inbox/14edfe0e296ef33a
+
+img(src="/images/etv-circle-logo.png" style="opacity: 0")

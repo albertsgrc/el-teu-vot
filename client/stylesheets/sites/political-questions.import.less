@@ -1,4 +1,3 @@
-
 #politicalQuestionsContainer {
     #politicalQuestionsListContainer {
         .globalPoliticalQuestionContainer:not(:first-child) .politicalQuestionContainer {
@@ -7,6 +6,16 @@
 
         .globalPoliticalQuestionContainer:not(:first-child):not(:nth-child(2)) .divider {
             opacity: 0.5;
+        }
+
+        .answerButton.answered {
+             background-color: @orange !important;
+             font-weight: bold;
+        }
+
+        .answerButtonContainer {
+            padding-left: 0;
+            padding-right: 0;
         }
     }
 }
@@ -26,6 +35,12 @@
 }
 #politicalQuestionsContainer {
 
+    visibility: hidden;
+
+    .typeContainer {
+        width: 70%;
+    }
+
     @media (max-width: @screen-xxs-max) {
         #politicalQuestionsListContainer {
             padding-left: 15px;
@@ -33,18 +48,21 @@
         }
 
         .divider {
-            width: 75%;
+            width: 87.5%;
             display: block;
-            margin: auto;
         }
 
         .answerButton {
-            width: 180px;
+            width: 198px;
             height: 35px;
             font-size: 13px;
             line-height: 35px;
             margin-top: 2px;
             margin-bottom: 1px;
+        }
+
+        .answerButton.longText {
+            font-size: 12px;
         }
 
         .doesntKnowDoesntAnswerButton {
@@ -86,16 +104,20 @@
 
         #endTestButton {
             margin-top: 35px;
-            width: 180px;
-            height: 35px;
-            font-size: 13px;
+            width: 220px;
+            height: 40px;
+            font-size: 14px;
         }
     }
 
     @media (min-width: @screen-xxs-max) and (max-width: 630px) {
         .answerButton {
-            width: 148px !important;
+            width: 165px !important;
             font-size: 11px !important;
+        }
+
+        .answerButton.longText {
+            font-size: 10px !important;
         }
     }
 
@@ -106,9 +128,9 @@
         }
 
         .answerButton {
-            width: 190px;
+            width: 205px;
             height: 38px;
-            font-size: 14px;
+            font-size: 12px;
             line-height: 38px;
             margin-top: 10px;
             margin-bottom: 8px;
@@ -126,7 +148,7 @@
         .numberContainer {
             position: absolute;
             font-size: 45px;
-            left: 30px;
+            left: -10px;
             top: 0;
             line-height: 30px;
         }
@@ -196,45 +218,61 @@
 
     @media (min-width: @screen-lg-min) and (max-width: 1300px) {
         .answerButton {
-            width: 145px;
-            height: 35px;
-            font-size: 10px;
+            width: 174px;
+            height: 40px;
+            font-size: 11px;
             line-height: 35px;
             margin-top: 15px;
             margin-bottom: 8px;
+        }
+
+        .answerButton.longText {
+            font-size: 10px;
         }
     }
 
     @media (min-width: 1300px) and (max-width: 1400px) {
         .answerButton {
-            width: 162px;
+            width: 188px;
             height: 38px;
-            font-size: 12px;
+            font-size: 13px;
             line-height: 38px;
             margin-top: 15px;
             margin-bottom: 8px;
+        }
+
+        .answerButton.longText {
+            font-size: 11px;
         }
     }
 
     @media (min-width: 1400px) and (max-width: 1600px) {
         .answerButton {
-            width: 176px;
+            width: 200px;
             height: 40px;
-            font-size: 13px;
+            font-size: 14px;
             line-height: 40px;
             margin-top: 15px;
             margin-bottom: 8px;
+        }
+
+        .answerButton.longText {
+            font-size: 11px;
         }
     }
 
     @media (min-width: 1600px) {
         .answerButton {
-            width: 210px;
+            width: 230px;
             height: 45px;
             font-size: 16px;
             line-height: 45px;
             margin-top: 15px;
             margin-bottom: 8px;
+        }
+
+        .answerButton.longText {
+            font-size: 14px;
         }
     }
 }

@@ -12,6 +12,20 @@ Language setter
 Logo sizing
 
         $rootScope.$state = $state;
+        $rootScope.$translate = $translate;
+
+Viewport size
+
+        ( ->
+            e = window
+            a = 'inner'
+
+            unless 'innerWidth' of window
+                a = 'client'
+                e = document.documentElement || document.body
+
+            { width: e["#{a}Width"], height: e["#{a}Height"] }
+        )()
 
 Opening and closing sidenav
 

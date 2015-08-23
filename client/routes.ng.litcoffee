@@ -26,6 +26,30 @@
                 templateUrl: 'client/views/partials/who-we-are.html'
                 controller: 'WhoWeAreCtrl'
             )
+            .state('questions',
+                parent: 'layout'
+                abstract: true
+                controller: 'QuestionsCtrl'
+                template: "<ui-view/>"
+            )
+            .state('politicalQuestions',
+                controller: 'PoliticalQuestionsCtrl'
+                parent: 'questions'
+                url: '/questionari'
+                templateUrl: 'client/views/partials/political-questions.html'
+            )
+            .state('personalQuestions',
+                controller: 'PersonalQuestionsCtrl'
+                parent: 'questions'
+                url: "/pquestions" # TODO: Remove in production
+                templateUrl: 'client/views/partials/personal-questions.html'
+            )
+            .state('results',
+                parent: 'layout'
+                url: "/results" # TODO: Remove in production
+                templateUrl: 'client/views/partials/results.html'
+                controller: 'ResultsCtrl'
+            )
 
         $urlRouterProvider.otherwise('/');
 

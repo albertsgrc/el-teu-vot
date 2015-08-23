@@ -15,6 +15,7 @@ check@1.0.5
 chuangbo:cookie@1.1.0
 civilframe:angular-jade@0.0.3
 coffeescript@1.0.6
+d3js:d3@3.5.5
 dapearce:material-icons@0.1.2
 dburles:collection-helpers@1.0.3
 dburles:mongo-collection-instances@0.3.4

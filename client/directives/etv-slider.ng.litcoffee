@@ -23,10 +23,11 @@
                         rest: "label"
                 })
                 .on('slidechange', (elem, ui) ->
-                    scope[attrs.valueObjectHolder][attrs.valueProperty] = ui.value
+                    return if scope[attrs.valueObjectHolder].answer isnt null and ui.answer is null
+                    $(".etv-slider .ui-slider-handle").addClass("touched") unless scope[attrs.valueObjectHolder].answer != null
+                    scope.setAnswer('political', scope[attrs.valueObjectHolder], ui.value)
+                    scope.$apply()
                 )
-
-                scope[attrs.valueObjectHolder][attrs.valueProperty] = 0
 
                 $rootScope.setQuestionsMargins()
                 $rootScope.highlightCurrentQuestion()
@@ -34,6 +35,6 @@
             $(window).on("resize.doResize", setSlider)
             $timeout(setSlider)
 
-            scope.$on('$destroy', -> $(window).off("resize.doResize") )
+            scope.$on('$destroy', -> $(window).off("resize.doResize", setSlider) )
 
     app.directive('etvSlider', ['$timeout', '$rootScope', sliderDirective])

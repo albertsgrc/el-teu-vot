@@ -1,0 +1,55 @@
+.etv-alert {
+    padding-right: 0 !important;
+
+    .modal-content {
+        border-radius: 0;
+        border: none;
+        background-color: @blue;
+        font-size: 14px;
+        color: white;
+    }
+
+    .modal-dialog {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 100px;
+    }
+
+    .vertical-alignment-helper {
+        display:table;
+        height: 100%;
+        width: 100%;
+        pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+    }
+    .vertical-align-center {
+        /* To center vertically */
+        display: table-cell;
+        vertical-align: middle;
+        pointer-events:none;
+    }
+
+    .modal-content {
+        padding: 10px 40px 10px 40px;
+        width: inherit;
+        height: inherit;
+        margin: 0 auto;
+        pointer-events: all;
+    }
+
+    .bigExclamation {
+        font-size: 70px;
+        font-weight: bold;
+        margin-bottom: -5px !important;
+    }
+
+    .closeButton {
+        font-size: 25px;
+        float: right;
+        margin-right: -35px;
+        margin-top: -5px;
+    }
+
+    .closeButton:hover {
+        cursor: pointer;
+    }
+}

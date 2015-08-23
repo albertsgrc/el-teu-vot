@@ -1,0 +1,173 @@
+#personalQuestionsContainer {
+    margin-top: 20px;
+
+    p.errorMessage {
+        color: #c7254e;
+        padding-left: 10px;
+    }
+
+    @media (max-width: 400px) {
+        p.errorMessage {
+            display: block;
+            padding-left: 0;
+            padding-top: 10px;
+        }
+    }
+
+    .personalQuestionContainer.invalid {
+        p.focusable, input {
+            color:  #c7254e !important;
+        }
+
+        input {
+            border-color: #c7254e !important;
+        }
+    }
+
+    .personalQuestionsButtonContainer button {
+        border: solid @blue 2px !important;
+        background-color: white !important;
+        color: @blue !important;
+        text-align: center;
+        padding: 5px 0px 5px 0px;
+        margin-bottom: 10px;
+    }
+
+    .personalQuestionsButtonContainer button span {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .personalQuestionsButtonContainer button.selected {
+        background-color: @blue !important;
+        span {
+            color: white !important;
+            font-weight: bold;
+        }
+    }
+
+    .personalQuestionsButtonContainer {
+        margin-left: -5px;
+        margin-bottom: -10px;
+    }
+
+    .personalQuestionsButtonContainer button {
+        margin-left: 5px;
+    }
+
+    .personalQuestionContainer {
+        .tbPadding(20px);
+
+        input {
+            outline: none;
+            border: solid @blue 2px;
+            background-color: white;
+            color: @blue;
+            text-align: center;
+            padding: 5px 0px 5px 0px;
+        }
+
+        input:focus {
+            border-color: @orange;
+            color: @orange;
+        }
+
+        p.focused {
+            color: @orange !important;
+        }
+    }
+
+    p#personalQuestionsOptionalIntro {
+        .tbMargin(20px) !important;
+    }
+
+    #endOfQuestionaire {
+        margin-top: 30px;
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: @screen-xxs-max) {
+        #personalQuestionsInfo {
+            .lrPadding(0);
+            .tbMargin(15px) !important;
+        }
+
+        .personalQuestionsButtonContainer button {
+            min-width: 110px;
+            height: 45px;
+        }
+
+        .personalQuestionContainer input {
+            width: 110px;
+            height: 45px;
+        }
+
+        #endOfQuestionaire {
+            button {
+                width: 180px;
+                height: 40px;
+                font-size: 16px;
+                line-height: 40px;
+            }
+        }
+    }
+
+    @media (min-width: @screen-xs-min) and (max-width: @screen-md-max) {
+        #personalQuestionsInfo {
+            .lrPadding(10%);
+            .tbMargin(25px) !important;
+        }
+
+        .personalQuestionsButtonContainer button {
+            min-width: 95px;
+            height: 35px;
+        }
+
+        .personalQuestionContainer input {
+            width: 95px;
+            height: 35px;
+        }
+
+        #endOfQuestionaire {
+            button {
+                width: 200px;
+                height: 40px;
+                font-size: 16px;
+                line-height: 40px;
+            }
+        }
+    }
+
+    @media (min-width: @screen-lg-min) {
+        #personalQuestionsInfo {
+            .lrPadding(15%);
+            .tbMargin(35px) !important;
+        }
+
+        button {
+            font-size: 15px;
+        }
+
+        .personalQuestionsButtonContainer button {
+            min-width: 120px;
+            height: 40px;
+        }
+
+        .personalQuestionContainer input {
+            width: 120px;
+            height: 40px;
+        }
+
+        #endOfQuestionaire {
+            button {
+                width: 220px;
+                height: 45px;
+                font-size: 18px;
+                line-height: 45px;
+            }
+        }
+    }
+}

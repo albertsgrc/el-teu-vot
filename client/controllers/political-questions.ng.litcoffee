@@ -10,8 +10,9 @@
                 top = $(@).find(".divider").offset().top - $("#main").css("padding-top").replace("px", "") - $("#politicalQuestionsContainer").css("margin-top").replace("px", "")
                 questionChild = $(@).find(".politicalQuestionContainer")
                 bottom = top + questionChild.outerHeight(true) + 2
+                offsetedCurrentPos = currentScrollPos + 185
 
-                if currentScrollPos + 150 >= top and currentScrollPos + 150 <= bottom
+                if offsetedCurrentPos >= top and offsetedCurrentPos <= bottom
                     questionIndex = Number($(@).attr('index'))
                     question = questionChild;
             )
@@ -24,11 +25,11 @@
         $timeout(highlightCurrentQuestion)
         $(window).scroll(highlightCurrentQuestion)
         $(window).on('resize', highlightCurrentQuestion)
-
+        $timeout(-> $("body").scrollTop(0))
 
         $scope.$on('$destroy', ->
-            $(window).off('resize')
-            $(window).off('scroll')
+            $(window).off('resize', highlightCurrentQuestion)
+            $(window).off('scroll', highlightCurrentQuestion)
         )
 
     app.controller('PoliticalQuestionsCtrl', ['$scope', '$rootScope', '$timeout', PoliticalQuestionsCtrl])
