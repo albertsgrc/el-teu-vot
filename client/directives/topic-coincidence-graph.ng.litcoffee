@@ -142,7 +142,7 @@
                 legend.append("p")
                 .attr("class", "legendPercentage")
                 .style("color", (d) -> d.color)
-                .html((d) -> "#{(d.value*100).toFixed(2)} %")
+                .html((d) -> "#{+(d.value*100).toFixed(1)} %")
 
                 $compile(angular.element(".legendPartyName"))(scope)
 
