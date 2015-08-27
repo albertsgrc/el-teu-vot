@@ -919,9 +919,9 @@
 
         tO.results =
             badResultsId: [
-                "Ups! Sembla que el link de resultats que has introduit és incorrecte"
+                "Ho sentim! Sembla que el link de resultats que has introduit és incorrecte"
 
-                "Ups! Parece que el link de resultados que has introducido es incorrecto"
+                "Lo sentimos! Parece que el link de resultados que has introducido es incorrecto"
             ]
 
             yourResultsTitle: [
@@ -947,13 +947,13 @@
             yourResultsTextOut: [
                 "Aquests són els resultats obtinguts a partir del questionari. \
                  Si vols saber com els hem calculat, consulta la \
-                 <a ui-sref='howItsDone'>metodologia</a>. I si vols que els \
+                 <a href='/com-ho-hem-fet'>metodologia</a>. I si vols que els \
                  teus amics i amigues els coneguin, comparteix-los a les \
                  xarxes socials."
 
                 "Estos son los resultados obtenidos a partir del cuestionario. \
                  Si quieres saber cómo los hemos calculado, consulta la \
-                 <a ui-sref='howItsDone'>metodología</a>. Y si quieres que tus \
+                 <a href='/com-ho-hem-fet'>metodología</a>. Y si quieres que tus \
                  amigos y amigas los conozcan, compártelos en las redes \
                  sociales."
             ]

@@ -25,7 +25,7 @@
             if allQuestionsAnswered()
                 resultsService.sendPersonalResults($scope.questions).then(
                     (resultId) ->
-                        $state.go('results', { id: resultId })
+                        $state.go('results', { id: resultId, justCreated: true })
                     ,
                     (err) ->
                         console.log err
