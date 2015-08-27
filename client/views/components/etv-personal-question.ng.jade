@@ -1,0 +1,11 @@
+.personalQuestionContainer(ng-class="{ 'invalid': shouldShowErrorMessage(question) }")
+   p.text-uppercase(ng-class="{ 'focusable': question.answerType == 'input' }" translate="{{ question.id }}")
+
+   span(ng-switch="question.type")
+
+      .personalQuestionsButtonContainer(ng-switch-when="button")
+         button(ng-repeat="option in question.options" ng-click="answerQuestion(question, option)" ng-class="{ 'selected': isSelected(question, option) }" etv-translate-tooltip="{{ option }}")
+            span(translate="{{ option }}")
+
+      input(type="text" ng-change="question.valid = isAnswered(question) &&  isValid(question)" ng-model="question.answer" ng-blur="setBlurred(question)" onFocus="$('.focusable').addClass('focused')" onBlur="$('.focusable').removeClass('focused');" ng-switch-when="input")
+      p.inline.errorMessage(ng-if="shouldShowErrorMessage(question)" translate="{{ question.errorMessageId }}")

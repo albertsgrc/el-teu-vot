@@ -6,35 +6,59 @@
         templateUrl: "client/views/components/etv-slider.html"
         scope: false
 
-        link: (scope, element, attrs) ->
-            scope._etvSliderLeftText = attrs.leftText;
-            scope._etvSliderRightText = attrs.rightText;
-            setSlider =  ->
-                width = window.innerWidth
+        compile: (element, attrs) ->
+            angular.element(element[0]).find(".leftText").attr("translate", "{{ '#{attrs.leftText}' }}")
+            angular.element(element[0]).find(".rightText").attr("translate", "{{ '#{attrs.rightText}' }}")
+            angular.element(element[0]).find(".etv-slider").attr("ng-class", "{ 'touched': isAnswered(question.number) }")
 
-                ORIENTATION_THRESHOLD = 650
+            pre: (scope, element, attrs) ->
 
+            post: (scope, element, attrs) ->
+                sliderSet = false
+                shouldNotChangeSliderValue = false
 
-                $(".etv-slider").slider({
-                    max: 10
-                    orientation: (if width <= ORIENTATION_THRESHOLD then "vertical" else "horizontal")
-                })
-                .slider("pips", {
-                        rest: "label"
-                })
-                .on('slidechange', (elem, ui) ->
-                    return if scope[attrs.valueObjectHolder].answer isnt null and ui.answer is null
-                    $(".etv-slider .ui-slider-handle").addClass("touched") unless scope[attrs.valueObjectHolder].answer != null
-                    scope.setAnswer('political', scope[attrs.valueObjectHolder], ui.value)
-                    scope.$apply()
+                setSlider = ->
+                    width = window.innerWidth
+
+                    ORIENTATION_THRESHOLD = 650
+
+                    if sliderSet is "horizontal"
+                        return if width > ORIENTATION_THRESHOLD
+                    else if sliderSet is "vertical"
+                        return if width <= ORIENTATION_THRESHOLD
+
+                    sliderSet = (if width <= ORIENTATION_THRESHOLD then "vertical" else "horizontal")
+
+                    accessObject = (object, string) ->
+                        properties = string.split(".")
+                        result = object[properties[0]]
+                        properties.shift()
+                        for property in properties
+                            result = result[property]
+                        result
+
+                    $(element[0]).find(".etv-slider").slider({
+                        value: accessObject(scope, attrs.ngModel) or 0
+                        max: 10
+                        orientation: sliderSet
+                    }).off('slidechange').on('slidechange', (event, ui) ->
+                        return unless ui.value? and not isNaN(ui.value) and not shouldNotChangeSliderValue
+
+                        scope.$apply( ->
+                            scope.question.answer = ui.value
+                        )
+                    )
+                    .slider("pips", {
+                            rest: "label"
+                    })
+
+                    $rootScope.$broadcast('layoutChange', 'slider')
+
+                scope.$on('layoutChange', (event, name) ->
+                    shouldNotChangeSliderValue = true
+                    if name isnt 'slider' then setSlider()
+                    shouldNotChangeSliderValue = false
                 )
-
-                $rootScope.setQuestionsMargins()
-                $rootScope.highlightCurrentQuestion()
-
-            $(window).on("resize.doResize", setSlider)
-            $timeout(setSlider)
-
-            scope.$on('$destroy', -> $(window).off("resize.doResize", setSlider) )
+                $timeout(setSlider)
 
     app.directive('etvSlider', ['$timeout', '$rootScope', sliderDirective])

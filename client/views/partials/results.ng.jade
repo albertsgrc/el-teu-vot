@@ -1,52 +1,28 @@
-#resultsContainer.container
-    #resultsIntroContainer.text-center
-        p.text-uppercase.text-l.text-bold(translate="yourResultsTitle")
-        p(translate="yourResultsText")
+#resultsContainer.container(etv-scroll-to-top-on-load="")
+    span(ng-if="loading")
 
-    #graphsContainer.row
+    span(ng-if="!loading && !validResultsId")
+        p.text-center.text-xxxl.badResultsIdText(translate="badResultsId")
 
-        .graphGlobalContainer.col-xs-12(ng-class="{ hidden: openedGraph == null }")
-            .divider
-            p.text-uppercase.text-bold.text-xl.inline(translate="{{ openedGraph }}")
-            div.shareButtons
-                .downloadContainer.inline
-                    span(translate="download")
-                    i.mdi.mdi-arrow-down-bold-circle-outline
-                //span.text-divider &nbsp;&nbsp;|&nbsp;&nbsp;
-                .shareContainer.inline
-                    span(translate="share")
-                    i.mdi.mdi-facebook
-                    i.mdi.mdi-twitter
-            span(ng-switch="openedGraph")
-                .graphContainer(ng-switch-when="partyCoincidence" party-coincidence-graph="")
-                .graphContainer(ng-switch-when="topicCoincidence" topic-coincidence-graph="")
-                .graphContainer(ng-switch-when="location" location-graph="")
-                .graphContainer(ng-switch-when="parlamentaryRepresentation" parlamentary-representation-graph="")
-            .divider
+    span(ng-if="!loading && validResultsId")
+        #resultsIntroContainer.text-center
+            p.text-uppercase.text-l.text-bold(translate="{{ justCreated ? 'yourResultsTitle' : 'yourResultsTitleOut' }}")
+            p(translate="{{ justCreated ? 'yourResultsText' : 'yourResultsTextOut' }}")
 
+        #graphsContainer.row
 
-        .graphMinGlobalContainer.col-xs-12.col-sm-6#partyCoincidenceGraph
-            p.text-uppercase.text-bold.text-xl.text-center(translate="partyCoincidence")
-            .graphMinContainer.center-block(ng-click="openGraph('partyCoincidence')")
-                .imgContainer
+            etv-graph-min(ng-repeat="graphMin in ['partyCoincidence', 'topicCoincidence', 'location', 'parlamentaryRepresentation']")
 
-        .graphMinGlobalContainer.col-xs-12.col-sm-6#topicCoincidenceGraph.insertPoint
-            p.text-uppercase.text-bold.text-xl.text-center(translate="topicCoincidence")
-            .graphMinContainer.center-block(ng-click="openGraph('topicCoincidence')")
-                .imgContainer
+            etv-graph(ng-repeat="graph in openedGraphs")
 
-        .graphMinGlobalContainer.col-xs-12.col-sm-6#locationGraph
-            p.text-uppercase.text-bold.text-xl.text-center(translate="location")
-            .graphMinContainer.center-block(ng-click="openGraph('location')")
-                .imgContainer
+        #shareContainer.text-center
+            span.text-bold.text-xl(translate="share")
+            i.mdi.mdi-facebook(ng-click="shareGraph('facebook', graph + topic)")
+            i.mdi.mdi-twitter(ng-click="shareGraph('twitter', graph + topic)")
 
-        .graphMinGlobalContainer.col-xs-12.col-sm-6#parlamentaryRepresentationGraph.insertPoint
-            p.text-uppercase.text-bold.text-xl.text-center(translate="parlamentaryRepresentation")
-            .graphMinContainer.center-block(ng-click="openGraph('parlamentaryRepresentation')")
-                .imgContainer
-
-    #resultsCodeContainer
-        p.resultsCodeText.text-center(translate="resultsCodeText")
-        p.resultsCode.text-bold.text-xl.text-center https://mail.google.com/mail/u/0/#inbox/14edfe0e296ef33a
+        #resultsCodeContainer
+            span(ng-if="justCreated")
+                p.resultsCodeText.text-center(translate="resultsCodeText")
+                p.resultsCode.text-bold.text-xl.text-center {{ link }}
 
 img(src="/images/etv-circle-logo.png" style="opacity: 0")

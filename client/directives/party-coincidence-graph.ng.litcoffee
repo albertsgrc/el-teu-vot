@@ -1,20 +1,32 @@
 # Party coincidence graph directive
 
-    partyCoincidenceGraphDirective = ($timeout, $translate, $compile) ->
+    partyCoincidenceGraphDirective = ($timeout, $translate, $compile, politicalPartiesService, resultsService) ->
         restrict: 'EA'
         scope: {}
         link: (scope, element, attrs) ->
-            data = [
-                {party: "ppc", color: "#37a7de", value: .20 }
-                {party: "juntsPelSi", color: "#36b6a9", value: .45 }
-                {party: "catalunyaSiQueEsPot", color: "#d80a30", value: .30 }
-                {party: "psc", color: "#bc2025", value: .60 }
-                {party: "cs", color: "#e64f24", value: .40 }
-                {party: "udc", color: "#2253a1", value: .15 }
-                {party: "cup", color: "#fee300", value: .05 }
-            ].sort( (a, b) -> b.value - a.value )
+            data = []
+
+            politicalPartiesService.getPoliticalParties().then(
+                (parties) ->
+                    resultsService.getResults().then(
+                        (results) ->
+                            return unless results?
+
+                            for party in parties
+                                data.push(
+                                    party: party.id
+                                    color: party.color
+                                    value: _.find(results.partyCoincidence, (elem) -> elem.party is party.id ).value
+                                )
+
+                            data.sort( (a, b) -> b.value - a.value )
+
+                            $timeout(paint)
+                    )
+            )
 
             paint = ->
+
                 parent = d3.select(element[0])
 
                 containerSize = $(".graphContainer").width()
@@ -71,11 +83,12 @@
                 partyName = legend.append("p")
                 .attr("class", "legendPartyName")
                 .attr("translate", (d) -> "{{ '#{d.party}' }}" )
+                .attr("etv-translate-tooltip", (d) -> d.party)
 
                 legend.append("p")
                 .attr("class", "legendPercentage")
                 .style("color", (d) -> d.color)
-                .html((d) -> "#{d.value*100}%")
+                .html((d) -> "#{(d.value*100).toFixed(2)}%")
 
 
 Background arc
@@ -93,9 +106,4 @@ Colored and valued arc
                 $compile(angular.element(".legendPartyName"))(scope)
 
 
-
-            $timeout(paint)
-            #$(window).on('resize', paint)
-            #scope.$on('$destroy', -> $(window).off('resize load', paint))
-
-    app.directive('partyCoincidenceGraph', ['$timeout', '$translate', '$compile', partyCoincidenceGraphDirective])
+    app.directive('partyCoincidenceGraph', ['$timeout', '$translate', '$compile', 'politicalPartiesService', 'resultsService', partyCoincidenceGraphDirective])

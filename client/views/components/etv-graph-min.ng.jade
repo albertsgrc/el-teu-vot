@@ -1,0 +1,4 @@
+.graphMinGlobalContainer.col-xs-6.col-md-3(id="{{ graphMin + 'Graph' }}")
+   p.text-uppercase.text-bold.text-xl.text-center.graphMinTitle(translate="{{ graphMin }}")
+   .graphMinContainer.center-block(ng-click="toggleGraph(graphMin)")
+      img.imgContainer(src="{{ '/images/graph_min_' + graphMin + '_bg.png' }}")

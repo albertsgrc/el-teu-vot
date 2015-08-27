@@ -1,15 +1,31 @@
 #resultsContainer {
     margin-top: 15px;
 
+    .badResultsIdText {
+        margin-top: 60px !important;
+    }
+
+    #shareContainer {
+        margin-top: 50px;
+
+
+        i {
+            margin-left: 10px;
+            font-size: 25px;
+        }
+    }
+
+    #shareContainer, .shareButtons {
+        i:hover {
+            cursor: pointer;
+        }
+    }
+
     p:first-child {
         margin-bottom: 10px !important;
     }
 
     #graphsContainer {
-        margin-top: 20px;
-    }
-
-    .graphMinGlobalContainer {
         margin-top: 20px;
     }
 
@@ -31,12 +47,36 @@
             margin-top: 15px;
         }
 
-        .shareButtons {
-            @media (min-width: @screen-sm-min) {
+        @media (min-width: @screen-sm-min) {
+            .shareButtons {
                 position: absolute;
                 right: 15px;
                 top: 17px;
             }
+
+            .topicGlobalContainer {
+                position: relative;
+                padding-top: 55px;
+            }
+
+            .topicRepeatContainer > div:first-child {
+                .shareButtons.topicCoincidence {
+                    margin-top: -56px;
+                }
+
+                padding-top: 0;
+            }
+        }
+
+        @media (max-width: @screen-xs-max) {
+            .topicRepeatContainer > div:not(:first-child) {
+                .shareButtons.topicCoincidence {
+                    margin-top: 15px;
+                }
+            }
+        }
+
+        .shareButtons {
 
             @media (max-width: 380px) {
                 .downloadContainer {
@@ -91,47 +131,51 @@
 
     .imgContainer {
         display: inline-block;
-        background-size: contain;
-        background-repeat: no-repeat;
         width: 218px;
-        max-width: 218px;
-        height: 218px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .graphMinGlobalContainer {
+        margin-top: 20px;
+    }
+
+    .graphMinTitle {
+    }
+
+    @media (max-width: @screen-xxs-max){
+        .graphMinTitle {
+            font-size: 0.9em;
+            height: 35px !important;
+        }
+    }
+
+    @media (min-width: @screen-xs-min) and (max-width: 600px) {
+        .graphMinTitle {
+            font-size: 1.1em;
+            height: 40px;
+        }
+    }
+
+    @media (min-width: 600px) and (max-width: @screen-sm-max) {
+        .graphMinTitle {
+            font-size: 1.1em;
+            height: 20px;
+        }
+    }
+
+    @media (min-width: @screen-md-min) {
+        .graphMinTitle {
+            height: 50px;
+        }
     }
 
     .imgContainer:hover {
         cursor: pointer;
     }
 
-    #partyCoincidenceGraph .imgContainer {
-        background-image: url('/images/graph_min_party_coincidence_bg.png')
-    }
-
-    #topicCoincidenceGraph .imgContainer {
-        background-image: url('/images/graph_min_topic_coincidence_bg.png')
-    }
-
-    #locationGraph .imgContainer {
-        background-image: url('/images/graph_min_location_bg.png')
-    }
-
-    #parlamentaryRepresentationGraph .imgContainer {
-        background-image: url('/images/graph_min_parlamentary_representation_bg.png')
-    }
-
-    #partyCoincidenceGraph .imgContainer:hover {
-        background-image: url('/images/graph_min_party_coincidence.png')
-    }
-
-    #topicCoincidenceGraph .imgContainer:hover {
-        background-image: url('/images/graph_min_topic_coincidence.png')
-    }
-
-    #locationGraph .imgContainer:hover {
-        background-image: url('/images/graph_min_location.png')
-    }
-
-    #parlamentaryRepresentationGraph .imgContainer:hover {
-        background-image: url('/images/graph_min_parlamentary_representation.png')
+    .imgContainer:hover {
+        opacity: 0.5;
     }
 
     .resultsCode {

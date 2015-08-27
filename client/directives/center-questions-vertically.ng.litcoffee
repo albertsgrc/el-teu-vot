@@ -1,9 +1,10 @@
 # Center questions vertically directive
 
-    CenterQuestionsVerticallyDirective = ($timeout, $window, $rootScope) ->
+    CenterQuestionsVerticallyDirective = ($timeout) ->
         restrict: 'A'
+
         link: (scope, element) ->
-            $rootScope.setQuestionsMargins = setQuestionsMargins = ->
+            setQuestionsMargins = ->
                 computeMargins = ->
                     INCLUDE_MARGIN = true
 
@@ -32,8 +33,6 @@
                 $("#politicalQuestionsContainer").css({ visibility: "visible" })
 
             $timeout(setQuestionsMargins)
-            angular.element($window).on('load', setQuestionsMargins)
-            angular.element($window).on('resize', setQuestionsMargins)
-            scope.$on('$destroy', -> angular.element($window).off('resize load', setQuestionsMargins))
+            scope.$on('layoutChange', setQuestionsMargins)
 
-    app.directive('centerQuestionsVertically', ['$timeout', '$window', '$rootScope', CenterQuestionsVerticallyDirective])
+    app.directive('centerQuestionsVertically', ['$timeout', CenterQuestionsVerticallyDirective])

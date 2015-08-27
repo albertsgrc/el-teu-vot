@@ -1,35 +1,37 @@
 # Political questions angular controller
 
-    PoliticalQuestionsCtrl = ($scope, $rootScope, $timeout) ->
-        $rootScope.highlightCurrentQuestion = highlightCurrentQuestion = ->
-            currentScrollPos = $(window).scrollTop()
-            questionIndex = 0
-            question = null
-
-            $('.globalPoliticalQuestionContainer').each( (elem) ->
-                top = $(@).find(".divider").offset().top - $("#main").css("padding-top").replace("px", "") - $("#politicalQuestionsContainer").css("margin-top").replace("px", "")
-                questionChild = $(@).find(".politicalQuestionContainer")
-                bottom = top + questionChild.outerHeight(true) + 2
-                offsetedCurrentPos = currentScrollPos + 185
-
-                if offsetedCurrentPos >= top and offsetedCurrentPos <= bottom
-                    questionIndex = Number($(@).attr('index'))
-                    question = questionChild;
-            )
-
-            $(".politicalQuestionContainer, .divider").css({ opacity: "0.5" })
-            question.css({ opacity: "1" })
-            $(".divider").eq(questionIndex).css({ opacity: "1" })
-            $(".divider").eq(questionIndex + 1).css({ opacity: "1" })
-
-        $timeout(highlightCurrentQuestion)
-        $(window).scroll(highlightCurrentQuestion)
-        $(window).on('resize', highlightCurrentQuestion)
-        $timeout(-> $("body").scrollTop(0))
-
-        $scope.$on('$destroy', ->
-            $(window).off('resize', highlightCurrentQuestion)
-            $(window).off('scroll', highlightCurrentQuestion)
+    PoliticalQuestionsCtrl = ($scope, $state, resultsService, questionsService, topicsService, questionNavigationService, $meteor) ->
+        questionsService.getPoliticalQuestions().then( (data) ->
+            $scope.questions = data
         )
 
-    app.controller('PoliticalQuestionsCtrl', ['$scope', '$rootScope', '$timeout', PoliticalQuestionsCtrl])
+        topicsService.getTopics().then( (data) ->
+            $scope.topics = data
+        )
+
+        $scope.BASIC_QUESTION_OPTIONS = PoliticalQuestions.BASIC_QUESTION_OPTIONS
+
+        $scope.isAnswered = (number) ->
+            _.find($scope.questions, (question) -> question.number is number).answer?
+
+        $scope.goToPersonalQuestions = ->
+            firstUnAnsweredQuestion = ( ->
+                return parseInt(i) + 1 for i, x of $scope.questions when not x.answer?
+                return null
+            )()
+
+            unless firstUnAnsweredQuestion?
+                resultsService.sendPoliticalResults($scope.questions)
+                $state.go('personalQuestions')
+            else
+                goToFirstUnAnsweredQuestion = ( ->
+                    showAlert = ->
+                        setTimeout((-> $(".etv-alert").modal("show")), 100)
+
+                    questionNavigationService.goToQuestion(firstUnAnsweredQuestion, showAlert)
+
+                )()
+
+            return true
+
+    app.controller('PoliticalQuestionsCtrl', ['$scope', '$state', 'resultsService', 'questionsService', 'topicsService', 'questionNavigationService', '$meteor', PoliticalQuestionsCtrl])

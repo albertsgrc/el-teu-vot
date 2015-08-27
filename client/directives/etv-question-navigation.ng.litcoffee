@@ -1,13 +1,13 @@
 # Question navigation directive
 
-    questionNavigationDirective = ($rootScope) ->
+    questionNavigationDirective = (questionNavigationService) ->
         restrict: 'E'
         replace: true
         templateUrl: "client/views/components/etv-question-navigation.html"
         scope: false
 
         link: (scope, element, attrs) ->
-            $rootScope.goToQuestion = (questionNumber, callback) ->
+            questionNavigationService.goToQuestion = scope.goToQuestion = (questionNumber, callback) ->
                 globalQuestion = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:nth-child(#{questionNumber})")
                 firstGlobalQuestion = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:nth-child(1)")
                 question = globalQuestion.find(".politicalQuestionContainer")
@@ -23,6 +23,6 @@
 
                 return true
 
+3257
 
-
-    app.directive('etvQuestionNavigation', ['$rootScope',  questionNavigationDirective])
+    app.directive('etvQuestionNavigation', ['questionNavigationService', questionNavigationDirective])

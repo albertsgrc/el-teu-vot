@@ -27,28 +27,49 @@
             bigFont: bigFont
         }
 
-    topicCoincidenceGraphDirective = ($timeout, $translate, $compile) ->
+    topicCoincidenceGraphDirective = ($timeout, $translate, $compile, politicalPartiesService, resultsService) ->
         restrict: 'EA'
-        scope: {}
+        scope: {
+            topic: '@topicCoincidenceGraph'
+        }
+
         link: (scope, element, attrs) ->
+            results = []
+
+            politicalPartiesService.getPoliticalParties().then(
+                (politicalParties) ->
+                    resultsService.getResults().then(
+                        (data) ->
+                            topicResultsInfo = _.find(data.topicAndPartyCoincidence, (elem) -> elem.topic is scope.topic).values
+
+                            for party in politicalParties
+                                results.push(
+                                    party: party.id
+                                    color: party.color
+                                    value: _.find(topicResultsInfo, (elem) -> elem.party is party.id ).value
+                                )
+                    )
+            )
+
             paint = ->
+
                 $(element[0]).empty()
 
                 self = @
 
                 @sizes = calcSizes()
 
-                title = "Economia i Estat del Benestar"
-
-                d3.select(element[0])
+                title = d3.select(element[0])
                 .append("p")
                 .style("font-size", self.sizes.bigFont + "px")
                 .style("color", "#a7a9ac")
-                .attr("class", "text-uppercase")
+                .attr("class", "text-uppercase topicGraphTitle")
                 .style("margin-bottom", "30px", "important")
                 .style("margin-left", "20px", "important")
                 .style("margin-right", "20px", "important")
-                .html(title)
+                .attr("translate", scope.topic)
+
+                $compile(angular.element(".topicGraphTitle"))(scope)
 
                 @arc = d3.svg.arc()
                 .startAngle(0)
@@ -61,16 +82,6 @@
                 .endAngle((d) -> 2*Math.PI)
                 .innerRadius((d) -> d.index*self.sizes.radius)
                 .outerRadius((d) -> (d.index + self.sizes.spacing)*self.sizes.radius)
-
-                results = [
-                    {party: "ppc", color: "#37a7de", value: .20 }
-                    {party: "juntsPelSi", color: "#36b6a9", value: .45 }
-                    {party: "catalunyaSiQueEsPot", color: "#d80a30", value: .10 }
-                    {party: "psc", color: "#bc2025", value: .60 }
-                    {party: "cs", color: "#e64f24", value: .40 }
-                    {party: "udc", color: "#2253a1", value: .15 }
-                    {party: "cup", color: "#fee300", value: .05 }
-                ]
 
                 @fields = ->
                     results.sort( (a, b) ->
@@ -126,17 +137,17 @@
                 partyName = legend.append("p")
                 .attr("class", "legendPartyName")
                 .attr("translate", (d) -> "{{ '#{d.party}' }}" )
+                .attr("etv-translate-tooltip", (d) -> d.party)
 
                 legend.append("p")
                 .attr("class", "legendPercentage")
                 .style("color", (d) -> d.color)
-                .html((d) -> d.value*100 + "%")
+                .html((d) -> "#{(d.value*100).toFixed(2)} %")
 
                 $compile(angular.element(".legendPartyName"))(scope)
 
 
             $timeout(paint)
-            $(window).on('resize', paint)
-            scope.$on('$destroy', -> $(window).off('resize load', paint))
+            scope.$on('layoutChange', paint)
 
-    app.directive('topicCoincidenceGraph', ['$timeout', '$translate', '$compile', topicCoincidenceGraphDirective])
+    app.directive('topicCoincidenceGraph', ['$timeout', '$translate', '$compile', 'politicalPartiesService', 'resultsService', topicCoincidenceGraphDirective])

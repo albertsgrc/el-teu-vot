@@ -1,6 +1,6 @@
 # Location graph directive
 
-    locationGraph = ($timeout, $compile) ->
+    locationGraph = ($timeout, $compile, resultsService, politicalPartiesService) ->
         restrict: 'EA'
 
         scope: {}
@@ -8,17 +8,32 @@
         link: (scope, element, attrs) ->
 
             data =
-                parties: [
-                    {party: "ppc", color: "#37a7de", value: .20, nationalUbication: 4, ideologicalUbication: 6.61}
-                    {party: "juntsPelSi", color: "#36b6a9", value: .45, nationalUbication: 10, ideologicalUbication: 4}
-                    {party: "catalunyaSiQueEsPot", color: "#d80a30", value: .10, nationalUbication: 7, ideologicalUbication: 3}
-                    {party: "psc", color: "#bc2025", value: .60, nationalUbication: 6, ideologicalUbication: 3.77}
-                    {party: "cs", color: "#e64f24", value: .40, nationalUbication: 5.5, ideologicalUbication: 5.13 }
-                    {party: "udc", color: "#2253a1", value: .50, nationalUbication: 7.5, ideologicalUbication: 6.3 }
-                    {party: "cup", color: "#fee300", value: .05, nationalUbication: 10, ideologicalUbication: 2.23}
-                ]
+                parties: []
+                user: []
 
-                user: [ { nationalUbication: 7, ideologicalUbication: 3 } ]
+            politicalPartiesService.getPoliticalParties().then(
+                (politicalParties) ->
+
+                    resultsService.getResults().then(
+                        (results) ->
+
+                            for party in politicalParties
+                                data.parties.push(
+                                    party: party.id
+                                    color: party.color
+                                    nationalLocation: party.nationalLocation
+                                    ideologicalLocation: party.ideologicalLocation
+                                )
+
+                            data.user.push(
+                                nationalLocation: results.political.nationalLocation
+                                ideologicalLocation: results.political.ideologicalLocation
+                            )
+
+                            $timeout(paint)
+                            scope.$on('layoutChange', paint)
+                    )
+            )
 
             paint = ->
 
@@ -182,32 +197,34 @@ Circles
                 .data(data.parties)
                 .enter()
                 .append("circle")
-                .attr("cx", (d) -> s.xPosition(d.ideologicalUbication))
-                .attr("cy", (d) -> s.yPosition(d.nationalUbication) )
+                .attr("cx", (d) -> s.xPosition(d.ideologicalLocation))
+                .attr("cy", (d) -> s.yPosition(d.nationalLocation) )
                 .attr("fill", (d) -> d.color )
                 .attr("r", (d) -> s.radiusFactor*s.baseRadius)
 
-                elTeuVot = svg.selectAll("image")
+                elTeuVot = graphContainer.selectAll("img")
                 .data(data.user)
                 .enter()
-                .append("image")
-                .attr("x", (d) -> s.xPosition(d.ideologicalUbication, false, true))
-                .attr("y", (d) -> s.yPosition(d.nationalUbication, false, true))
-                .attr("width", s.radiusFactor*s.baseRadius*2)
-                .attr("height", s.radiusFactor*s.baseRadius*2)
-                .attr("xlink:href", "/images/etv-circle-logo.png")
+                .append("img")
+                .attr("src", "/images/etv-circle-logo.png")
+                .style("position", "absolute")
+                .style("left", (d) -> s.xPosition(d.ideologicalLocation, false, true) + "px")
+                .style("top", (d) -> s.yPosition(d.nationalLocation, false, true) + "px")
+                .style("width", s.radiusFactor*s.baseRadius*2 + "px")
+                .style("height", s.radiusFactor*s.baseRadius*2 + "px")
 
 Turns down el teu vot radius when it matches the position of a party
 
                 fixCircleOverlapping = ( ->
 
                     for party in data.parties
-                        if party.ideologicalUbication is data.user[0].ideologicalUbication and party.nationalUbication is data.user[0].nationalUbication
+                        if party.ideologicalLocation is data.user[0].ideologicalLocation and party.nationalLocation is data.user[0].nationalLocation
                             elTeuVot
-                            .attr("x", (d) -> s.xPosition(d.ideologicalUbication, true, true))
-                            .attr("y", (d) -> s.yPosition(d.nationalUbication, true, true))
-                            .attr("width", s.radiusFactor*(s.baseRadius - s.positionMatchRadiusDecrease)*2)
-                            .attr("height", s.radiusFactor*(s.baseRadius - s.positionMatchRadiusDecrease)*2)
+                            .style("left", (d) -> s.xPosition(d.ideologicalLocation, true, true) + "px")
+                            .style("top", (d) -> s.yPosition(d.nationalLocation, true, true) + "px")
+                            .style("width", s.radiusFactor*(s.baseRadius - s.positionMatchRadiusDecrease)*2 + "px")
+                            .style("height", s.radiusFactor*(s.baseRadius - s.positionMatchRadiusDecrease)*2 + "px")
+
                             return
 
                 )()
@@ -234,6 +251,7 @@ Legend
                 partyName = legend.append("p")
                 .attr("class", "legendPartyName")
                 .attr("translate", (d) -> "{{ '#{d.party}' }}" )
+                .attr("etv-translate-tooltip", (d) -> d.party)
 
                 legend.append("svg")
                 .attr("width", 2*s.legendCircleRadius)
@@ -256,21 +274,14 @@ El teu vot image and location circle
                 .attr("class", "legendPartyName")
                 .attr("translate", (d) -> "{{ 'elTeuVot' }}" )
 
-                elTeuVotLegend.append("svg")
-                .attr("width", 2*s.legendCircleRadius)
-                .attr("height", s.legendHeight)
-                .append("image")
-                .attr("xlink:href", "/images/etv-circle-logo.png")
-                .attr("x", "0")
-                .attr("y", "#{(s.legendHeight - 2*s.legendCircleRadius)/2}")
-                .attr("width", 2*s.legendCircleRadius)
-                .attr("height", 2*s.legendCircleRadius)
+                elTeuVotLegend.append("img")
+                .attr("src", "/images/etv-circle-logo.png")
+                .style("width", (2*s.legendCircleRadius + 1) + "px")
+                .style("height", (2*s.legendCircleRadius + 1) + "px")
+                .style("float", "right")
+                .style("margin-top", "4px")
 
                 $compile(angular.element(".legendPartyName"))(scope)
 
-            $timeout(paint)
-            $(window).on('resize', paint)
-            scope.$on('$destroy', -> $(window).off('resize load', paint))
 
-
-    app.directive('locationGraph', ['$timeout', '$compile', locationGraph])
+    app.directive('locationGraph', ['$timeout', '$compile', 'resultsService', 'politicalPartiesService', locationGraph])

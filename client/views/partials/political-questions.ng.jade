@@ -1,46 +1,9 @@
-#politicalQuestionsContainer(center-questions-vertically="")
+#politicalQuestionsContainer(center-questions-vertically="" highlight-current-question="" etv-scroll-to-top-on-load="")
 
     etv-question-navigation
 
     #politicalQuestionsListContainer
-        .globalPoliticalQuestionContainer(ng-repeat="question in politicalQuestions" index="{{$index}}")
-            .divider
-
-            .politicalQuestionContainer
-                .numberContainer
-                    p {{ $index + 1 }}:
-
-                .typeContainer.text-center.text-uppercase.center-block
-                    p {{ question.type }}
-
-                .textContainer.text-center
-                    p {{ question.text }}
-
-                span(ng-switch="question.answerType")
-                    .row.center-text(ng-switch-when="1")
-                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12.answerButtonContainer
-                            button.answerButton(ng-click="setAnswer('political', question, 0)" ng-class="{ answered: question.answer == 0 }")
-                                span(translate="{{ 'totallyDisagree' }}")
-                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12.answerButtonContainer
-                            button.answerButton(ng-click="setAnswer('political', question, 1)" ng-class="{ answered: question.answer == 1 }")
-                                span(translate="{{ 'disagree' }}")
-                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12.answerButtonContainer
-                            button.answerButton(ng-click="setAnswer('political', question, 2)" ng-class="{ answered: question.answer == 2, longText: $translate.use() == 'es' }")
-                                span(translate="{{ 'nonAgreeNonDisagree' }}")
-                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12.answerButtonContainer
-                            button.answerButton(ng-click="setAnswer('political', question, 3)" ng-class="{ answered: question.answer == 3 }")
-                                span(translate="{{ 'agree' }}")
-                        .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12.answerButtonContainer
-                            button.answerButton(ng-click="setAnswer('political', question, 4)" ng-class="{ answered: question.answer == 4 }")
-                                span(translate="{{ 'totallyAgree' }}")
-                        .col-lg-12.col-md-4.col-xs-6.col-xxs-12.doesntKnowDoesntAnswerButton.answerButtonContainer
-                            button.answerButton(ng-click="setAnswer('political', question, -1)" ng-class="{ answered: question.answer == -1 }")
-                                span(translate="{{ 'doesntKnowDoesntAnswer' }}")
-
-                    .sliderContainer(ng-switch-when="2")
-                        etv-slider(left-text="extrema esquerra" right-text="extrema dreta" value-object-holder="question" value-property="answer")
-
-            .divider(ng-if="$last")
+        etv-political-question(ng-repeat="question in questions")
 
     #endTestButtonContainer.text-center
         button#endTestButton(ng-click="goToPersonalQuestions()")

@@ -1,6 +1,6 @@
 # Layout controller
 
-    LayoutCtrl = ($scope, $translate, $state, $rootScope) ->
+    LayoutCtrl = ($scope, $translate, $state, $rootScope, $window, $timeout, questionsService, topicsService, politicalPartiesService) ->
 
 ## Header and navigation
 
@@ -8,6 +8,7 @@ Language setter
 
         $scope.setLanguage = (lang) ->
             $translate.use(lang)
+            $rootScope.$broadcast('languageChange')
 
 Logo sizing
 
@@ -61,4 +62,9 @@ Opening and closing sidenav
             $("#sideNavContainer").css({ "display": "none" })
             return true
 
-    app.controller('LayoutCtrl', ['$scope', '$translate', '$state', '$rootScope', LayoutCtrl])
+        broadCastLayoutChange = (type) -> $rootScope.$broadcast('layoutChange', type)
+        angular.element($window).on('load', -> broadCastLayoutChange('load'))
+        angular.element($window).on('resize', -> broadCastLayoutChange('resize'))
+        angular.element($window).on('scroll', -> $rootScope.$broadcast('scrollChange', 'scroll'))
+
+    app.controller('LayoutCtrl', ['$scope', '$translate', '$state', '$rootScope', '$window', '$timeout', 'questionsService', 'topicsService', 'politicalPartiesService', LayoutCtrl])

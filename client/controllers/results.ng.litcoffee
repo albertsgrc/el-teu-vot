@@ -1,41 +1,66 @@
 # Results page angular controller
 
-    ResultsCtrl = ($scope, $translate, $window) ->
-        $scope.openedGraph = null;
-        graphContainer = null
+    ResultsCtrl = ($scope, $translate, $window, graphService, topicsService, resultsService, $stateParams, $location) ->
+        topicsService.getTopics().then( (results) -> $scope.topics = results )
 
-        isMedia = (alias) -> $(".device-#{alias}").is(':visible')
+        $scope.loading = true
+        $scope.validResultsId = false
 
-        placeGraphImm = (graph) ->
-            if isMedia('xs') or $("##{graph}Graph").is(".insertPoint")
-                graphContainer.insertAfter("##{graph}Graph")
-            else
-                graphContainer.insertAfter($("##{graph}Graph").nextAll(".insertPoint")[0])
+        resultsService.getResults($stateParams.id).then(
+            (result) ->
+                $scope.loading = false
 
-        placeGraph = ->
-            if $scope.openedGraph isnt null
-                placeGraphImm($scope.openedGraph)
-
-
-        $(document).ready( ->
-            graphContainer = $(".graphGlobalContainer")
-            angular.element($window).on('resize', placeGraph)
-            $scope.$on('$destroy', -> angular.element($window).off('resize', placeGraph))
+                $scope.validResultsId = result?
+                if $scope.validResultsId
+                    $scope.results = result
         )
 
-        $scope.openGraph = (graph) ->
-            if $scope.openedGraph is graph
-                $scope.openedGraph = null
+        $scope.justCreated = $stateParams.justCreated
 
-            else
-                placeGraphImm(graph)
+        $scope.link = $location.absUrl()
 
-                $scope.openedGraph = graph
+        $scope.toggleGraph = graphService.toggleGraph
+
+        $scope.openedGraphs = graphService.getOpenedGraphs()
+
+        $scope.shareGraph = (socialMedia, graphName) ->
+
+            url = $scope.link
+            url = encodeURIComponent(url) if socialMedia is "twitter"
+
+            socialUrl =
+                switch socialMedia
+                    when "facebook"
+                        "https://www.facebook.com/sharer/sharer.php?u="
+                    when "twitter"
+                        "https://twitter.com/intent/tweet?url="
+
+            link = d3.select("body").append("a")
+            .attr("id", "graphShareLink")
+            .attr("target", "_blank")
+            .attr("href", socialUrl + url)
+
+            $("#graphShareLink")[0].click()
+            $("#graphShareLink").remove()
+
+            return true
+
+        $scope.downloadGraph = (graphName) ->
+            scroll = $(window).scrollTop()
+            $(window).scrollTop(0)
+
+            html2canvas($("##{graphName}"),
+                onrendered: (canvas) ->
+
+                    link = d3.select("body").append("a").attr("id", "graphDownloadLink")
+                    link.attr('download', "#{$translate.instant(graphName + "Download")}.png")
+                    link.attr('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"))
+                    $("#graphDownloadLink")[0].click()
+                    $("#graphDownloadLink").remove()
+                    $(window).scrollTop(scroll)
+
+                background: "white"
+            )
 
 
-
-
-
-
-
-    app.controller('ResultsCtrl', ['$scope', '$translate', '$window', ResultsCtrl])
+    app.controller('ResultsCtrl', ['$scope', '$translate', '$window', 'graphService', 'topicsService', 'resultsService', '$stateParams', '$location', ResultsCtrl])

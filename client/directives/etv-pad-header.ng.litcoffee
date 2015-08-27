@@ -1,6 +1,6 @@
 # Main header padding directive
 
-    padHeaderDirective = ($timeout, $window) ->
+    padHeaderDirective = ($timeout) ->
         restrict: 'A'
         link: (scope, element) ->
             setMainPadding = ->
@@ -12,9 +12,6 @@
                 return true
 
             $timeout(setMainPadding)
-            angular.element($window).on('load', setMainPadding)
-            angular.element($window).on('resize', setMainPadding)
+            scope.$on('layoutChange', setMainPadding)
 
-            scope.$on('$destroy', -> angular.element($window).off('resize load', setMainPadding))
-
-    app.directive('etvPadHeader', ['$timeout', '$window', padHeaderDirective])
+    app.directive('etvPadHeader', ['$timeout', padHeaderDirective])

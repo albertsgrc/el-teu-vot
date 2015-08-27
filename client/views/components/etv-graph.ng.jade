@@ -1,0 +1,26 @@
+.graphGlobalContainer.col-xs-12
+    .divider
+
+    p.text-uppercase.text-bold.text-xl.inline(translate="{{ graph }}")
+
+    span(ng-switch="graph")
+        span.topicRepeatContainer(ng-switch-when="topicCoincidence")
+            div.topicGlobalContainer(ng-repeat="topic in topics")
+                div.shareButtons.topicCoincidence
+                    .downloadContainer.inline
+                        span(translate="download")
+                        i.mdi.mdi-arrow-down-bold-circle-outline(ng-click="downloadGraph(graph + topic.id)")
+                    //span.text-divider &nbsp;&nbsp;|&nbsp;&nbsp;
+                .graphContainer(topic-coincidence-graph="{{ topic.id }}" id="{{ graph + topic.id }}")
+
+        span(ng-switch-default="")
+            div.shareButtons
+                .downloadContainer.inline
+                    span(translate="download")
+                    i.mdi.mdi-arrow-down-bold-circle-outline(ng-click="downloadGraph(graph)")
+                //span.text-divider &nbsp;&nbsp;|&nbsp;&nbsp;
+            span(ng-switch="graph")
+                .graphContainer(ng-switch-when="partyCoincidence" party-coincidence-graph="" id="{{ graph }}")
+                .graphContainer(ng-switch-when="location" location-graph="" id="{{ graph }}")
+                .graphContainer(ng-switch-when="parlamentaryRepresentation" parlamentary-representation-graph="" id="{{ graph }}")
+    .divider
