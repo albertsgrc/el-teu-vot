@@ -1,0 +1,23 @@
+.legendPartyContainer {
+    @legendHeight: 25px;
+
+    text-align: initial;
+    display: inline-block;
+    min-width: 100px;
+    height: @legendHeight;
+    border-bottom: solid 1px @strongGrey;
+
+    p {
+        display: inline-block;
+        line-height: @legendHeight;
+    }
+
+    p.legendPartyName {
+        color: @strongGrey;
+        margin-right: 15px !important;
+    }
+
+    p.legendPercentage, svg {
+        float: right;
+    }
+}

@@ -1,0 +1,81 @@
+.axisIndicator {
+    &.left {
+        .translate(-100%, -50%);
+
+        @media (max-width: 550px) {
+            .transform(translate(-25px, -50%) rotate(-90deg));
+        }
+    }
+
+    &.right {
+        .translate(100%, -50%);
+
+        @media (max-width: 550px) {
+            .transform(translate(18px, -50%) rotate(-90deg));
+        }
+    }
+
+    &.top {
+        .translate(-50%, -100%);
+    }
+
+    &.bottom {
+        .translate(-50%, 100%);
+    }
+
+    &.left, &.right {
+        top: 50%;
+    }
+
+    &.top, &.bottom {
+        left: 50%;
+    }
+}
+
+#locationGraphSvgWrapper {
+    position: relative;
+
+    margin-bottom: -5px;
+
+    img#elTeuVotCircle {
+        position: absolute;
+        transform:translateY(-5px);
+    }
+}
+
+.legend {
+    margin-top: 50px;
+
+    .legendPartyContainer {
+        margin-bottom: 10px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .locationLegendCircle {
+        width: 16px !important;
+        height: 16px !important;
+        border-radius: 50% !important;
+        float: right;
+        position: relative;
+        top: 50%;
+        .translateY(-50%);
+    }
+}
+
+#locationGraphContainer {
+    @media (max-width: @screen-xxs-max){
+        margin-top: 90px;
+        margin-bottom: 50px;
+    }
+
+    @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+        margin-top: 70px;
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: @screen-sm-min) {
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+}
