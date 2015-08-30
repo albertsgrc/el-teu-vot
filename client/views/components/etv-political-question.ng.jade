@@ -1,4 +1,4 @@
-.globalPoliticalQuestionContainer(index="{{ question.number - 1 }}")
+.globalPoliticalQuestionContainer(index="{{ question.number - 1 }}" etv-watch-height-change="watchHeightChangeOn")
    .divider
 
    .politicalQuestionContainer
@@ -6,15 +6,15 @@
          p {{ question.number }}:
 
       .typeContainer.text-center.text-uppercase.center-block
-         p(translate="{{ question.topic || 'spaces' }}")
+         p(translate="{{ questionTopic(question) }}")
 
       .textContainer.text-center
-         p(translate="{{ 'question' + question.number }}")
+         p(translate="{{ questionText(question) }}")
 
       span(ng-switch="question.type")
          .row.center-text(ng-switch-when="basic")
-            .col-md-4.col-xs-6.col-xxs-12.answerButtonContainer(ng-repeat="option in BASIC_QUESTION_OPTIONS", ng-class="{ 'col-lg-2-4': option != 'nsnc', 'col-lg-12 nsncButton': option == 'nsnc' }")
-               button.answerButton(ng-click="question.answer = option" ng-class="{ answered: question.answer == option, longText: option == 'nand' && $translate.use() == 'es' }")
+            .col-md-4.col-xs-6.col-xxs-12.answerButtonContainer(ng-repeat="option in BASIC_QUESTION_OPTIONS", ng-class="{ 'col-lg-2-4': !isNoAnswer(option), 'col-lg-12 nsncButton': isNoAnswer(option) }")
+               button.answerButton(ng-click="setQuestionAnswer(question, option)" ng-class="{ answered: isAnsweredWith(question, option), longText: isLongAnswer(option) }")
                   span(translate="{{ option }}")
 
          .sliderContainer(ng-switch-when="ideologicalLocation")
@@ -24,11 +24,7 @@
             etv-slider(left-text="centralizedState" right-text="ownState" ng-model="question.answer")
 
          span(ng-switch-when="topicSort")
-            p.text-container.text-center.sortableTip(translate="sortTip")
-            ul.sortable.center-horizontally(etv-sortable="")
-               li(ng-repeat="topic in topics" ng-mousedown="answerOption(topic.id)" etv-value="{{ topic.id }}")
-                  button.answerButton.superLongText(ng-class="{ 'answered': question.answeredOption[topic.id] }")
-                     span(translate="{{ topic.id }}")
+            etv-sortable
 
 
    .divider(ng-if="$last")

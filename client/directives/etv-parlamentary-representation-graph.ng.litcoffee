@@ -11,7 +11,7 @@
         voteValues = []
 
         for party in data
-            if party.value/votesSum >= LEGAL_WALL
+            if votesSum > 0 and party.value/votesSum >= LEGAL_WALL
                 parties[party.party] = { votes: party.value, seats: 0 }
             else
                 party.seats = 0
@@ -50,7 +50,7 @@
 
         link: (scope, element, attrs) ->
             data = []
-            parties = []
+            partiesIds = []
 
             politicalPartiesService.getPoliticalParties().then(
                 (politicalParties) ->
@@ -58,13 +58,13 @@
                         (results) ->
                             return unless results?
 
-                            parties = _.pluck(politicalParties, 'id')
+                            partiesIds = _.pluck(politicalParties, '_id')
 
                             for party in politicalParties
                                 data.push(
-                                    party: party.id
+                                    party: party._id
                                     color: party.color
-                                    value: _.find(results.partyCoincidence, (elem) -> elem.party is party.id ).value
+                                    value: _.find(results.partyCoincidence, (elem) -> elem.party is party._id ).value
                                 )
 
                             setGraph()
@@ -79,7 +79,7 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                 hemicycle = [3.5, 8, 9, 10, 7, 8, 8, 6, 5]
                 hemicycleSeats = [7, 16, 18, 26, 20, 16, 16, 12, 10]
 
-                paint = ->
+                paint = _.debounce( ->
 
                     parent = d3.select(element[0])
 
@@ -211,7 +211,7 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                             while lengthTillNow < l
                                 if shouldPutCircle(it + 1, i, 10 + it*3)
                                     hemicycleVector[k] = svg.append("circle")
-                                    .attr("fill", "orange")
+                                    .attr("fill", colors.grey)
                                     .attr("r", s.circleRadius)
                                     .attr("cx", pal(lengthTillNow).x)
                                     .attr("cy", pal(lengthTillNow).y)
@@ -254,10 +254,13 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                             b.attr('cx') - a.attr('cx')
                         )
 
-                        partiesCopy = JSON.parse(JSON.stringify(parties))
+                        partiesCopy = JSON.parse(JSON.stringify(partiesIds))
 
                         for seat in hemicycleVector
                             partiesCopy.shift() while partiesCopy.length and partyToInfo[partiesCopy[0]].seats is 0
+
+                            break if partiesCopy.length is 0
+
                             seat.attr("fill", partyToInfo[partiesCopy[0]].color)
                             --partyToInfo[partiesCopy[0]].seats
 
@@ -296,10 +299,11 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
 
                         $compile(angular.element(".legendPartyName"))(scope)
                     )()
+                , 250)
 
                 $timeout(paint)
-                scope.$on('layoutChange', paint)
+                scope.$on('resize', paint)
 
 
 
-    app.directive('parlamentaryRepresentationGraph', ['$timeout', '$compile', 'politicalPartiesService', 'resultsService', parlamentaryRepresentationGraph])
+    app.directive('etvParlamentaryRepresentationGraph', ['$timeout', '$compile', 'politicalPartiesService', 'resultsService', parlamentaryRepresentationGraph])

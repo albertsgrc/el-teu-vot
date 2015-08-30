@@ -2,6 +2,7 @@
 
     topicsService = ($meteor, $q) ->
         topics = null
+        error = false
 
         pendingRequests = []
 
@@ -15,15 +16,18 @@
 
             pendingRequests = []
 
-        $meteor.call('getTopics').then(
-            (result) ->
-                topics = result
-                resolvePendingRequests(topics, false)
-        ,
-            (error) ->
-                console.error "Error retrieveing topics\n#{@etvPrint(error)}"
-                resolvePendingRequests(error, true)
-        )
+        (getTopics = ->
+            $meteor.call('getTopics').then(
+                (result) ->
+                    topics = result
+                    error = false
+                    resolvePendingRequests(topics, false)
+                ,
+                (err) ->
+                    resolvePendingRequests(error, true)
+                    error = true
+            )
+        )()
 
         @getTopics = ->
             q = $q.defer()
@@ -32,6 +36,7 @@
                 q.resolve(topics)
             else
                 pendingRequests.push q
+                getTopics() if error
 
             return q.promise
 

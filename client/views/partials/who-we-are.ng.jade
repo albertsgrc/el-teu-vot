@@ -1,10 +1,10 @@
 #whoWeAreContainer.container.globalTextContainer
 
     #whoWeAreTitleContainer.mainTitleContainer
-        p#whoWeAreTitle.text-uppercase.mainTitle(translate="{{ 'whoWeAre' }}")
+        p#whoWeAreTitle.text-uppercase.mainTitle(translate="whoWeAre")
 
     #whoWeAreMainTextContainer.paddedText.bottomPadding
-        p#whoWeAreMainText(translate="{{ 'whoWeAreMainText' }}")
+        p#whoWeAreMainText(translate="whoWeAreMainText")
 
     .divider
 
@@ -12,12 +12,14 @@
         .col-sm-6.col-xs-12
             .center-text.whoWeArePartnerLogoContainer
                 span.centerHelper
-                img#whoWeAreEtpLogo(src="/images/logo_etp.png")
-            p.text-smaller(translate="{{ 'whoWeAreEtpText' }}")
+                a(href="{{ ETP_URL }}" target="_blank")
+                    img#whoWeAreEtpLogo(src="/images/logo_etp.png")
+            p.text-smaller(translate="whoWeAreEtpText")
 
         .col-sm-6.col-xs-12
             .center-text.whoWeArePartnerLogoContainer#whoWeAreapps4citizensLogoContainer
                 span.centerHelper
-                img#whoWeAreapps4citizensLogo(src="/images/logo_apps4citizens.png")
-            p.text-smaller(translate="{{ 'whoWeAreapps4citizensText' }}")
+                a(href="{{ APPS4CITIZENS_URL }}" target="_blank")
+                    img#whoWeAreapps4citizensLogo(src="/images/logo_apps4citizens.png")
+            p.text-smaller(translate="whoWeAreapps4citizensText")
 

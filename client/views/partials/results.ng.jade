@@ -1,17 +1,22 @@
 #resultsContainer.container(etv-scroll-to-top-on-load="")
-    span(ng-if="loading")
+    span(ng-if="shouldShowLoading()")
+        etv-centered-text(text="resultsLoading")
 
-    span(ng-if="!loading && !validResultsId")
-        p.text-center.text-xxxl.badResultsIdText(translate="badResultsId")
 
-    span(ng-if="!loading && validResultsId")
+    span(ng-if="shouldShowError()")
+        etv-centered-text(text="resultsError")
+
+    span(ng-if="shouldShowBadIdMessage()")
+        etv-centered-text(text="badResultsId")
+
+    span(ng-if="shouldShowResults()")
         #resultsIntroContainer.text-center
-            p.text-uppercase.text-l.text-bold(translate="{{ justCreated ? 'yourResultsTitle' : 'yourResultsTitleOut' }}")
-            p(translate="{{ justCreated ? 'yourResultsText' : 'yourResultsTextOut' }}")
+            p.text-uppercase.text-l.text-bold(translate="{{ resultsTitle }}")
+            p(translate="{{ resultsIntroText }}")
 
         #graphsContainer.row
 
-            etv-graph-min(ng-repeat="graphMin in ['partyCoincidence', 'topicCoincidence', 'location', 'parlamentaryRepresentation']")
+            etv-graph-min(ng-repeat="graphMin in GRAPHS")
 
             etv-graph(ng-repeat="graph in openedGraphs")
 
@@ -24,5 +29,3 @@
             span(ng-if="justCreated")
                 p.resultsCodeText.text-center(translate="resultsCodeText")
                 p.resultsCode.text-bold.text-xl.text-center {{ link }}
-
-img(src="/images/etv-circle-logo.png" style="opacity: 0")

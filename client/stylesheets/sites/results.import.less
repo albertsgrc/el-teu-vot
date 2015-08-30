@@ -1,8 +1,12 @@
 #resultsContainer {
     margin-top: 15px;
 
-    .badResultsIdText {
-        margin-top: 60px !important;
+    .graphMinTitle.opened {
+        color: @orange;
+    }
+
+    .goToRight {
+        right: 0 !important;
     }
 
     a {
@@ -111,12 +115,15 @@
                 margin-left: 5px;
             }
 
-            i.mdi.mdi-arrow-down-bold-circle-outline {
+            i {
                 font-size: 1.9em;
                 line-height: 15px;
-                margin-right: 15px;
                 position: relative;
                 top: 5px;
+            }
+
+            i:not(:last-child) {
+                margin-right: 15px;
             }
 
             span:not(.text-divider) {

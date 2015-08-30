@@ -2,13 +2,12 @@
 
     @PoliticalParties = new Mongo.Collection('PoliticalParties')
 
+
     Schemas.PoliticalParties = new SimpleSchema(
-        id:
+        _id:
             type: String
             min: 1
             max: 30
-            unique: true
-            index: true
 
         color:
             type: String

@@ -1,19 +1,18 @@
 # Layout controller
 
-    LayoutCtrl = ($scope, $translate, $state, $rootScope, $window, $timeout, questionsService, topicsService, politicalPartiesService) ->
+    LayoutCtrl = ($scope, $translate, $state, $rootScope, $window, questionsService, topicsService, politicalPartiesService) ->
 
 ## Header and navigation
+
+        $rootScope.isFixedHeader = -> not $state.includes('elTeuVot')
+
+        $rootScope.hasSidenav = -> $state.includes('questions') || $state.includes('results')
 
 Language setter
 
         $scope.setLanguage = (lang) ->
             $translate.use(lang)
             $rootScope.$broadcast('languageChange')
-
-Logo sizing
-
-        $rootScope.$state = $state;
-        $rootScope.$translate = $translate;
 
 Viewport size
 
@@ -62,9 +61,8 @@ Opening and closing sidenav
             $("#sideNavContainer").css({ "display": "none" })
             return true
 
-        broadCastLayoutChange = (type) -> $rootScope.$broadcast('layoutChange', type)
-        angular.element($window).on('load', -> broadCastLayoutChange('load'))
-        angular.element($window).on('resize', -> broadCastLayoutChange('resize'))
-        angular.element($window).on('scroll', -> $rootScope.$broadcast('scrollChange', 'scroll'))
+        angular.element($window).on('resize', -> $rootScope.$broadcast('resize'))
+        angular.element($window).on('load', -> $rootScope.$broadcast('load'))
+        angular.element($window).on('scroll', -> $rootScope.$broadcast('scroll'))
 
-    app.controller('LayoutCtrl', ['$scope', '$translate', '$state', '$rootScope', '$window', '$timeout', 'questionsService', 'topicsService', 'politicalPartiesService', LayoutCtrl])
+    app.controller('LayoutCtrl', ['$scope', '$translate', '$state', '$rootScope', '$window', 'questionsService', 'topicsService', 'politicalPartiesService', LayoutCtrl])

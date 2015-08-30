@@ -3,10 +3,10 @@
 .device-md.visible-md
 .device-lg.visible-lg
 
-etv-header
+etv-header(etv-fixed-vertically-but-not-horizontally=".fixedHeader")
 
-#main(ui-view="" autoscroll="true" ng-class="{ 'fixedHeader': !$state.includes('elTeuVot') }" etv-pad-header="")
+#main(ui-view="" autoscroll="true" ng-class="{ 'fixedHeader': isFixedHeader() }" etv-pad-header="")
 
-etv-footer(ng-if="!$state.includes('questions') && !$state.includes('results')")
+etv-footer(ng-if="!hasSidenav()")
 
-etv-side-nav(ng-if="$state.includes('questions') || $state.includes('results')")
+etv-side-nav(ng-if="hasSidenav()")

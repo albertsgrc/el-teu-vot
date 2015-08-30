@@ -1,18 +1,30 @@
 # Meteor methods file
 
+    isOlderThan = (minutesOld, date) ->
+        now = new Date
+        return now - date >= minutesOld*60000
 
     Meteor.methods(
-        getResults: (id) -> Results.findOne({ _id: id })
+        getResults: (id) ->
+            Results.findOne({ _id: id }, { fields: { partyCoincidence: 1, topicAndPartyCoincidence: 1, "political.ideologicalLocation": 1, "political.nationalLocation": 1, "political.topicOrder": 1 } })
 
-        getPoliticalParties: -> PoliticalParties.find().fetch()
+        getPoliticalParties: ->
+            PoliticalParties.find({}, { fields: { createdAt: 0, updatedAt: 0 } }).fetch()
 
-        getPersonalQuestions: -> PersonalQuestions.find({}, { sort: { order: 1 } }).fetch()
+        getPersonalQuestions: ->
+            PersonalQuestions.find({}, { fields: { createdAt: 0, updatedAt: 0 }, sort: { order: 1 } }).fetch()
 
-        getPoliticalQuestions: -> PoliticalQuestions.find({}, { sort: { number: 1 } }).fetch()
+        getPoliticalQuestions: ->
+            PoliticalQuestions.find({ currentlyActive: true }, { sort: { number: 1 }, fields: { answerResemblanceToPartyMatrix: 0, currentlyActive: 0, createdAt: 0, updatedAt: 0 } }).fetch()
 
-        getTopics: -> Topics.find().fetch()
+        getTopics: ->
+            Topics.find({}, { fields: { createdAt: 0, updatedAt: 0 } }).fetch()
 
         sendResults: (results) ->
+            possiblePreviousSavedResult = Results.findOne({ userId: results.userId }, { fields: { _id: 1, createdAt: 1 }, sort: { createdAt: -1 } })
+
+            if possiblePreviousSavedResult? and not isOlderThan(60, possiblePreviousSavedResult.createdAt)
+                return possiblePreviousSavedResult._id
 
             Schemas.Result.clean(results)
 
@@ -25,22 +37,19 @@
 Need to calculate results based on the answered questions
 
             computeResults = () ->
+                questionsById = {}
 
 Get info altogether
 
-                politicalParties = _.pluck(PoliticalParties.find().fetch(), 'id')
-                topics = _.pluck(Topics.find().fetch(), 'id')
-                questionsById = {}
+                politicalParties = _.pluck(PoliticalParties.find().fetch(), '_id')
+                topics = _.pluck(Topics.find().fetch(), '_id')
 
 Build question map by id for efficiency
 
-                topicQuestionCountMap = {}
+                politicalQuestions = PoliticalQuestions.find({ type: 'basic' }).fetch()
 
-                topicQuestionCountMap[topic] = 0 for topic in topics
-
-                for question in PoliticalQuestions.find().fetch()
+                for question in politicalQuestions
                     questionsById[question._id] = question
-                    ++topicQuestionCountMap[question.topic]
 
 Initialize result properties
 
@@ -64,6 +73,7 @@ The position of the topic in the array indicates the order (weight) assigned to 
                 for topic, i in results.political.topicOrder
                     topicWeightMap[topic] = Topics.TOPIC_WEIGHT_BY_ORDER_INDEX[i]
 
+
 We repeat the score calculation process for every political party
 
                 for politicalParty in politicalParties
@@ -74,6 +84,7 @@ Initialize map to gather information about the score of the party in every topic
                     for topic in topics
                         topicInfoMap[topic] =
                             score: 0
+                            validAnswerCount: 0
 
 Get every answer and sum the correspondant score for the party to the topic
 
@@ -82,15 +93,17 @@ Get every answer and sum the correspondant score for the party to the topic
 
                         partyRow =  _.find(question.answerResemblanceToPartyMatrix, (artp) -> artp.party is politicalParty).resemblanceToAnswers
 
-                        questionScore = if answer.answer is PoliticalQuestions.NO_ANSWER then PoliticalQuestions.NO_ANSWER_POINTS else partyRow[PoliticalQuestions.BASIC_QUESTION_OPTIONS.indexOf(answer.answer)]
-                        topicInfoMap[question.topic].score += questionScore
+                        unless answer.answer is PoliticalQuestions.NO_ANSWER
+                            questionScore = partyRow[PoliticalQuestions.BASIC_QUESTION_OPTIONS.indexOf(answer.answer)]
+                            topicInfoMap[question.topic].score += questionScore
+                            ++topicInfoMap[question.topic].validAnswerCount
 
                     politicalPartyRawScoreValue = 0
 
 Sum the score of the party in every topic to the total score and to the topic score and push it to its info arrays
 
                     for topic, info of topicInfoMap
-                        partyScoreInTopic = info.score/(topicQuestionCountMap[topic]*PoliticalQuestions.QUESTION_COUNT)
+                        partyScoreInTopic = if topicInfoMap[topic].validAnswerCount is 0 then 0 else info.score/(topicInfoMap[topic].validAnswerCount*PoliticalQuestions.MAX_ANSWER_VALUE)
                         politicalPartyRawScoreValue += (partyScoreInTopic)*topicWeightMap[topic]
                         topicPartyArray = _.find(results.topicAndPartyCoincidence, (elem) -> elem.topic is topic)
 

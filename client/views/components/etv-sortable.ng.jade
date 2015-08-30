@@ -1,0 +1,7 @@
+.etv-sortable
+   p.text-container.text-center.sortableTip(translate="sortTip")
+   ul.sortable.center-horizontally
+      li(ng-repeat="topic in topics" ng-mousedown="answerOption(topic._id)" etv-value="{{ topic._id }}")
+         button.answerButton.superLongText(ng-class="{ 'answered': isAnswered(topic._id) }")
+            span(translate="{{ topic._id }}")
+

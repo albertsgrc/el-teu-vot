@@ -5,12 +5,10 @@
     Topics.TOPIC_WEIGHT_BY_ORDER_INDEX = [0.25, 0.225, 0.2, 0.175, 0.15]
 
     Schemas.Topic = new SimpleSchema(
-        id:
+        _id:
             type: String
             min: 1
             max: 50
-            unique: true
-            index: true
 
         createdAt:
             type: Date

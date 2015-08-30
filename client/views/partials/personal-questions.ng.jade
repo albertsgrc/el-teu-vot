@@ -1,23 +1,28 @@
 #personalQuestionsContainer.container(etv-scroll-to-top-on-load="")
-   .divider
+   span(ng-if="shouldShowPersonalQuestionsError()")
+      etv-centered-text(text="personalQuestionsError")
 
-   p.center-block#personalQuestionsInfo(translate="{{ 'personalQuestionsInfo' }}")
+   span(ng-if="shouldShowLoading()")
+      etv-centered-text(text="personalQuestionsLoading")
 
-   .divider
+   span(ng-if="shouldShowPersonalQuestions()")
+      .divider
 
-   .personalMandatoryQuestionsContainer
-      etv-personal-question(ng-repeat="question in questions | filter:{ 'mandatory': true }")
+      p.center-block#personalQuestionsInfo(translate="personalQuestionsInfo")
 
-   .divider
+      .divider
 
-   p#personalQuestionsOptionalIntro(translate="{{ 'personalQuestionsOptionalIntro' }}")
+      .personalMandatoryQuestionsContainer
+         etv-personal-question(ng-repeat="question in questions | filter:{ 'mandatory': true }")
 
-   etv-personal-question(ng-repeat="question in questions | filter:{ 'mandatory': false }")
+      .divider
 
-   #endOfQuestionaire.text-center
-      p(translate="{{ 'endQuestionaireText' }}")
+      p#personalQuestionsOptionalIntro(translate="personalQuestionsOptionalIntro")
 
-      button(ng-click="goToResults()")
-         span.text-uppercase(translate="{{ 'seeResults' }}")
+      etv-personal-question(ng-repeat="question in questions | filter:{ 'mandatory': false }")
 
-   etv-alert(text="{{ 'personalQuestionsAlert' | translate}}")
+      #endOfQuestionaire.text-center
+         p(translate="{{ endQuestionaireText }}")
+
+         button(ng-click="goToResults()")
+            span.text-uppercase(translate="{{ 'seeResults' }}")

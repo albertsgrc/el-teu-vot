@@ -19,7 +19,7 @@
 
                             for party in politicalParties
                                 data.parties.push(
-                                    party: party.id
+                                    party: party._id
                                     color: party.color
                                     nationalLocation: party.nationalLocation
                                     ideologicalLocation: party.ideologicalLocation
@@ -31,7 +31,7 @@
                             )
 
                             $timeout(paint)
-                            scope.$on('layoutChange', paint)
+                            scope.$on('resize', paint)
                     )
             )
 
@@ -284,4 +284,4 @@ El teu vot image and location circle
                 $compile(angular.element(".legendPartyName"))(scope)
 
 
-    app.directive('locationGraph', ['$timeout', '$compile', 'resultsService', 'politicalPartiesService', locationGraph])
+    app.directive('etvLocationGraph', ['$timeout', '$compile', 'resultsService', 'politicalPartiesService', locationGraph])

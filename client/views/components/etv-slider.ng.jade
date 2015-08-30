@@ -1,6 +1,6 @@
 .centeringContainer.center-text
-   .leftText.borderText.inline
+   .leftText.borderText.inline(translate="{{ __sliderLeftText }}")
       span
-   .etv-slider
-   .rightText.borderText.inline
+   .etv-slider(ng-class="{ 'touched': isAnswered(question.number) }")
+   .rightText.borderText.inline(translate="{{ __sliderRightText }}")
       span

@@ -1,13 +1,57 @@
 # Political questions angular controller
 
-    PoliticalQuestionsCtrl = ($scope, $state, resultsService, questionsService, topicsService, questionNavigationService, $meteor) ->
-        questionsService.getPoliticalQuestions().then( (data) ->
-            $scope.questions = data
+    PoliticalQuestionsCtrl = ($scope, $state, resultsService, questionsService, topicsService, questionNavigationService, $meteor, etvAlertService, $translate, $timeout) ->
+        $scope.loadingCounter = 2
+        $scope.error = false
+
+        notifyError = ->
+            $scope.error = true
+            NProgress.done()
+
+        onDataLoad = ->
+            --$scope.loadingCounter
+            NProgress.done() unless $scope.loadingCounter
+
+        NProgress.start()
+        questionsService.getPoliticalQuestions().then(
+            (data) ->
+                $scope.questions = data
+                onDataLoad()
+            ,
+            notifyError
         )
 
-        topicsService.getTopics().then( (data) ->
-            $scope.topics = data
+        topicsService.getTopics().then(
+            (data) ->
+                $scope.topics = data
+                onDataLoad()
+            ,
+            notifyError
         )
+
+
+        $scope.watchHeightChangeOn =
+            firstNeeded: true
+            selector: '#politicalQuestionsListContainer .globalPoliticalQuestionContainer:first-child .politicalQuestionContainer'
+            event: 'politicalQuestionsHeightChange'
+
+        $scope.questionTopic = (question) -> question.topic or 'spaces'
+
+        $scope.questionText = (question) -> 'question' + question.number
+
+        $scope.isNoAnswer = (answer) -> answer is PoliticalQuestions.NO_ANSWER
+
+        $scope.isAnsweredWith = (question, option) -> question.answer is option
+
+        $scope.isLongAnswer = (answer) -> answer is 'nand' and $translate.use() is 'es'
+
+        $scope.shouldShowLoading = -> $scope.loadingCounter and not $scope.error
+
+        $scope.shouldShowQuestions = -> not $scope.loadingCounter
+
+        $scope.shouldShowError = -> $scope.error
+
+        $scope.setQuestionAnswer = (question, answer) -> question.answer = answer
 
         $scope.BASIC_QUESTION_OPTIONS = PoliticalQuestions.BASIC_QUESTION_OPTIONS
 
@@ -26,12 +70,11 @@
             else
                 goToFirstUnAnsweredQuestion = ( ->
                     showAlert = ->
-                        setTimeout((-> $(".etv-alert").modal("show")), 100)
-
+                        $timeout((-> etvAlertService.openAlert('politicalQuestionsAlert')), 100)
                     questionNavigationService.goToQuestion(firstUnAnsweredQuestion, showAlert)
 
                 )()
 
             return true
 
-    app.controller('PoliticalQuestionsCtrl', ['$scope', '$state', 'resultsService', 'questionsService', 'topicsService', 'questionNavigationService', '$meteor', PoliticalQuestionsCtrl])
+    app.controller('PoliticalQuestionsCtrl', ['$scope', '$state', 'resultsService', 'questionsService', 'topicsService', 'questionNavigationService', '$meteor', 'etvAlertService', '$translate', '$timeout', PoliticalQuestionsCtrl])

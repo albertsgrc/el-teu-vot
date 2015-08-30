@@ -1,7 +1,6 @@
 # Results control and sending service
 
     resultsService = ($q, $meteor, questionsService) ->
-
         answerResults = {}
 
         computedResults = null
@@ -15,7 +14,10 @@
 
         (wipeResults = ->
             answerResults = {
+                userId: Random.id()
+
                 political:
+
                     basicAnswers: []
 
                     ideologicalLocation: null
@@ -50,7 +52,6 @@
                     resolvePendingRequests(computedResults.value, false)
                 ,
                 (error) ->
-                    console.error("Error retrieving results: #{etvPrint(error)}")
                     resolvePendingRequests(error, true)
             )
 
@@ -69,24 +70,27 @@
                         answerResults.political.nationalLocation = question.answer
                     when "topicSort"
                         answerResults.political.topicOrder = question.answer
+
         @sendPersonalResults = (questions) ->
             for question in questions
                 answerResults.personal.answers.push
-                    questionId: question.id
+                    questionId: question._id
                     answer: question.answer
 
             q = $q.defer()
 
-            sendResultsToServerAndGetNewResults(q)
+            self.sendResultsToServerAndGetNewResults(q)
 
             return q.promise
 
         @getResults = (id) ->
-            return if not id? and not computedResults?
+            q = $q.defer()
+
+            if not id? and not computedResults?
+                q.reject("An id is needed")
+                return q.promise
 
             id ?= computedResults.id
-
-            q = $q.defer()
 
             if not computedResults? or computedResults.id isnt id
                 if pendingRequests.value.size > 0
@@ -103,30 +107,28 @@
 
             return q.promise
 
-        sendResultsToServerAndGetNewResults = (q) ->
+        @sendResultsToServerAndGetNewResults = (q = $q.defer()) ->
             questionsService.reset()
+
             $meteor.call('sendResults', answerResults).then(
                 (resultsId) ->
                     wipeResults()
-
-                    self.getResults(resultsId).then(
-                        (results) ->
-                            q.resolve(resultsId)
-                    )
+                    q.resolve(resultsId)
+                    self.getResults(resultsId)
                 ,
                 (error) ->
-                    wipeResults()
-                    console.log error
                     q.reject(error)
             )
 
+            return q.promise
+
         @setPersonalQuestionAnswer = (id, value) ->
             for questionClass, obj of personalQuestions
-                return question.answer = value for question in obj when question.id is id
+                return question.answer = value for question in obj when question._id is id
 
         @isPersonalQuestionAnswered = (id) ->
             for questionClass, obj of personalQuestions
-                return question.answer? for question in obj when question.id is id
+                return question.answer? for question in obj when question._id is id
 
         @areAllPersonalQuestionsAnsweredAndValid = ->
             return false for question in personalQuestions.mandatory when not question.answer? or (question.valid? and not question.valid)

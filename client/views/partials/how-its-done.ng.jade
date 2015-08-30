@@ -1,135 +1,101 @@
 #howItsDoneContainer.container.globalTextContainer
 
     #howItsDoneTitleContainer.mainTitleContainer
-        p#howItsDoneTitle.text-uppercase.mainTitle(translate="{{ 'howItsDoneTitle' }}")
+        p#howItsDoneTitle.text-uppercase.mainTitle(translate="howItsDoneTitle")
 
     #howItsDoneMainTextContainer.paddedText.bottomPadding
-        p#howItsDoneMainText(translate="{{ 'howItsDoneMainText' }}")
+        p#howItsDoneMainText(translate="howItsDoneMainText")
 
-    p.text-uppercase.text-bold.center-text(translate="{{ 'howItsDoneExplanationMainTitle' }}")
+    p.text-uppercase.text-bold.center-text(translate="howItsDoneExplanationMainTitle")
 
     br
 
-    p.text-slight-smaller.text-uppercase(translate="{{ 'howItsDoneExplanationTitle1' }}")
+    p.text-slight-smaller.text-uppercase(translate="howItsDoneExplanationTitle1")
 
     div.someTopBottomMargin
-        p.paddedText.text-smaller(translate="{{ 'howItsDoneExplanationText1' }}")
+        p.paddedText.text-smaller(translate="howItsDoneExplanationText1")
 
-    p.text-slight-smaller.text-uppercase(translate="{{ 'howItsDoneExplanationTitle2' }}")
+    p.text-slight-smaller.text-uppercase(translate="howItsDoneExplanationTitle2")
 
     div.someTopMargin
-        p.text-smaller.text-underlined.paddedText(translate="{{ 'howItsDoneExplanationSubtitle21' }}")
+        p.text-smaller.text-underlined.paddedText(translate="howItsDoneExplanationSubtitle21")
 
-        p.text-smaller.paddedText(translate="{{ 'howItsDoneExplanationText211' }}")
+        p.text-smaller.paddedText(translate="howItsDoneExplanationText211")
 
         .row.howItsDoneExampleButtonsContainer.answerButtonContainer.center-text.paddedText
-            .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
+            .col-md-4.col-xs-6.col-xxs-12(ng-repeat="option in BASIC_QUESTION_OPTIONS", ng-class="{ 'col-lg-2-4': !isNoAnswer(option), 'col-lg-12 nsncButton': isNoAnswer(option) }")
                 button.demoAnswerButton
-                    span(translate="{{ 'totallyDisagree' }}")
-            .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
-                button.demoAnswerButton
-                    span(translate="{{ 'disagree' }}")
-            .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
-                button.demoAnswerButton
-                    span(translate="{{ 'nonAgreeNonDisagree' }}")
-            .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
-                button.demoAnswerButton
-                    span(translate="{{ 'agree' }}")
-            .col-lg-2-4.col-md-4.col-xs-6.col-xxs-12
-                button.demoAnswerButton
-                    span(translate="{{ 'totallyAgree' }}")
-            .col-lg-12.col-md-4.col-xs-6.col-xxs-12
-                button.demoAnswerButton
-                    span(translate="{{ 'doesntKnowDoesntAnswer' }}")
-        p.text-smaller.paddedText(translate="{{ 'howItsDoneExplanationText212' }}")
+                    span(translate="{{ option }}")
+
+        p.text-smaller.paddedText(translate="howItsDoneExplanationText212")
 
     br
     .divider
     br
     br
 
-    p.text-smaller.paddedText.text-underlined(translate="{{ 'howItsDoneExplanationSubtitle22' }}")
+    p.text-smaller.paddedText.text-underlined(translate="howItsDoneExplanationSubtitle22")
 
-    p.text-smaller.paddedText(translate="{{ 'howItsDoneExplanationText22' }}")
+    p.text-smaller.paddedText(translate="howItsDoneExplanationText22")
 
-    p.text-smaller.paddedText.text-bold(translate="{{ 'howItsDoneExplanationSubtitle221' }}")
+    p.text-smaller.paddedText.text-bold(translate="howItsDoneExplanationSubtitle221")
 
     .row.paddedText.imageTextContainer
         .col-xxs-12.col-xs-3.col-md-2.text-center.textImageContainer
             img(src="/images/candidatura.png").textLeftImage
         .col-xxs-12.col-xs-9.col-md-10.textImageTextContainer
-            p.text-smaller(translate="{{ 'howItsDoneExplanationText221' }}")
+            p.text-smaller(translate="howItsDoneExplanationText221")
 
-    p.text-smaller.paddedText.text-bold(translate="{{ 'howItsDoneExplanationSubtitle222' }}")
+    p.text-smaller.paddedText.text-bold(translate="howItsDoneExplanationSubtitle222")
 
     .row.paddedText.imageTextContainer
         .col-xxs-12.col-xs-3.col-md-2.text-center.textImageContainer
             img(src="/images/act_parlamentaria.png").textLeftImage
         .col-xxs-12.col-xs-9.col-md-10.textImageTextContainer
-            p.text-smaller(translate="{{ 'howItsDoneExplanationText222' }}")
+            p.text-smaller(translate="howItsDoneExplanationText222")
 
-    p.text-smaller.paddedText.text-bold(translate="{{ 'howItsDoneExplanationSubtitle223' }}")
+    p.text-smaller.paddedText.text-bold(translate="howItsDoneExplanationSubtitle223")
 
     .row.paddedText.imageTextContainer
         .col-xxs-12.col-xs-3.col-md-2.text-center.textImageContainer
             img(src="/images/hemeroteca.png").textLeftImage
         .col-xxs-12.col-xs-9.col-md-10.textImageTextContainer
-            p.text-smaller(translate="{{ 'howItsDoneExplanationText223' }}")
+            p.text-smaller(translate="howItsDoneExplanationText223")
 
-    p.text-smaller.paddedText.text-bold(translate="{{ 'howItsDoneExplanationSubtitle224' }}")
+    p.text-smaller.paddedText.text-bold(translate="howItsDoneExplanationSubtitle224")
 
     .row.paddedText.imageTextContainer
         .col-xxs-12.col-xs-3.col-md-2.text-center.textImageContainer
             img(src="/images/programa_electoral.png").textLeftImage
         .col-xxs-12.col-xs-9.col-md-10.textImageTextContainer
-            p.text-smaller(translate="{{ 'howItsDoneExplanationText224' }}")
+            p.text-smaller(translate="howItsDoneExplanationText224")
 
-    p.text-smaller.paddedText(translate="{{ 'howItsDoneExplanationText231' }}")
+    p.text-smaller.paddedText(translate="howItsDoneExplanationText231")
 
     .paddedText.largeTable.someTopBottomMargin
         table.howItsDoneTable.table.table-bordered.text-smaller
             thead
                 tr
-                    th.text-center.text-bold.text-uppercase(colspan="6") Pregunta X
+                    th.text-center.text-bold.text-uppercase(colspan="6", translate="questionTableLabel")
             tbody
                 tr
                     td
-                    td TED
-                    td TD
-                    td NAND
-                    td TA
-                    td TDA
+                    td.text-uppercase(ng-repeat="answer in basicAnswers") {{ answer }}
                 tr
-                    td.text-center.text-bold.text-uppercase Candidatura y
-                    td 1
-                    td 2
-                    td 3
-                    td 4
-                    td 5
+                    td.text-center.text-bold.text-uppercase(translate="candidacyTableLabel")
+                    td(ng-repeat="number in tableNumbers") {{ number }}
 
     .paddedText.smallTable.someTopBottomMargin
         table.howItsDoneTable.table.table-bordered.text-smaller
             thead
                 tr
-                    th.text-center.text-bold.text-uppercase(colspan="6") Pregunta X
+                    th.text-center.text-bold.text-uppercase(colspan="6" translate="questionTableLabel")
             tbody
                 tr
                     td
-                    td.text-center.text-bold.text-uppercase Candidatura y
-                tr
-                    td TED
-                    td 1
-                tr
-                    td TD
-                    td 2
-                tr
-                    td NAND
-                    td 3
-                tr
-                    td TA
-                    td 4
-                tr
-                    td TDA
-                    td 5
+                    td.text-center.text-bold.text-uppercase(translate="candidacyTableLabel")
+                tr(ng-repeat="answer in basicAnswers")
+                    td.text-uppercase {{ answer }}
+                    td {{ tableNumbers[$index] }}
 
-    p.text-smaller.paddedText(translate="{{ 'howItsDoneExplanationText232' }}")
+    p.text-smaller.paddedText(translate="howItsDoneExplanationText232")

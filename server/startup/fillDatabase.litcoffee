@@ -10,25 +10,25 @@
         ]
 
         for topic in TOPICS
-            unless Topics.findOne({ id: topic })?
-                Topics.insert({ id: topic }, (err, result) ->
+            unless Topics.findOne({ _id: topic })?
+                Topics.insert({ _id: topic }, (err, result) ->
                     console.error(err) if err
                 )
 
 
     createPoliticalParties = ->
         POLITICAL_PARTIES = [
-            { id: "JxS", color: "#36b6a9", ideologicalLocation: 4, nationalLocation: 10 }
-            { id: "CSQEP", color: "#d80a30", ideologicalLocation: 3, nationalLocation: 7 }
-            { id: "CUP", color: "#fee300", ideologicalLocation: 2.23, nationalLocation: 10 }
-            { id: "PPC", color: "#37a7de", ideologicalLocation: 6.61, nationalLocation: 4 }
-            { id: "PSC", color: "#bc2025", ideologicalLocation: 3.77, nationalLocation: 6 }
-            { id: "Cs", color: "#e64f24", ideologicalLocation: 5.13, nationalLocation: 5.5 }
-            { id: "UDC", color: "#2253a1", ideologicalLocation: 6.3, nationalLocation: 7.5 }
+            { _id: "JxS", color: "#36b6a9", ideologicalLocation: 4, nationalLocation: 10 }
+            { _id: "CSQEP", color: "#d80a30", ideologicalLocation: 3, nationalLocation: 7 }
+            { _id: "CUP", color: "#fee300", ideologicalLocation: 2.23, nationalLocation: 10 }
+            { _id: "PPC", color: "#37a7de", ideologicalLocation: 6.61, nationalLocation: 4 }
+            { _id: "PSC", color: "#bc2025", ideologicalLocation: 3.77, nationalLocation: 6 }
+            { _id: "Cs", color: "#e64f24", ideologicalLocation: 5.13, nationalLocation: 5.5 }
+            { _id: "UDC", color: "#2253a1", ideologicalLocation: 6.3, nationalLocation: 7.5 }
         ]
 
         for party in POLITICAL_PARTIES
-            unless PoliticalParties.findOne({ id: party.id })?
+            unless PoliticalParties.findOne({ _id: party._id })?
                 PoliticalParties.insert(party, (err, res) ->
                     console.error err if err
                 )
@@ -37,393 +37,393 @@
         POLITICAL_QUESTIONS = [
             { type: "basic", topic: "regeneracioDemocratica", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 5 4 3
+                    JxS 0 0.2 5 4 1
 
-                    CSQEP 1 2 3 5 4
+                    CSQEP 0 0.2 1 5 4
 
-                    CUP 1 2 3 5 4
+                    CUP 0 0.2 1 5 4
 
-                    PP 5 4 3 2 1
+                    PP 5 4 1 0.2 0
 
-                    PSC 1 2 3 4 5
+                    PSC 0 0.2 1 4 5
 
-                    C’S 1 2 4 5 3
+                    C’S 0 0.2 4 5 1
 
-                    UDC 5 4 3 2 1
+                    UDC 5 4 1 0.2 0
                 """
             }
             { type: "basic", topic: "regeneracioDemocratica", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 5 4
+                    JxS 0 0.2 1 5 4
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 1 2 5 4 3
+                    PP 0 0.2 5 4 1
 
-                    PSC 1 2 3 5 4
+                    PSC 0 0.2 1 5 4
 
-                    C’S 1 2 3 5 4
+                    C’S 0 0.2 1 5 4
 
-                    UDC 1 2 4 5 3
+                    UDC 0 0.2 4 5 1
                 """
             }
             { type: "basic", topic: "regeneracioDemocratica", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 5 4
+                    JxS 0 0.2 1 5 4
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 1 2 5 4 3
+                    PP 0 0.2 5 4 1
 
-                    PSC 1 2 3 5 4
+                    PSC 0 0.2 1 5 4
 
-                    C’S 1 2 3 5 4
+                    C’S 0 0.2 1 5 4
 
-                    UDC 1 2 4 5 3
+                    UDC 0 0.2 4 5 1
                 """
             }
             { type: "basic", topic: "regeneracioDemocratica", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 5 4
+                    JxS 0 0.2 1 5 4
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 5 4 3 2 1
+                    PP 5 4 1 0.2 0
 
-                    PSC 1 5 4 3 2
+                    PSC 0 5 4 1 0.2
 
-                    C’S 4 5 3 2 1
+                    C’S 4 5 1 0.2 0
 
-                    UDC 1 2 4 5 3
+                    UDC 0 0.2 4 5 1
                 """
             }
             { type: "basic", topic: "modelTerritorial", answerResemblanceToPartyMatrix:
                 """
-                    JxS 5 4 3 2 1
+                    JxS 5 4 1 0.2 0
 
-                    CSQEP 1 2 4 5 3
+                    CSQEP 0 0.2 4 5 1
 
-                    CUP 5 4 3 2 1
+                    CUP 5 4 1 0.2 0
 
-                    PP 1 2 3 5 4
+                    PP 0 0.2 1 5 4
 
-                    PSC 1 2 3 5 4
+                    PSC 0 0.2 1 5 4
 
-                    C’S 1 5 4 3 2
+                    C’S 0 5 4 1 0.2
 
-                    UDC 1 2 4 5 3
+                    UDC 0 0.2 4 5 1
                 """
             }
             { type: "basic", topic: "modelTerritorial", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 4 5
+                    JxS 0 0.2 1 4 5
 
-                    CSQEP 2 4 5 3 1
+                    CSQEP 0.2 4 5 1 0
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 5 4 3 2 1
+                    PP 5 4 1 0.2 0
 
-                    PSC 5 4 3 2 1
+                    PSC 5 4 1 0.2 0
 
-                    C’S 5 4 3 2 1
+                    C’S 5 4 1 0.2 0
 
-                    UDC 4 5 3 2 1
+                    UDC 4 5 1 0.2 0
                 """
             }
             { type: "basic", topic: "modelTerritorial", answerResemblanceToPartyMatrix:
                 """
-                    JxS 5 4 3 2 1
+                    JxS 5 4 1 0.2 0
 
-                    CSQEP 4 5 3 2 1
+                    CSQEP 4 5 1 0.2 0
 
-                    CUP 5 4 3 2 1
+                    CUP 5 4 1 0.2 0
 
-                    PP 1 2 3 4 5
+                    PP 0 0.2 1 4 5
 
-                    PSC 1 5 4 3 2
+                    PSC 0 5 4 1 0.2
 
-                    C’S 1 2 3 5 4
+                    C’S 0 0.2 1 5 4
 
-                    UDC 3 5 4 2 1
+                    UDC 1 5 4 0.2 0
                 """
             }
             { type: "basic", topic: "modelTerritorial", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 4 5
+                    JxS 0 0.2 1 4 5
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 5 4 3 2 1
+                    PP 5 4 1 0.2 0
 
-                    PSC 1 2 3 4 5
+                    PSC 0 0.2 1 4 5
 
-                    C’S 5 4 3 2 1
+                    C’S 5 4 1 0.2 0
 
-                    UDC 1 2 3 4 5
+                    UDC 0 0.2 1 4 5
                 """
             }
             { type: "basic", topic: "modelTerritorial", answerResemblanceToPartyMatrix:
                 """
-                    JxS 5 4 3 2 1
+                    JxS 5 4 1 0.2 0
 
-                    CSQEP 4 3 5 2 1
+                    CSQEP 4 1 5 0.2 0
 
-                    CUP 2 4 5 3 1
+                    CUP 0.2 4 5 1 0
 
-                    PP 1 2 3 4 5
+                    PP 0 0.2 1 4 5
 
-                    PSC 4 5 3 2 1
+                    PSC 4 5 1 0.2 0
 
-                    C’S 1 2 3 4 5
+                    C’S 0 0.2 1 4 5
 
-                    UDC 5 4 3 2 1
+                    UDC 5 4 1 0.2 0
                 """
             }
             { type: "basic", topic: "modelTerritorial", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 4 5
+                    JxS 0 0.2 1 4 5
 
-                    CSQEP 1 2 3 5 4
+                    CSQEP 0 0.2 1 5 4
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 5 4 3 2 1
+                    PP 5 4 1 0.2 0
 
-                    PSC 1 2 3 4 5
+                    PSC 0 0.2 1 4 5
 
-                    C’S 5 4 3 2 1
+                    C’S 5 4 1 0.2 0
 
-                    UDC 1 2 3 4 5
+                    UDC 0 0.2 1 4 5
                 """
             }
             { type: "basic", topic: "estatDelBenestar", answerResemblanceToPartyMatrix:
                 """
-                    JxS 4 5 3 2 1
+                    JxS 4 5 1 0.2 0
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 5 4 1 0.2 0
 
-                    CUP 5 4 3 2 1
+                    CUP 5 4 1 0.2 0
 
-                    PP 2 3 4 5 1
+                    PP 0.2 1 4 5 0
 
-                    PSC 4 5 3 2 1
+                    PSC 4 5 1 0.2 0
 
-                    C’S 1 3 5 4 2
+                    C’S 0 1 5 4 0.2
 
-                    UDC 4 5 3 2 1
+                    UDC 4 5 1 0.2 0
                 """
             }
             { type: "basic", topic: "estatDelBenestar", answerResemblanceToPartyMatrix:
                 """
-                    JxS 2 4 5 3 1
+                    JxS 0 0.2 1 5 4
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 5 4 3 2 1
+                    CUP 0 0.2 1 4 5
 
-                    PP 1 2 3 4 5
+                    PP 0 5 1 4 0.2
 
-                    PSC 2 5 3 4 1
+                    PSC 0 0.2 1 4 5
 
-                    C’S 2 5 4 3 1
+                    C’S 0 0.2 1 5 4
 
-                    UDC 1 2 3 5 4
+                    UDC 0 0.2 1 5 4
                 """
             }
             { type: "basic", topic: "estatDelBenestar", answerResemblanceToPartyMatrix:
                 """
-                    JxS 2 4 5 3 1
+                    JxS 0.2 4 5 1 0
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 5 4 1 0.2 0
 
-                    CUP 5 4 3 2 1
+                    CUP 5 4 1 0.2 0
 
-                    PP 1 2 3 4 5
+                    PP 0 0.2 1 4 5
 
-                    PSC 3 5 4 2 1
+                    PSC 0.2 5 1 4 0
 
-                    C’S 1 2 3 5 4
+                    C’S 0.2 5 4 1 0
 
-                    UDC 3 4 5 2 1
+                    UDC 0 0.2 1 5 4
                 """
             }
             { type: "basic", topic: "estatDelBenestar", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 5 4 3
+                    JxS 0.2 4 5 1 0
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 5 4 1 0.2 0
 
-                    CUP 1 2 3 4 5
+                    CUP 5 4 1 0.2 0
 
-                    PP 5 4 3 2 1
+                    PP 0 0.2 1 4 5
 
-                    PSC 1 2 3 5 4
+                    PSC 1 5 4 0.2 0
 
-                    C’S 1 2 4 5 3
+                    C’S 0 0.2 1 5 4
 
-                    UDC 1 3 4 5 2
+                    UDC 1 4 5 0.2 0
                 """
             }
             { type: "basic", topic: "ciutadania", answerResemblanceToPartyMatrix:
                 """
-                    JxS 4 5 3 2 1
+                    JxS 0 0.2 5 4 1
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 5 4 3 2 1
+                    CUP 0 0.2 1 4 5
 
-                    PP 1 2 3 5 4
+                    PP 5 4 1 0.2 0
 
-                    PSC 4 5 3 2 1
+                    PSC 0 0.2 1 5 4
 
-                    C’S 4 5 3 2 1
+                    C’S 0 0.2 4 5 1
 
-                    UDC 1 2 3 5 4
+                    UDC 0 1 4 5 0.2
                 """
             }
             { type: "basic", topic: "ciutadania", answerResemblanceToPartyMatrix:
                 """
-                    JxS 4 5 3 2 1
+                    JxS 4 5 1 0.2 0
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 5 4 1 0.2 0
 
-                    CUP 5 4 3 2 1
+                    CUP 5 4 1 0.2 0
 
-                    PP 1 2 3 5 4
+                    PP 0 0.2 1 5 4
 
-                    PSC 4 5 3 2 1
+                    PSC 4 5 1 0.2 0
 
-                    C’S 5 4 3 2 1
+                    C’S 4 5 1 0.2 0
 
-                    UDC 1 2 3 5 4
+                    UDC 0 0.2 1 5 4
                 """
             }
             { type: "basic", topic: "ciutadania", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 4 5
+                    JxS 4 5 1 0.2 0
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 5 4 1 0.2 0
 
-                    CUP 1 2 3 4 5
+                    CUP 5 4 1 0.2 0
 
-                    PP 5 4 3 2 1
+                    PP 0 0.2 1 5 4
 
-                    PSC 1 2 3 4 5
+                    PSC 4 5 1 0.2 0
 
-                    C’S 1 2 3 5 4
+                    C’S 5 4 1 0.2 0
 
-                    UDC 5 4 3 2 1
+                    UDC 0 0.2 1 5 4
                 """
             }
             { type: "basic", topic: "ciutadania", answerResemblanceToPartyMatrix:
                 """
-                    JxS 5 4 3 2 1
+                    JxS 0 0.2 1 4 5
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 5 4 3 2 1
+                    CUP 0 0.2 1 4 5
 
-                    PP 1 2 3 4 5
+                    PP 5 4 1 0.2 0
 
-                    PSC 4 5 3 2 1
+                    PSC 0 0.2 1 4 5
 
-                    C’S 2 4 5 3 1
+                    C’S 0 0.2 1 5 4
 
-                    UDC 3 5 4 2 1
+                    UDC 5 4 1 0.2 0
                 """
             }
             { type: "basic", topic: "ciutadania", answerResemblanceToPartyMatrix:
                 """
-                    JxS 5 4 3 2 1
+                    JxS 5 4 1 0.2 0
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 5 4 1 0.2 0
 
-                    CUP 5 4 3 2 1
+                    CUP 5 4 1 0.2 0
 
-                    PP 1 2 3 4 5
+                    PP 0 0.2 1 4 5
 
-                    PSC 4 5 3 2 1
+                    PSC 4 5 1 0.2 0
 
-                    C’S 2 4 5 3 1
+                    C’S 0.2 4 5 1 0
 
-                    UDC 3 5 4 2 1
+                    UDC 1 5 4 0.2 0
                 """
             }
             { type: "basic", topic: "ciutadania", answerResemblanceToPartyMatrix:
                                                   """
-                    JxS 5 4 3 2 1
+                    JxS 5 4 1 0.2 0
 
-                    CSQEP 5 4 3 2 1
+                    CSQEP 5 4 1 0.2 0
 
-                    CUP 5 4 3 2 1
+                    CUP 5 4 1 0.2 0
 
-                    PP 1 2 3 4 5
+                    PP 0 0.2 1 4 5
 
-                    PSC 4 5 3 2 1
+                    PSC 4 5 1 0.2 0
 
-                    C’S 2 4 5 3 1
+                    C’S 0.2 4 5 1 0
 
-                    UDC 3 5 4 2 1
+                    UDC 1 5 4 0.2 0
                 """
             }
             { type: "basic", topic: "territoriEcologiaIMediAmbient", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 5 4
+                    JxS 0 0.2 1 5 4
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 3 5 4 2 1
+                    PP 1 5 4 0.2 0
 
-                    PSC 1 2 4 5 3
+                    PSC 0 0.2 4 5 1
 
-                    C’S 1 2 3 4 5
+                    C’S 0 0.2 1 4 5
 
-                    UDC 1 2 4 5 3
+                    UDC 0 0.2 4 5 1
                 """
             }
             { type: "basic", topic: "territoriEcologiaIMediAmbient", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 2 3 5 4
+                    JxS 0 0.2 1 5 4
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 2 3 4 5 1
+                    PP 0.2 1 4 5 0
 
-                    PSC 1 2 3 4 5
+                    PSC 0 0.2 1 4 5
 
-                    C’S 1 2 3 4 5
+                    C’S 0 0.2 1 4 5
 
-                    UDC 1 2 3 5 4
+                    UDC 0 0.2 1 5 4
                 """
             }
             { type: "basic", topic: "territoriEcologiaIMediAmbient", answerResemblanceToPartyMatrix:
                 """
-                    JxS 1 3 4 5 2
+                    JxS 0 1 4 5 0.2
 
-                    CSQEP 1 2 3 4 5
+                    CSQEP 0 0.2 1 4 5
 
-                    CUP 1 2 3 4 5
+                    CUP 0 0.2 1 4 5
 
-                    PP 5 4 3 2 1
+                    PP 5 4 1 0.2 0
 
-                    PSC 1 2 3 4 5
+                    PSC 0 0.2 1 4 5
 
-                    C’S 1 2 4 5 3
+                    C’S 0 0.2 4 5 1
 
-                    UDC 1 2 5 4 3
+                    UDC 0 0.2 5 4 1
                 """
             }
             {
@@ -464,7 +464,7 @@
 
     createPersonalQuestions = ->
         PERSONAL_QUESTIONS = [
-            { id: "age", mandatory: true, type: "button", order: 1, options: [
+            { _id: "age", mandatory: true, type: "button", order: 1, options: [
                 "age0"
                 "age1"
                 "age2"
@@ -474,15 +474,15 @@
                 "age6"
                 ]
             }
-            { id: "genre", mandatory: true, type: "button", order: 2, options:  [
+            { _id: "genre", mandatory: true, type: "button", order: 2, options:  [
                 "male"
                 "female"
                 "intersexual"
                 ]
             }
-            { id: "postalCode", mandatory: true, type: "input", order: 3, validate: "^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$", errorMessageId: "incorrectPostalCode" }
+            { _id: "postalCode", mandatory: true, type: "input", order: 3, validate: "^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$", errorMessageId: "incorrectPostalCode" }
 
-            { id: "educationLevel", mandatory: false, type: "button", order: 4, options:  [
+            { _id: "educationLevel", mandatory: false, type: "button", order: 4, options:  [
                 "noStudies"
                 "primaryStudies"
                 "secondaryStudies"
@@ -491,13 +491,13 @@
                 "postgraduateStudies"
                 ]
             }
-            { id: "cotidianLanguage", mandatory: false, type: "button", order: 5, options:  [
+            { _id: "cotidianLanguage", mandatory: false, type: "button", order: 5, options:  [
                 "catalan"
                 "spanish"
                 "bothLanguages"
                 ]
             }
-            { id: "votingRecord", mandatory: false, type: "button", order: 6, options: [
+            { _id: "votingRecord", mandatory: false, type: "button", order: 6, options: [
                 "CIU"
                 "Cs"
                 "CUP"
@@ -512,7 +512,7 @@
                 "nsnc"
                 ]
             }
-            { id: "votingIntention", mandatory: false, type: "button", order: 7, options: [
+            { _id: "votingIntention", mandatory: false, type: "button", order: 7, options: [
                 "Cs"
                 "CSQEP"
                 "CUP"
@@ -531,7 +531,7 @@
 
 
         for question in PERSONAL_QUESTIONS
-            unless PersonalQuestions.findOne({ id: question.id })?
+            unless PersonalQuestions.findOne({ _id: question._id })?
                 PersonalQuestions.insert(question, (err, res) ->
                     console.error(err) if err
                 )

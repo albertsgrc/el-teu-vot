@@ -1,64 +1,60 @@
 # Slider directive
 
-    sliderDirective = ($timeout, $rootScope) ->
+    sliderDirective = ($timeout) ->
         replace: true,
         restrict: 'E',
         templateUrl: "client/views/components/etv-slider.html"
-        scope: false
 
-        compile: (element, attrs) ->
-            angular.element(element[0]).find(".leftText").attr("translate", "{{ '#{attrs.leftText}' }}")
-            angular.element(element[0]).find(".rightText").attr("translate", "{{ '#{attrs.rightText}' }}")
-            angular.element(element[0]).find(".etv-slider").attr("ng-class", "{ 'touched': isAnswered(question.number) }")
+        link: (scope, element, attrs) ->
+            sliderSet = false
+            shouldNotChangeSliderValue = false
 
-            pre: (scope, element, attrs) ->
+            setSlider = _.debounce( ->
+                width = window.innerWidth
 
-            post: (scope, element, attrs) ->
-                sliderSet = false
-                shouldNotChangeSliderValue = false
+                ORIENTATION_THRESHOLD = 650
 
-                setSlider = ->
-                    width = window.innerWidth
+                if sliderSet is "horizontal"
+                    return if width > ORIENTATION_THRESHOLD
+                else if sliderSet is "vertical"
+                    return if width <= ORIENTATION_THRESHOLD
 
-                    ORIENTATION_THRESHOLD = 650
+                sliderSet = (if width <= ORIENTATION_THRESHOLD then "vertical" else "horizontal")
 
-                    if sliderSet is "horizontal"
-                        return if width > ORIENTATION_THRESHOLD
-                    else if sliderSet is "vertical"
-                        return if width <= ORIENTATION_THRESHOLD
-
-                    sliderSet = (if width <= ORIENTATION_THRESHOLD then "vertical" else "horizontal")
-
-                    accessObject = (object, string) ->
-                        properties = string.split(".")
-                        result = object[properties[0]]
-                        properties.shift()
-                        for property in properties
-                            result = result[property]
-                        result
-
-                    $(element[0]).find(".etv-slider").slider({
-                        value: accessObject(scope, attrs.ngModel) or 0
-                        max: 10
-                        orientation: sliderSet
-                    }).off('slidechange').on('slidechange', (event, ui) ->
-                        return unless ui.value? and not isNaN(ui.value) and not shouldNotChangeSliderValue
-
-                        scope.$apply( ->
-                            scope.question.answer = ui.value
-                        )
-                    )
-                    .slider("pips", {
-                            rest: "label"
-                    })
-
-                    $rootScope.$broadcast('layoutChange', 'slider')
-
-                scope.$on('layoutChange', (event, name) ->
-                    shouldNotChangeSliderValue = true
-                    if name isnt 'slider' then setSlider()
-                    shouldNotChangeSliderValue = false
+                scope.$apply( ->
+                    scope.__sliderLeftText = if sliderSet is "vertical" then attrs.rightText else attrs.leftText
+                    scope.__sliderRightText = if sliderSet is "vertical" then attrs.leftText else attrs.rightText
                 )
-                $timeout(setSlider)
 
-    app.directive('etvSlider', ['$timeout', '$rootScope', sliderDirective])
+                accessObject = (object, string) ->
+                    properties = string.split(".")
+                    result = object[properties[0]]
+                    properties.shift()
+                    for property in properties
+                        result = result[property]
+                    result
+
+                $(element[0]).find(".etv-slider").slider({
+                    value: accessObject(scope, attrs.ngModel) or 0
+                    max: 10
+                    orientation: sliderSet
+                }).off('slidechange').on('slidechange', (event, ui) ->
+                    return unless ui.value? and not isNaN(ui.value) and not shouldNotChangeSliderValue
+
+                    scope.$apply( ->
+                        scope.setQuestionAnswer(scope.question, ui.value)
+                    )
+                )
+                .slider("pips", {
+                        rest: "label"
+                })
+            , 100)
+
+            scope.$on('resize', ->
+                shouldNotChangeSliderValue = true
+                setSlider()
+                shouldNotChangeSliderValue = false
+            )
+            $timeout(setSlider)
+
+    app.directive('etvSlider', ['$timeout', sliderDirective])

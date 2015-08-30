@@ -1,23 +1,22 @@
-header.container-fluid(ng-class="{ 'fixedHeader': !$state.includes('elTeuVot') }")
+header.container-fluid(ng-class="{ 'fixedHeader': isFixedHeader(), 'smallHeader': isSmallHeader() }" etv-watch-height-change="{ event: 'headerHeightChange' }")
     .row
         .col-xs-4.socialMedia
-            a(href="https://www.facebook.com/elteuvot" target="_blank")
+            a(href="{{ facebookUrl }}" target="_blank")
                 i.mdi.mdi-facebook
 
-            // TODO: Definir la pàgina de twitter
-            a(href="https://twitter.com/elteuvot" target="_blank")
+            a(href="{{ twitterUrl }}" target="_blank")
                 i.mdi.mdi-twitter
 
         .col-xs-4
             a(ui-sref="elTeuVot")
-                img#logo.center-block(src="/images/logo.png" alt="Logo ETV" ng-class="{ 'compactLogo': !$state.includes('elTeuVot') }")
+                img#logo.center-block(ng-src="{{ logoUrl() }}" alt="Logo ETV" ng-class="{ 'compactLogo': isFixedHeader() }")
 
-        .col-xs-4.languageSelection(ng-if="!$state.includes('questions') && !$state.includes('results')")
-            a(href="" ng-click="setLanguage('ca')") català
+        .col-xs-4.languageSelection(ng-if="!hasSidenav()")
+            a(href="" ng-click="setLanguage('ca')" translate="catalan")
             span.showOnNonxxs &nbsp;|&nbsp;
             br.showOnxxs
-            a(href="" ng-click="setLanguage('es')") castellano
+            a(href="" ng-click="setLanguage('es')" translate="spanish")
 
-        .col-xs-4.menuButtonContainer(ng-if="$state.includes('questions') || $state.includes('results')")
+        .col-xs-4.menuButtonContainer(ng-if="hasSidenav()")
             a#menuButton(href="" ng-click="openSidenav()")
                 i.mdi.mdi-menu

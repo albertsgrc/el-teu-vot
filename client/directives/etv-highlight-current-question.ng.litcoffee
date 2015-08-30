@@ -4,20 +4,24 @@
         restrict: 'A'
 
         link: (scope, element, attrs) ->
-            highlightCurrentQuestion = ->
+            highlightCurrentQuestion = _.throttle( ->
                 currentScrollPos = $(window).scrollTop()
                 questionIndex = 0
                 question = null
 
+                HIGHLIGHT_OFFSET = 185
+                DIVIDER_HEIGHT = 2
+
                 $('.globalPoliticalQuestionContainer').each( (elem) ->
-                    top = $(@).find(".divider").offset().top - $("#main").css("padding-top").replace("px", "") - $("#politicalQuestionsContainer").css("margin-top").replace("px", "")
+                    top = $(@).find(".divider").offset().top - parseFloat($("#main").css("padding-top")) - parseFloat($("#politicalQuestionsContainer").css("margin-top"))
                     questionChild = $(@).find(".politicalQuestionContainer")
-                    bottom = top + questionChild.outerHeight(true) + 2
-                    offsetedCurrentPos = currentScrollPos + 185
+                    bottom = top + questionChild.outerHeight(true) + DIVIDER_HEIGHT
+                    offsetedCurrentPos = currentScrollPos + HIGHLIGHT_OFFSET
 
                     if offsetedCurrentPos >= top and offsetedCurrentPos <= bottom
                         questionIndex = Number($(@).attr('index'))
-                        question = questionChild;
+                        question = questionChild
+                        return false
                 )
 
                 return unless question
@@ -26,9 +30,11 @@
                 question.css({ opacity: "1" })
                 $(".divider").eq(questionIndex).css({ opacity: "1" })
                 $(".divider").eq(questionIndex + 1).css({ opacity: "1" })
+            , 250)
 
             $timeout(highlightCurrentQuestion)
-            scope.$on('layoutChange', highlightCurrentQuestion)
-            scope.$on('scrollChange', highlightCurrentQuestion)
+            scope.$on('politicalQuestionHeightChange', highlightCurrentQuestion)
+            scope.$on('resize', highlightCurrentQuestion)
+            scope.$on('scroll', highlightCurrentQuestion)
 
-    app.directive('highlightCurrentQuestion', ['$timeout', highlightCurrentQuestionDirective])
+    app.directive('etvHighlightCurrentQuestion', ['$timeout', highlightCurrentQuestionDirective])

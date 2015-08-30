@@ -1,6 +1,6 @@
 # Alert directive
 
-    alertDirective = ->
+    alertDirective = (etvAlertService) ->
         replace: true
         restrict: 'E'
         templateUrl: "client/views/components/etv-alert.html"
@@ -8,4 +8,7 @@
         scope:
             text: "@"
 
-    app.directive('etvAlert', alertDirective)
+        link: (scope, element, attrs) ->
+            scope.close = etvAlertService.closeAlert
+
+    app.directive('etvAlert', ['etvAlertService', alertDirective])

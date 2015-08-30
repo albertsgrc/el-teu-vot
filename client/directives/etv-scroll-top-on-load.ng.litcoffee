@@ -3,8 +3,7 @@
     scrollToTopOnLoadDirective = ($timeout) ->
         restrict: 'A'
 
-        link: (scope, element, attrs) ->
-            $timeout(-> $("body").scrollTop(0))
+        link: (scope, element, attrs) -> $timeout(-> $("body").scrollTop(0))
 
 
     app.directive('etvScrollToTopOnLoad', ['$timeout', scrollToTopOnLoadDirective])

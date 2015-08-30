@@ -194,7 +194,7 @@
                 La metodología es muy importante a la hora de elaborar un \
                 proyecto con las características de \
                 <strong><i>El teu Vot</i></strong> –el usuario debe poder \
-                saber de dónde salen sus resultados. Pero no sólo esto: \
+                saber de dónde salen sus resultados. Pero no solo esto: \
                 también es importante saber por qué las preguntas que \
                 conforman el cuestionario son las más adecuadas, por qué \
                 las opciones de respuesta son unas y no otras, cómo se \
@@ -487,9 +487,24 @@
                 definir mejor la proximidad entre candidatura y elector."
             ]
 
+            questionTableLabel: "Pregunta X"
 
+            candidacyTableLabel: "Candidatura Y"
 
         tO.politicalQuestions =
+            politicalQuestionsError: [
+                "Ho sentim, s'ha produït un error durant la càrrega del qüestionari. Comprovi la seva connexió a Internet i recarregui la pàgina."
+
+                "Lo sentimos, se ha producido un error durante la carga del cuestionario. Compruebe su conexión a Internet y recargue la página."
+            ]
+
+
+            politicalQuestionsLoading: [
+                "S'està carregant el qüestionari, només serà un moment..."
+
+                "Se está cargando el cuestionario, solo será un momento..."
+            ]
+
             endTest: [
                 "Finalitza el test"
 
@@ -566,9 +581,9 @@
             ]
 
             sortTip: [
-                "(Cal que facis clic sobre tots els botons perquè la resposta sigui vàlida, encara que no en vulguis canviar l'ordre)"
+                "(Clica sobre cada botó i arrossega'l cap a la posició que prefereixis. Si no vols canviar l'ordre, només clica sobre l'opció)"
 
-                "(Es necesario que hagas clic en todos los botones para que la respuesta sea válida, incluso aunque no quieras cambiar su orden)"
+                "(Haz clic encima de cada botón y arrástralo hasta la posición que prefieras. Si no quieres cambiar el orden, sólo pulsa encima de la opción)"
             ]
 
             question1: [
@@ -598,12 +613,12 @@
                 "Todas las decisiones políticas relevantes deberían ser consultadas a la ciudadanía."
             ]
             question5: [
-                "Les properes eleccions del dia 27 de setembre al Parlament de Catalunya són unes eleccions autonòmiques ordinàries."
+                "En el context polític actual, les properes eleccions del dia 27 de setembre al Parlament de Catalunya són unes eleccions autonòmiques ordinàries."
 
-                "Las próximas elecciones del día 27 de septiembre al Parlamento de Cataluña son unas elecciones autonómicas ordinarias."
+                "En el contexto político actual, las próximas elecciones del día 27 de septiembre al Parlamento de Cataluña son unas elecciones autonómicas ordinarias."
             ]
             question6: [
-                "Si les llistes que es presenten a favor de la independència de Catalunya aconseguissin majoria absoluta, s’hauria d'iniciar un procés per separar-se de l'Estat espanyol"
+                "Si les llistes que es presenten a favor de la independència de Catalunya aconseguissin majoria absoluta, s’hauria d'iniciar un procés per separar-se de l'Estat espanyol."
 
                 "Si las listas que se presentan a favor de la independencia de Cataluña consiguieran mayoría absoluta, deberían iniciar un proceso para separarse del Estado español."
             ]
@@ -613,9 +628,9 @@
                 "Me gustaría que Cataluña continuara formando parte del Estado español en las condiciones actuales."
             ]
             question8: [
-                "La immersió lingüística és una bona eina per assegurar la qualitat educativa que reben els estudiants catalans."
+                "La immersió lingüística és una bona eina per millorar la qualitat educativa que reben els estudiants catalans."
 
-                "La inmersión lingüística es una buena herramienta para asegurar la calidad de la enseñanza a los estudiantes catalanes."
+                "La inmersión lingüística es una buena herramienta para mejorar la calidad educativa que reciben los estudiantes catalanes."
             ]
             question9: [
                 "L'acció exterior de Catalunya suposa una duplicitat i és una despesa innecesària."
@@ -628,9 +643,9 @@
                 "La Generalitat debería financiar el sector cultural, especialmente para promover la cultura catalana."
             ]
             question11: [
-                "La ciutadania hauria de pagar pels serveis socials en funció del seu nivell econòmic."
+                "La ciutadania hauria de pagar pels serveis socials, i fer-ho en funció del seu nivell econòmic."
 
-                "La ciudadanía debería pagar por los servicios sociales en función de su nivel económico."
+                "La ciudadanía debería pagar por los servicios sociales, y hacerlo en función de su nivel económico."
             ]
             question12: [
                 "Tothom hauria de tenir accés gratuït a la sanitat pública, independentment del seu nivell de renda i el seu lloc de procedència."
@@ -673,7 +688,7 @@
                 "En el contexto actual, las cuotas de paridad de género son necesarias para asegurar la igualdad de representación entre mujeres y hombres."
             ]
             question20: [
-                "Per tal de reduir certes activitats delictives s'hauria de combatre la immigració il·legal"
+                "Per tal de reduir certes activitats delictives s'hauria de combatre la immigració il·legal."
 
                 "Con el objetivos de reducir determinados comportamientos delictivos se debería combatir la inmigración ilegal."
             ]
@@ -700,15 +715,52 @@
             question25: [
                 "Algunes candidatures han plantejat aquestes eleccions com a plebiscitàries pel que fa a la relació entre Catalunya i l’Estat espanyol. On t’ubicaries en una escala del 0 al 10, on 0 equival a un Estat espanyol centralitzat, 5 al manteniment de l’status quo i 10 a un Estat propi per a Catalunya?"
 
-                "Algunas candidaturas han planteado estas elecciones como plebiscitarias por lo que a la relación entre Cataluña y el Estado español respecta. ¿Dónde te ubicarías en una escala del 0 al 10, en la que 0 equivale a un Estado español centralizado, 5 al mantenimiento del status quo y 10 a un Estado propio para Cataluña."
+                "Algunas candidaturas han planteado estas elecciones como plebiscitarias por lo que a la relación entre Cataluña y el Estado español respecta. ¿Dónde te ubicarías en una escala del 0 al 10, en la que 0 equivale a un Estado español centralizado, 5 al mantenimiento del status quo y 10 a un Estado propio para Cataluña?"
             ]
             question26: [
                 "Per acabar, ordena els següents blocs temàtics segons com d'importants siguin per a tu a l'hora de votar (com més amunt, més important)."
 
-                "Para terminar, ordena los siguientes bloques temáticos en función de la importancia que tengan para ti a la hora de ir a votar (cuanto más arriba, más importante)"
+                "Para terminar, ordena los siguientes bloques temáticos en función de la importancia que tengan para ti a la hora de ir a votar (cuanto más arriba, más importante)."
             ]
 
         tO.personalQuestions =
+            personalQuestionsError: [
+                "Ho sentim, s'ha produït un error durant la càrrega del qüestionari personal."
+
+                "Lo sentimos, se ha producido un error durante la carga del cuestionario personal."
+            ]
+
+
+            personalQuestionsLoading: [
+                "S'està carregant el qüestionari personal, només serà un moment..."
+
+                "Se está cargando el cuestionario personal, solo será un momento..."
+            ]
+
+            sendResultsError: [
+                "Ho sentim, s'ha produït un error en enviar les respostes. Torni a intentar-ho clicant de nou al botó 'VEURE RESULTATS'."
+
+                "Lo sentimos, se ha producido un error al enviar las respuestas. Vuelva a intentarlo pulsando de nuevo el botón 'VER RESULTADOS'."
+            ]
+
+            sendResultsTooLongDelay: [
+                "Sembla que l'enviament de les respostes està trigant massa. " +
+                "Comprovi la seva connexió a Internet i no tanqui la pàgina, les " +
+                "respostes s'enviaràn automàticament quan torni a tenir " +
+                "connexió."
+
+                "Parece que la subida de las respuestas está tardando " +
+                "demasiado. Compruebe su conexión a Internet y no " +
+                "cierre la página, las respuestas se enviarán " +
+                "automáticamente cuando vuelva a tener conexión."
+            ]
+
+            sendingResults: [
+                "Enviant les respostes..."
+
+                "Enviando las respuestas..."
+            ]
+
             personalQuestionsInfo: [
                 "Les dades que ens proporcionis seran tractades amb " +
                 "confidencialitat i assegurem l’anonimat de les teves " +
@@ -718,7 +770,7 @@
 
                 "Los datos que nos proporciones serán tratados con " +
                 "confidencialidad y aseguramos el anonimato de tus " +
-                "respuestas<br/>Si disponemos de más datos, podremos ubicar " +
+                "respuestas.<br/>Si disponemos de más datos, podremos ubicar " +
                 "tus preferencias de manera más concreta dentro del mapa " +
                 "político catalán. Gracias!"
             ]
@@ -774,11 +826,11 @@
             ]
 
             personalQuestionsOptionalIntro: [
-                "A continuació, preguntes opcionals que ens ajudaran a " +
-                "donar-te uns millors resultats"
+                "A continuació, et demanem que constestis les següents " +
+                "preguntes opcionals."
 
-                "A continuación, preguntas opcionales que nos ayudarán a " +
-                "darte unos mejores resultados"
+                "A continuación, te pedimos que contestes a las siguientes " +
+                "preguntas opcionales."
             ]
 
             educationLevel: [
@@ -918,10 +970,22 @@
 
 
         tO.results =
-            badResultsId: [
-                "Ho sentim! Sembla que el link de resultats que has introduit és incorrecte"
+            resultsError: [
+                "Ho sentim, s'ha produït un error en carregar els resultats. Comprovi la seva connexió a Internet i torni a carregar la pàgina."
 
-                "Lo sentimos! Parece que el link de resultados que has introducido es incorrecto"
+                "Lo sentimos, se ha producido un error en cargar los resultados. Compruebe su conexión a Internet y vuelva a cargar la página."
+            ]
+
+            resultsLoading: [
+                "S'estàn carregant els resultats, només serà un moment..."
+
+                "Se están cargando los resultados, solo será un momento..."
+            ]
+
+            badResultsId: [
+                "Ho sentim! Sembla que l'enllaç de resultats que has introduït és incorrecte"
+
+                "Lo sentimos! Parece que el enlace de resultados que has introducido es incorrecto"
             ]
 
             yourResultsTitle: [
@@ -945,7 +1009,7 @@
             ]
 
             yourResultsTextOut: [
-                "Aquests són els resultats obtinguts a partir del questionari. \
+                "Aquests són els resultats obtinguts a partir del qüestionari. \
                  Si vols saber com els hem calculat, consulta la \
                  <a href='/com-ho-hem-fet'>metodologia</a>. I si vols que els \
                  teus amics i amigues els coneguin, comparteix-los a les \
@@ -995,10 +1059,10 @@
             ]
 
             resultsCodeText: [
-                "Guarda't aquest enllaç/codi. Et permetrà recuperar els teus \
+                "Guarda aquest enllaç. Et permetrà recuperar els teus \
                 resultats quan vulguis"
 
-                "Guarda este enlace/código. Te permitirá recuperar tus \
+                "Guarda este enlace. Te permitirá recuperar tus \
                 resultados cuando quieras"
             ]
 
@@ -1016,9 +1080,9 @@
             ]
 
             independentism: [
-                "Estat independent per a catalunya"
+                "Estat independent per a Catalunya"
 
-                "Estado independiente para cataluña"
+                "Estado independiente para Cataluña"
             ]
 
             unionism: [
@@ -1135,6 +1199,10 @@
 
         tO.other =
             spaces: "&nbsp;&nbsp;"
+
+            catalan: "català"
+
+            spanish: "castellano"
 
         globalTranslations = {}
 

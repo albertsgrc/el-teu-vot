@@ -1,7 +1,6 @@
 # Angular route configuration
 
     Router = ($stateProvider, $urlRouterProvider, $locationProvider) ->
-        # TODO: Make main state and put header and footer inside it
         $stateProvider
             .state('layout',
                 abstract: true
@@ -12,7 +11,6 @@
                 parent: 'layout'
                 url: '/'
                 templateUrl: 'client/views/partials/el-teu-vot.html'
-                controller: 'ElTeuVotCtrl'
             )
             .state('howItsDone',
                 parent: 'layout'
@@ -44,7 +42,7 @@
             )
             .state('results',
                 parent: 'layout'
-                url: '/results/:id'
+                url: '/resultats/:id'
                 params: {
                     justCreated: null
                 }

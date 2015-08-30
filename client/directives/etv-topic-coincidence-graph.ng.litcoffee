@@ -16,6 +16,7 @@
         radius = calcRadius(width)
         font = calcFontSize($("#resultsContainer").width())
         bigFont = font*1.7
+        arcOffset = 0.05
 
         {
             width: width
@@ -25,12 +26,13 @@
             radius: radius
             font: font
             bigFont: bigFont
+            arcOffset: arcOffset
         }
 
-    topicCoincidenceGraphDirective = ($timeout, $translate, $compile, politicalPartiesService, resultsService) ->
+    topicCoincidenceGraphDirective = ($timeout, $compile, politicalPartiesService, resultsService) ->
         restrict: 'EA'
         scope: {
-            topic: '@topicCoincidenceGraph'
+            topic: '@etvTopicCoincidenceGraph'
         }
 
         link: (scope, element, attrs) ->
@@ -44,14 +46,14 @@
 
                             for party in politicalParties
                                 results.push(
-                                    party: party.id
+                                    party: party._id
                                     color: party.color
-                                    value: _.find(topicResultsInfo, (elem) -> elem.party is party.id ).value
+                                    value: _.find(topicResultsInfo, (elem) -> elem.party is party._id ).value
                                 )
                     )
             )
 
-            paint = ->
+            paint = _.debounce( ->
 
                 $(element[0]).empty()
 
@@ -73,7 +75,7 @@
 
                 @arc = d3.svg.arc()
                 .startAngle(0)
-                .endAngle((d) -> d.value*2*Math.PI)
+                .endAngle((d) -> sizes.arcOffset + d.value*(2*Math.PI - sizes.arcOffset))
                 .innerRadius((d) -> d.index*self.sizes.radius)
                 .outerRadius((d) -> (d.index + self.sizes.spacing)*self.sizes.radius)
 
@@ -145,9 +147,9 @@
                 .html((d) -> "#{+(d.value*100).toFixed(1)} %")
 
                 $compile(angular.element(".legendPartyName"))(scope)
-
+            , 250)
 
             $timeout(paint)
-            scope.$on('layoutChange', paint)
+            scope.$on('resize', paint)
 
-    app.directive('topicCoincidenceGraph', ['$timeout', '$translate', '$compile', 'politicalPartiesService', 'resultsService', topicCoincidenceGraphDirective])
+    app.directive('etvTopicCoincidenceGraph', ['$timeout', '$compile', 'politicalPartiesService', 'resultsService', topicCoincidenceGraphDirective])

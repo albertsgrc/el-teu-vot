@@ -1,12 +1,16 @@
-#politicalQuestionsContainer(center-questions-vertically="" highlight-current-question="" etv-scroll-to-top-on-load="")
+#politicalQuestionsContainer(etv-scroll-to-top-on-load="")
+    span(ng-if="shouldShowLoading()")
+        etv-centered-text(text="politicalQuestionsLoading")
 
-    etv-question-navigation
+    span(ng-if="shouldShowError()")
+        etv-centered-text(text="politicalQuestionsError")
 
-    #politicalQuestionsListContainer
-        etv-political-question(ng-repeat="question in questions")
+    span(ng-if="shouldShowQuestions()")
+        etv-question-navigation()
 
-    #endTestButtonContainer.text-center
-        button#endTestButton(ng-click="goToPersonalQuestions()")
-            span.text-uppercase(translate="{{ 'endTest' }}")
+        #politicalQuestionsListContainer(etv-center-questions-vertically="" etv-highlight-current-question="")
+            etv-political-question(ng-repeat="question in questions")
 
-    etv-alert(text="{{ 'politicalQuestionsAlert' | translate }}")
+        #endTestButtonContainer.text-center
+            button#endTestButton(ng-click="goToPersonalQuestions()")
+                span.text-uppercase(translate="{{ 'endTest' }}")

@@ -14,9 +14,9 @@
 
                             for party in parties
                                 data.push(
-                                    party: party.id
+                                    party: party._id
                                     color: party.color
-                                    value: _.find(results.partyCoincidence, (elem) -> elem.party is party.id ).value
+                                    value: _.find(results.partyCoincidence, (elem) -> elem.party is party._id ).value
                                 )
 
                             data.sort( (a, b) -> b.value - a.value )
@@ -45,6 +45,8 @@
 
                     r.legendHeight = 25
                     r.font = 14
+
+                    r.arcOffset = 0.03
 
                     r
                 )(containerSize)
@@ -100,10 +102,10 @@ Background arc
 Colored and valued arc
 
                 donut.append("path")
-                .attr("d", arc.endAngle((d) -> d.value*2*Math.PI))
+                .attr("d", arc.endAngle((d) -> sizes.arcOffset + d.value*(2*Math.PI - sizes.arcOffset)))
                 .style("fill", (d) -> d.color)
 
                 $compile(angular.element(".legendPartyName"))(scope)
 
 
-    app.directive('partyCoincidenceGraph', ['$timeout', '$translate', '$compile', 'politicalPartiesService', 'resultsService', partyCoincidenceGraphDirective])
+    app.directive('etvPartyCoincidenceGraph', ['$timeout', '$translate', '$compile', 'politicalPartiesService', 'resultsService', partyCoincidenceGraphDirective])

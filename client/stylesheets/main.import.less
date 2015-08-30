@@ -281,8 +281,19 @@
 
 // Utils
 
-.absolute {
+.infoCenterText {
+    .lrPadding(30px);
+    text-align: center;
+    left: 0;
     position: absolute;
+    top: 50%;
+    .translateY(-50%);
+    width: 100%;
+    visibility: visible;
+}
+
+.absolute {
+    position: absolute !important;
 }
 
 .fullWidth { width: 100% }
@@ -300,6 +311,12 @@
 .center-horizontally {
     left: 50%;
     .translateX(-50%);
+}
+
+.center-both {
+    left: 50%;
+    top: 50%;
+    .translate(-50%, -50%);
 }
 
 .moveWholeLeft {

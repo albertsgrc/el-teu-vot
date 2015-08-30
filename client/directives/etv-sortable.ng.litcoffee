@@ -1,14 +1,16 @@
 # Sortable directive
 
-    sortableDirective = (resultsService) ->
+    sortableDirective = ->
         restrict: 'EA'
+        replace: true
+        templateUrl: "client/views/components/etv-sortable.html"
+
         link: (scope, element, attrs) ->
-            scope.question.answeredOption = {}
+            answeredOptions = {}
 
             getAnswer = -> ($(elem).attr("etv-value") for elem in $(element).find('li'))
 
-
-            element.sortable({
+            element.find("ul").sortable({
                 tolerance: 'touch'
                 cancel: ''
                 update: (e, ui) ->
@@ -19,8 +21,10 @@
             element.disableSelection()
 
             scope.answerOption = (option) ->
-                scope.question.answeredOption[option] = true
-                if _.size(scope.question.answeredOption) is scope.topics.length
-                    scope.question.answer = getAnswer()
+                answeredOptions[option] = true
+                if _.size(answeredOptions) is scope.topics.length
+                    scope.setQuestionAnswer(scope.question, getAnswer())
 
-    app.directive('etvSortable', ['resultsService', sortableDirective])
+            scope.isAnswered = (option) -> answeredOptions[option]
+
+    app.directive('etvSortable', [sortableDirective])

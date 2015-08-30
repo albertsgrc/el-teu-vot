@@ -11,7 +11,7 @@
     )
 
     Schemas.Translation = new SimpleSchema(
-        id:
+        _id:
             type: String
             min: 1
             max: 200

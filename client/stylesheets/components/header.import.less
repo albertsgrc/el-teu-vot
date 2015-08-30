@@ -18,7 +18,7 @@ header {
     background-color: white;
 
     .socialMedia i:first-child {
-        margin-right: 5px;
+        margin-right: 10px;
     }
 
     .languageSelection {
@@ -29,79 +29,73 @@ header {
         max-width: 100%;
     }
 
+    .socialMedia i {
+        font-size: 1.2em;
+    }
+
+    .menuButtonContainer i {
+        font-size: 1.6em;
+    }
+
+    .languageSelection {
+        font-size: 0.9em;
+    }
+
+    @media (max-height: 750px) {
+        #logo {
+            width: 200px;
+        }
+    }
+
+    padding: 1.3em 1.3em 0.9em 1.3em !important;
+
+    @media (max-width: @screen-xxs-max) {
+        font-size: 15px;
+
+        padding: 0.7em 0.7em 0.5em 0.7em !important;
+
+        &.fixedHeader {
+            img#logo {
+                width: 100px;
+            }
+        }
+    }
+
+    @media (min-width: @screen-xs-min) and (max-width: @screen-md-max) {
+        font-size: 17px;
+
+        &.fixedHeader {
+            img#logo {
+                width: 120px;
+            }
+        }
+    }
+
+    @media (min-width: @screen-lg-min) {
+        font-size: 19px;
+
+        &.fixedHeader {
+            img#logo {
+                width: 140px;
+            }
+        }
+
+        @media (min-height: 850px) {
+            font-size: 21px;
+        }
+    }
+}
+
+header.smallHeader {
     img#logo.compactLogo {
-        width: 120px !important;
-    }
-}
-
-#main.fixedHeader {
-    padding-top: 131px;
-}
-
-@media (min-width: 400px) and (max-width: 500px) { #main.fixedHeader { padding-top: 100px; } }
-@media (max-width: 400px) { #main.fixedHeader { padding-top: 70px; } }
-
-@media (max-width: @screen-xs-max) {
-    header {
-        #logo {
-            .img-size(@logo-sz) !important;
+        @media (max-width: @screen-md-max) {
+            width: 90px !important;
         }
-
-        .languageSelection {
-            font-size: @lang-sel-sz !important;
-        }
-
-        padding: @hd-pd/2 !important;
-    }
-}
-
-@media (max-width: @screen-sm-max)  {
-    header {
-        padding: @hd-pd @hd-pd @hd-pd/2 @hd-pd !important;
-
-        .menuButtonContainer i {
-            font-size: @menu-sz;
-        }
-
-        .socialMedia i {
-            font-size: @social-sz;
-        }
-
-        #logo {
-            .img-size(@logo-sz-f*@logo-sz);
-        }
-
-        .languageSelection {
-            font-size: @lang-sel-sz-f*@lang-sel-sz;
+        @media (min-width: @screen-lg-min) {
+            width: 125px !important;
         }
     }
 }
-
-@media (min-width: @screen-md-min) {
-    header {
-        padding: @hd-pd-f*@hd-pd @hd-pd-f*@hd-pd @hd-pd-f*@hd-pd/2 @hd-pd-f*@hd-pd !important;
-
-        .menuButtonContainer i {
-            font-size: @menu-sz-f*@menu-sz;
-        }
-
-        .socialMedia i {
-            font-size: @social-sz-f*@social-sz;
-        }
-
-        #logo {
-            .img-size(@logo-sz-f*@logo-sz-f*@logo-sz);
-        }
-
-        .languageSelection {
-            font-size: @lang-sel-sz-f*@lang-sel-sz-f*@lang-sel-sz;
-        }
-    }
-}
-
-@media (max-height: 600px) {  header { padding: @hd-pd/2 !important; #logo { .img-size(@logo-sz) !important; } } }
-
-@media (min-height: 600px) and (max-height: 800px) { header { padding: @hd-pd !important; #logo { .img-size(@logo-sz-f*@logo-sz) !important; } } }
 
 header.fixedHeader {
     top: 0;
@@ -118,6 +112,7 @@ header.fixedHeader {
     z-index: 200;
 }
 
+#main.fixedHeader {padding-top: 131px;}
 
 .menuButtonContainer {
     text-align: right;

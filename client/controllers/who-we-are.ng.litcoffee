@@ -1,5 +1,8 @@
-# Who are we page controller
+# Who we are page controller
 
-    WhoWeAreCtrl = ($scope) ->
+    whoWeAreCtrl = ($scope) ->
+        $scope.ETP_URL = "http://www.elteuparlament.cat/"
+        $scope.APPS4CITIZENS_URL = "http://apps4citizens.org/"
 
-    app.controller('WhoWeAreCtrl', ['$scope', WhoWeAreCtrl])
+
+    app.controller('WhoWeAreCtrl', ['$scope', whoWeAreCtrl])

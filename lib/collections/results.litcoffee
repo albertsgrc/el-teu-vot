@@ -41,7 +41,7 @@
         topicOrder:
             type: [String]
             custom: ->
-                topics = _.pluck(Topics.find().fetch(), 'id')
+                topics = _.pluck(Topics.find().fetch(), '_id')
                 return "Some topic is missing or is incorrect or there are extra topics" unless _.intersection(@value, topics).length is topics.length and topics.length is @value.length
     )
 
@@ -50,14 +50,14 @@
             type: String
             min: 1
             max: 50
-            custom: -> return "The question doesn't exist" unless PersonalQuestions.findOne({ id: @value })?
+            custom: -> return "The question doesn't exist" unless PersonalQuestions.findOne({ _id: @value })?
 
 
         answer:
             type: String
             optional: true
             custom: ->
-                question = PersonalQuestions.findOne({ id: @siblingField("questionId").value })
+                question = PersonalQuestions.findOne({ _id: @siblingField("questionId").value })
 
                 return "The personal question doesn't exist" unless question?
 
@@ -74,7 +74,7 @@
         answers:
             type: [Schemas.PersonalAnswer]
             custom: ->
-                personalQuestionsIds = _.pluck(PersonalQuestions.find({}).fetch(), 'id')
+                personalQuestionsIds = _.pluck(PersonalQuestions.find({}).fetch(), '_id')
                 answersQuestionsIds = _.pluck(@value, 'questionId')
                 return "Some question's answer is missing or there are extra or incorrect ones" unless _.intersection(personalQuestionsIds, answersQuestionsIds).length is personalQuestionsIds.length
     )
@@ -83,7 +83,7 @@
         party:
             type: String
             custom: ->
-                return "Party name is incorrect" unless @value in _.pluck(PoliticalParties.find().fetch(), 'id')
+                return "Party name is incorrect" unless @value in _.pluck(PoliticalParties.find().fetch(), '_id')
 
         value:
             type: Number
@@ -96,17 +96,21 @@
         topic:
             type: String
             custom: ->
-                return "Topic is incorrect" unless @value in _.pluck(Topics.find().fetch(), 'id')
+                return "Topic is incorrect" unless @value in _.pluck(Topics.find().fetch(), '_id')
 
         values:
             type: [Schemas.PartyCoincidence]
             custom: ->
                 actualPartiesIds = _.pluck(@value, 'party')
-                partiesIds = _.pluck(PoliticalParties.find().fetch(), 'id')
+                partiesIds = _.pluck(PoliticalParties.find().fetch(), '_id')
                 return "Some political party is missing or there are extra or incorrect ones" unless _.intersection(partiesIds, actualPartiesIds).length is partiesIds.length and partiesIds.length is actualPartiesIds.length
     )
 
     Schemas.Result = new SimpleSchema(
+        userId:
+            type: String
+            index: true
+
         political:
             type: Schemas.PoliticalResult
 
@@ -121,7 +125,7 @@
             custom: ->
                 if @isSet
                     actualPartiesIds = _.pluck(@value, 'party')
-                    partiesIds = _.pluck(PoliticalParties.find().fetch(), 'id')
+                    partiesIds = _.pluck(PoliticalParties.find().fetch(), '_id')
                     return "Some political party is or there are extra or incorrect ones" unless _.intersection(partiesIds, actualPartiesIds).length is partiesIds.length and partiesIds.length is actualPartiesIds.length
 
         topicAndPartyCoincidence:
@@ -132,7 +136,7 @@
             custom: ->
                 if @isSet
                     actualTopicsIds = _.pluck(@value, 'topic')
-                    topicsIds = _.pluck(Topics.find().fetch(), 'id')
+                    topicsIds = _.pluck(Topics.find().fetch(), '_id')
                     return "Some topic is missing or there are extra or incorrect ones" unless _.intersection(actualTopicsIds, topicsIds).length is topicsIds.length and topicsIds.length is actualTopicsIds.length
 
         createdAt:

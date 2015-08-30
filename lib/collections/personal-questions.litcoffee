@@ -5,12 +5,10 @@
     PersonalQuestions.QUESTION_TYPES = ["button", "input"]
 
     Schemas.PersonalQuestion = new SimpleSchema(
-        id:
+        _id:
             type: String
             min: 1
             max: 50
-            unique: true
-            index: true
 
         order:
             type: Number

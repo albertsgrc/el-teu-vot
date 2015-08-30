@@ -22,7 +22,9 @@ If this array changes, then the Party coincidence - answer scoring matrix should
 
     PoliticalQuestions.NO_ANSWER = "nsnc"
 
-    PoliticalQuestions.NO_ANSWER_POINTS = 0.000001
+    PoliticalQuestions.MAX_ANSWER_VALUE = 5
+
+    throw new Meteor.Error("Max answer value must be != 0") if PoliticalQuestions.MAX_ANSWER_VALUE is 0
 
     Schemas.AnswerResemblanceToParty = new SimpleSchema(
         party:
@@ -37,13 +39,15 @@ If this array changes, then the Party coincidence - answer scoring matrix should
 
             maxCount: PoliticalQuestions.VALID_QUESTION_COUNT
 
+            decimal: true
+
             custom: ->
 
 Again we substract one because of the Ns/Nc option
 
                 length = PoliticalQuestions.VALID_QUESTION_COUNT
-                unless _.intersection(@value, [1..length]).length is length
-                    return "Incorrect attribute value, doesn't contain #{[1..length]} numbers"
+                unless length is @value.length and _.max(@value) is PoliticalQuestions.MAX_ANSWER_VALUE
+                    return "Incorrect attribute value, doesn't have #{length} numbers or exceeds max value #{PoliticalQuestions.MAX_ANSWER_VALUE}"
     )
 
     Schemas.PoliticalQuestion = new SimpleSchema(
@@ -64,7 +68,7 @@ Again we substract one because of the Ns/Nc option
             custom: ->
                 if @field("type").value is "basic"
                     return "Topic field is required for basic-type political questions" if not @isSet
-                    return "Incorrect topic value" unless @value in _.pluck(Topics.find().fetch(), 'id')
+                    return "Incorrect topic value" unless @value in _.pluck(Topics.find().fetch(), '_id')
 
         answerResemblanceToPartyMatrix:
             type: [Schemas.AnswerResemblanceToParty]
@@ -73,7 +77,7 @@ Again we substract one because of the Ns/Nc option
                 if @field("type").value is "basic"
                     return "Answer Resemblance Matrix field is required for basic-type political questions"  if not @isSet
 
-                    politicalParties = _.pluck(PoliticalParties.find().fetch(), 'id')
+                    politicalParties = _.pluck(PoliticalParties.find().fetch(), '_id')
                     partiesIncluded = _.pluck(@value, 'party')
                     return "Some political party was not included in the matrix or there were invalid or extra ones" unless _.intersection(partiesIncluded, politicalParties).length is politicalParties.length and politicalParties.length is partiesIncluded.length
 

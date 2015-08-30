@@ -1,9 +1,30 @@
 # Personal questions angular controller
 
-    PersonalQuestionsCtrl = ($scope, $state, resultsService, questionsService, $meteor) ->
-        questionsService.getPersonalQuestions().then( (result) ->
-            $scope.questions = result
+    PersonalQuestionsCtrl = ($scope, $state, resultsService, questionsService, $meteor, etvAlertService, $timeout) ->
+        MAX_SEND_RESULTS_SECONDS_DELAY = 20
+
+        sendResultsStarted = false
+
+        errorSending = false
+
+        $scope.loadingCounter = 1
+        $scope.error = false
+
+        NProgress.start()
+
+        questionsService.getPersonalQuestions().then(
+            (result) ->
+                $scope.questions = result
+                --$scope.loadingCounter
+                NProgress.done()
+                $scope.error = false
+            ,
+            (err) ->
+                $scope.error = true
+                NProgress.done()
         )
+
+        $scope.endQuestionaireText = "endQuestionaireText"
 
         $scope.isValid = (question) ->
             regex = new RegExp(question.validate)
@@ -11,9 +32,21 @@
 
         $scope.isSelected = (question, option) -> question.answer is option
 
+        $scope.questionTitle = (question) -> question._id
+
+        $scope.isFocusable = (question) -> question.type is 'input'
+
         $scope.isAnswered = (question) -> question?
 
+        $scope.onInputTextChange = (question) -> question.valid = $scope.isAnswered(question) and $scope.isValid(question)
+
         $scope.answerQuestion = (question, answer) -> question.answer = answer
+
+        $scope.shouldShowPersonalQuestionsError = -> $scope.error
+
+        $scope.shouldShowPersonalQuestions = -> not $scope.loadingCounter
+
+        $scope.shouldShowLoading = -> $scope.loadingCounter and not $scope.error
 
         $scope.shouldShowErrorMessage = (question) ->
             question.type is 'input' and question.blurred and not question.valid
@@ -21,15 +54,46 @@
         allQuestionsAnswered = ->
             return _.every($scope.questions, (question) -> not question.mandatory or (question.answer? and (question.type isnt 'input' or $scope.isValid(question))))
 
+        onSendResultsSuccess = (id) ->
+            NProgress.done()
+            $state.go('results', { id: id, justCreated: true })
+            errorSending = false
+
+        onSendResultsFailure = ->
+            NProgress.done()
+            $scope.endQuestionaireText = "endQuestionaireText"
+            sendResultsStarted = false
+            errorSending = true
+            etvAlertService.openAlert("sendResultsError")
+
         $scope.goToResults = ->
-            if allQuestionsAnswered()
-                resultsService.sendPersonalResults($scope.questions).then(
-                    (resultId) ->
-                        $state.go('results', { id: resultId, justCreated: true })
-                    ,
-                    (err) ->
-                        console.log err
-                )
+            if allQuestionsAnswered() and not sendResultsStarted
+                $scope.endQuestionaireText = "sendingResults"
+                sendResultsStarted = true
+
+
+                $timeout( ->
+                    if $state.includes('personalQuestions') and not errorSending
+                        NProgress.done()
+                        $scope.endQuestionaireText = "endQuestionaireText"
+                        sendResultsStarted = false
+                        etvAlertService.openAlert('sendResultsTooLongDelay')
+                , 1000*MAX_SEND_RESULTS_SECONDS_DELAY)
+
+                NProgress.start()
+
+                if errorSending
+                    resultsService.sendResultsToServerAndGetNewResults().then(
+                        onSendResultsSuccess
+                        ,
+                        onSendResultsFailure
+                    )
+                else
+                    resultsService.sendPersonalResults($scope.questions).then(
+                        onSendResultsSuccess
+                        ,
+                        onSendResultsFailure
+                    )
 
             else
                 goToMandatoryQuestions = ( ->
@@ -39,7 +103,7 @@
                         $(".personalMandatoryQuestionsContainer").offset().top - $("header").outerHeight(true)
 
                     showAlert = ->
-                        setTimeout((-> $(".etv-alert").modal("show")), 100)
+                        $timeout((-> etvAlertService.openAlert('personalQuestionsAlert')), 100)
 
                     $('html, body').animate({ scrollTop: getMandatoryQuestionsPos() }, SCROLL_ANIMATION_TIME, showAlert)
                 )()
@@ -50,4 +114,4 @@
 
 
 
-    app.controller('PersonalQuestionsCtrl', ['$scope', '$state', 'resultsService', 'questionsService', '$meteor', PersonalQuestionsCtrl])
+    app.controller('PersonalQuestionsCtrl', ['$scope', '$state', 'resultsService', 'questionsService', '$meteor', 'etvAlertService', '$timeout', PersonalQuestionsCtrl])
