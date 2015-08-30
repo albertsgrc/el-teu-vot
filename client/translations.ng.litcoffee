@@ -80,13 +80,13 @@
                 al elector dentro de un sistema de partidos concreto. \
                 Este tipo de aplicaciones no buscan determinar el voto, sino \
                 ofrecer un posicionamiento concreto según las respuestas, \
-                de forma precisa i de acuerdo con las propuestas y acciones \
+                de forma precisa y de acuerdo con las propuestas y acciones \
                 de las diferentes candidaturas.<br/><br/>
                 El teu Vot, que toma la forma de página web, se basa en un \
                 cuestionario que ubica al usuario o usuaria ideológicamente \
                 en bloques temáticos concretos respecto a las candidaturas \
                 que participan en las elecciones del 27 de septiembre de 2015 \
-                al Parlament de Cataluña. Una vez completado el cuestionario, \
+                al Parlament de Catalunya. Una vez completado el cuestionario, \
                 el usuario obtendrá una serie de resultados que le permitirán \
                 ver de manera gráfica e intuitiva cuál es la candidatura que \
                 más se aproxima a sus preferencias. El teu Vot es una \
@@ -96,14 +96,14 @@
                 garantizar unos resultados veraces para nuestros usuarios.\
                 <br/><br/>
                 El teu Vot es un proyecto que nace de la colaboración entre \
-                <strong>El teu Parlament</strong> y \
+                <strong>El Teu Parlament</strong> y \
                 <strong>apps4citizens</strong>. Esta alianza ha permitido \
                 unir la experiencia del equipo de apps4citizens y el bagaje \
-                en la creación de herramientas digitales de El Teu Parlament."
+                en la creación de herramientas digitales de El teu Parlament."
             ]
 
             whoWeAreEtpText: [
-                "El teu Parlament és una organització de monitoratge \
+                "El Teu Parlament és una organització de monitoratge \
                 parlamentari (OMP) impulsada per quatre politòlegs de la \
                 Universitat Pompeu Fabra. Com a OMP, El teu Parlament és una \
                 organització independent i sense ànim de lucre que té per \
@@ -142,7 +142,7 @@
                 social dels agents que intervenen."
 
                 "apps4citizens es una plataforma que tiene como objetivo " +
-                "promover por un lado el uso de aplicaciones móvil como " +
+                "promover por un lado el uso de aplicaciones móviles como " +
                 "instrumento útil para mejorar la calidad democrática de los " +
                 "procesos de toma de decisiones a través del compromiso " +
                 "social y político, el apoderamiento de los propios " +
@@ -181,16 +181,16 @@
                 aquests en gràfics."
 
                 "El proyecto de <i>El teu Vot</i> se construye sobre dos \
-                pilares fundamentales: la <strong>metodología</strong>, \
+                pilares fundamentales:<br/>la <strong>metodología</strong>, \
                 esto es, el modo como se ha creado esta <strong>aplicación \
-                de orientación del voto</strong>, y la \
+                de orientación del voto;</strong><br/>y la \
                 <strong>independencia</strong> respecto a partidos políticos \
                 e instituciones públicas.<br/><br/>
                 Estos dos elementos dotan a esta iniciativa del rigor y la \
                 validez necesarias para ser tenida en cuenta a la hora de \
                 ubicar el electorado en el escenario político catalán previo \
-                a las elecciones del 27 de septiembre de 2015 al Parlamento \
-                de Cataluña.<br/><br/>
+                a las elecciones del 27 de septiembre de 2015 al Parlament \
+                de Catalunya.<br/><br/>
                 La metodología es muy importante a la hora de elaborar un \
                 proyecto con las características de \
                 <strong><i>El teu Vot</i></strong> –el usuario debe poder \
@@ -282,7 +282,7 @@
             ]
 
             howItsDoneExplanationText212: [
-                "També s’inclourà una opció de No ho sap / No contesta, perquè \
+                "També s’inclourà una opció de No sap/No contesta, perquè \
                 s’obliga a respondre totes les preguntes i és necessària una \
                 opció on l’enquestat pugui recórrer en cas de no saber la \
                 resposta o no voler respondre (però tot i així, acabar el \
@@ -348,7 +348,7 @@
 
                 "El cuestionario definitivo es enviado a las candidaturas " +
                 "que concurren a las elecciones. Las respuestas que elijan " +
-                "para cada pregunta serán consideradas a la hora de " +
+                "para cada pregunta serán consideradas a la hora de definir" +
                 "sus preferencias. No obstante, ello puede comportar que " +
                 "los partidos recurran a la respuesta más \"positiva\" o " +
                 "encarada a ganar votos, por lo que también se tienen en " +
@@ -394,7 +394,7 @@
                 "Las preferencias de los partidos suelen quedas reflejadas " +
                 "en los diferentes medios de comunicación. Es por ello que " +
                 "también se hace una revisión de las declaraciones hechas " +
-                "por los diversos representates de partidos y candidaturas " +
+                "por los diversos representantes de partidos y candidaturas " +
                 "que aparecen en los medios."
             ]
 
@@ -483,7 +483,7 @@
                 orden de preferencias para cada candidatura, esta pregunta \
                 nos permitirá ponderar los diferentes bloques según su \
                 importancia subjetiva a la hora de decidir el voto \
-                (ver operacionalización de los resultados) y permitirá \
+                (ver <u>operacionalización</u> de los resultados) y permitirá \
                 definir mejor la proximidad entre candidatura y elector."
             ]
 
