@@ -28,10 +28,24 @@
 
             Schemas.Result.clean(results)
 
-            isValid = Results.simpleSchema().namedContext("Results").validate(results, { modifier: false })
+            politicalParties = _.pluck(PoliticalParties.find().fetch(), '_id')
+            topics = _.pluck(Topics.find().fetch(), '_id')
+            politicalQuestions = PoliticalQuestions.find({ currentlyActive: true, type: 'basic' }).fetch()
+            personalQuestionsArray = PersonalQuestions.find().fetch()
+            personalQuestions = {}
+            for question in personalQuestionsArray
+                personalQuestions[question._id] = question
+
+            validationData = {
+                politicalParties: politicalParties
+                topics: topics
+                politicalQuestions: politicalQuestions
+                personalQuestions: personalQuestions
+            }
+
+            isValid = Results.simpleSchema().namedContext("Results").validate(results, { modifier: false, extendedCustomContext: validationData })
 
             unless isValid
-                console.error(Results.simpleSchema().namedContext("Results").invalidKeys())
                 throw new Meteor.Error("result-validation", "Results are incorrect")
 
 Need to calculate results based on the answered questions
@@ -39,14 +53,7 @@ Need to calculate results based on the answered questions
             computeResults = () ->
                 questionsById = {}
 
-Get info altogether
-
-                politicalParties = _.pluck(PoliticalParties.find().fetch(), '_id')
-                topics = _.pluck(Topics.find().fetch(), '_id')
-
 Build question map by id for efficiency
-
-                politicalQuestions = PoliticalQuestions.find({ type: 'basic' }).fetch()
 
                 for question in politicalQuestions
                     questionsById[question._id] = question
@@ -120,20 +127,20 @@ Sum the score of the party in every topic to the total score and to the topic sc
 
             computeResults()
 
-
+            ###
             Schemas.Result.clean(results)
 
-            isValid = Results.simpleSchema().namedContext().validateOne(results, 'partyCoincidence', { modifier: false })
+            isValid = Results.simpleSchema().namedContext().validateOne(results, 'partyCoincidence', { modifier: false, extendedCustomContext: validationData })
 
             unless isValid
                 console.error(Results.simpleSchema().namedContext("Results").invalidKeys())
                 throw new Meteor.Error("result-computation-validation", "Computed results are incorrect") unless isValid
 
-            isValid = Results.simpleSchema().namedContext().validateOne(results, 'topicAndPartyCoincidence', { modifier: false })
+            isValid = Results.simpleSchema().namedContext().validateOne(results, 'topicAndPartyCoincidence', { modifier: false, extendedCustomContext: validationData })
 
             unless isValid
                 console.error(Results.simpleSchema().namedContext("Results").invalidKeys())
                 throw new Meteor.Error("result-computation-validation", "Computed results are incorrect") unless isValid
-
+            ###
             return Results.insert(results, { validate: false })
     )

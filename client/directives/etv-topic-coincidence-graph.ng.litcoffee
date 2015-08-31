@@ -41,12 +41,13 @@
 
                 BLANK_SPACING = .08
 
-                title = d3.select(element[0])
-                .append("p")
-                .attr("class", "text-uppercase topicGraphTitle")
-                .attr("translate", scope.topic)
+                unless attrs.miniature?
+                    title = d3.select(element[0])
+                    .append("p")
+                    .attr("class", "text-uppercase topicGraphTitle")
+                    .attr("translate", scope.topic)
 
-                $compile(angular.element(".topicGraphTitle"))(scope)
+                    $compile(angular.element(".topicGraphTitle"))(scope)
 
                 arc = d3.svg.arc()
                 .startAngle(0)
@@ -79,27 +80,28 @@
 
 legend
 
-                legendContainer = d3.select(element[0])
-                .append("div")
-                .attr("id", "topicCoincidenceLegend")
+                unless attrs.miniature?
+                    legendContainer = d3.select(element[0])
+                    .append("div")
+                    .attr("id", "topicCoincidenceLegend")
 
-                legend = legendContainer.selectAll("div")
-                .data(-> return results.sort( (a, b) ->
-                    return b.value - a.value
-                ))
-                .enter().append("div")
-                .attr("class", "legendPartyContainer")
+                    legend = legendContainer.selectAll("div")
+                    .data(-> return results.sort( (a, b) ->
+                        return b.value - a.value
+                    ))
+                    .enter().append("div")
+                    .attr("class", "legendPartyContainer")
 
-                partyName = legend.append("p")
-                .attr("class", "legendPartyName")
-                .attr("translate", (d) -> "{{ '#{d.party}' }}" )
-                .attr("etv-translate-tooltip", (d) -> d.party)
+                    partyName = legend.append("p")
+                    .attr("class", "legendPartyName")
+                    .attr("translate", (d) -> "{{ '#{d.party}' }}" )
+                    .attr("etv-translate-tooltip", (d) -> d.party)
 
-                legend.append("p")
-                .attr("class", "legendPercentage")
-                .style("color", (d) -> d.color)
-                .html((d) -> "#{+(d.value*100).toFixed(1)} %")
+                    legend.append("p")
+                    .attr("class", "legendPercentage")
+                    .style("color", (d) -> d.color)
+                    .html((d) -> "#{+(d.value*100).toFixed(1)} %")
 
-                $compile(angular.element(".legendPartyName"))(scope)
+                    $compile(angular.element(".legendPartyName"))(scope)
 
     app.directive('etvTopicCoincidenceGraph', ['$timeout', '$compile', 'politicalPartiesService', 'resultsService', topicCoincidenceGraphDirective])

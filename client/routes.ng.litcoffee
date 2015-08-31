@@ -38,6 +38,10 @@
             .state('personalQuestions',
                 controller: 'PersonalQuestionsCtrl'
                 parent: 'questions'
+                url: '/questionari/'
+                params: {
+                    cameFromVerification: null
+                }
                 templateUrl: 'client/views/partials/personal-questions.html'
             )
             .state('results',

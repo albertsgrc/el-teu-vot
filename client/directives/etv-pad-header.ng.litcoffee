@@ -11,7 +11,7 @@
                     $("#main").css({ "padding-top": fixedHeader.outerHeight(true) + "px" })
 
                 return true
-            , 50)
+            , 25)
 
             scope.$on('resize', setMainPadding)
 

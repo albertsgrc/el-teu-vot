@@ -46,7 +46,9 @@
     parlamentaryRepresentationGraph = ($timeout, $compile, politicalPartiesService, resultsService) ->
         restrict: 'EA'
 
-        scope: {}
+        scope: {
+            miniature: '@'
+        }
 
         link: (scope, element, attrs) ->
             data = []
@@ -176,6 +178,7 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                                     .attr("r", radius)
                                     .attr("cx", cx)
                                     .attr("cy", cy)
+                                    .attr("fill", COLORS.GREY)
 
                                     hemicycleVector[k] =
                                         circle: circleElement
@@ -200,6 +203,7 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                             .attr("r", CIRCLE_RADIUS)
                             .attr("cx", position)
                             .attr("cy", cy)
+                            .attr("fill", COLORS.GREY)
 
                             hemicycleVector[k] =
                                 circle: circleElement
@@ -237,28 +241,29 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                     )()
 
                     putLegend = ( ->
-                        legendContainer = graphContainer
-                        .append("div")
-                        .attr("id", "parlamentaryRepresentationLegend")
+                        unless attrs.miniature?
+                            legendContainer = graphContainer
+                            .append("div")
+                            .attr("id", "parlamentaryRepresentationLegend")
 
-                        legend = legendContainer.selectAll("div")
-                        .data(-> return data.sort( (a, b) ->
-                            return b.seats - a.seats
-                        ))
-                        .enter().append("div")
-                        .attr("class", "legendPartyContainer")
+                            legend = legendContainer.selectAll("div")
+                            .data(-> return data.sort( (a, b) ->
+                                return b.seats - a.seats
+                            ))
+                            .enter().append("div")
+                            .attr("class", "legendPartyContainer")
 
-                        partyName = legend.append("p")
-                        .attr("class", "legendPartyName")
-                        .attr("translate", (d) -> "{{ '#{d.party}' }}" )
-                        .attr("etv-translate-tooltip", (d) -> d.party)
+                            partyName = legend.append("p")
+                            .attr("class", "legendPartyName")
+                            .attr("translate", (d) -> "{{ '#{d.party}' }}" )
+                            .attr("etv-translate-tooltip", (d) -> d.party)
 
-                        legend.append("p")
-                        .attr("class", "legendPercentage")
-                        .style("color", (d) -> d.color)
-                        .html((d) -> (d.seats || 0))
+                            legend.append("p")
+                            .attr("class", "legendPercentage")
+                            .style("color", (d) -> d.color)
+                            .html((d) -> (d.seats || 0))
 
-                        $compile(angular.element(".legendPartyName"))(scope)
+                            $compile(angular.element(".legendPartyName"))(scope)
                     )()
 
                 $timeout(paint)

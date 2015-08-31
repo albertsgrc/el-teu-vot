@@ -66,7 +66,7 @@
 
             unless firstUnAnsweredQuestion?
                 resultsService.sendPoliticalResults($scope.questions)
-                $state.go('personalQuestions')
+                $state.go('personalQuestions', { cameFromVerification: 'sedawidaiov' })
             else
                 goToFirstUnAnsweredQuestion = ( ->
                     showAlert = ->

@@ -29,7 +29,9 @@
 
                 parent = d3.select(element[0])
 
-                containerSize = $(".graphContainer").width()
+                VIEWBOX_SIZE = 120
+                containerSize = if attrs.miniature? then VIEWBOX_SIZE else $(".graphContainer").width()
+                data = [data[0]] if attrs.miniature?
 
                 sizes = ( (size) ->
                     r = {}
@@ -51,7 +53,7 @@
                     r
                 )(containerSize)
 
-                parent.style("padding-top", "#{sizes.parentTopPadding}px")
+                parent.style("padding-top", "#{sizes.parentTopPadding}px") unless attrs.miniature?
 
                 arc = d3.svg.arc()
                 .startAngle(0)
@@ -62,36 +64,45 @@
                 .data( -> data )
                 .enter()
                 .append("div")
-                .style("display", "inline-block")
-                .style("min-width", "#{sizes.size}px")
-                .style("margin-left", "#{sizes.donutSideMargin}px")
-                .style("margin-right", "#{sizes.donutSideMargin}px")
-                .style("margin-bottom", "#{sizes.donutBottomMargin}px")
 
-                donut = donutContainer
+                unless attrs.miniature?
+                    donutContainer.style("display", "inline-block")
+                    .style("min-width", "#{sizes.size}px")
+                    .style("margin-left", "#{sizes.donutSideMargin}px")
+                    .style("margin-right", "#{sizes.donutSideMargin}px")
+                    .style("margin-bottom", "#{sizes.donutBottomMargin}px")
+
+
+                svg = donutContainer
                 .append("svg")
-                .attr("width", sizes.size)
-                .attr("height", sizes.size)
+                .attr("width", if attrs.miniature? then "100%" else sizes.size)
+                .attr("height", if attrs.miniature? then undefined else sizes.size)
                 .style("display", "block")
                 .style("margin", "auto")
-                .append("g")
+
+                svg.attr("viewBox", "0 0 #{VIEWBOX_SIZE} #{VIEWBOX_SIZE}") if attrs.miniature?
+
+                donut = svg.append("g")
                 .attr("transform", "translate(#{sizes.radius}, #{sizes.radius})")
 
-                legend = donutContainer
-                .append("div")
-                .attr("class", "legendPartyContainer")
-                .style("margin-top", "#{sizes.donutToLegendSpacing}px")
 
-                partyName = legend.append("p")
-                .attr("class", "legendPartyName")
-                .attr("translate", (d) -> "{{ '#{d.party}' }}" )
-                .attr("etv-translate-tooltip", (d) -> d.party)
+                unless attrs.miniature?
+                    legend = donutContainer
+                    .append("div")
+                    .attr("class", "legendPartyContainer")
+                    .style("margin-top", "#{sizes.donutToLegendSpacing}px")
 
-                legend.append("p")
-                .attr("class", "legendPercentage")
-                .style("color", (d) -> d.color)
-                .html((d) -> "#{+(d.value*100).toFixed(1)} %")
+                    partyName = legend.append("p")
+                    .attr("class", "legendPartyName")
+                    .attr("translate", (d) -> "{{ '#{d.party}' }}" )
+                    .attr("etv-translate-tooltip", (d) -> d.party)
 
+                    legend.append("p")
+                    .attr("class", "legendPercentage")
+                    .style("color", (d) -> d.color)
+                    .html((d) -> "#{+(d.value*100).toFixed(1)} %")
+
+                    $compile(angular.element(".legendPartyName"))(scope)
 
 Background arc
 
@@ -104,8 +115,6 @@ Colored and valued arc
                 donut.append("path")
                 .attr("d", arc.endAngle((d) -> sizes.arcOffset + d.value*(2*Math.PI - sizes.arcOffset)))
                 .style("fill", (d) -> d.color)
-
-                $compile(angular.element(".legendPartyName"))(scope)
 
 
     app.directive('etvPartyCoincidenceGraph', ['$timeout', '$translate', '$compile', 'politicalPartiesService', 'resultsService', partyCoincidenceGraphDirective])

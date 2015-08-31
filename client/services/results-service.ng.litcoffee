@@ -12,7 +12,7 @@
 
         self = @
 
-        (wipeResults = ->
+        (@reset = ->
             answerResults = {
                 sessionId: Random.id()
 
@@ -56,6 +56,7 @@
             )
 
         @sendPoliticalResults = (questions) ->
+            answerResults.political.basicAnswers = []
             for question in questions
                 switch question.type
                     when "basic"
@@ -72,6 +73,7 @@
                         answerResults.political.topicOrder = question.answer
 
         @sendPersonalResults = (questions) ->
+            answerResults.personal.answers = []
             for question in questions
                 answerResults.personal.answers.push
                     questionId: question._id
@@ -112,7 +114,7 @@
 
             $meteor.call('sendResults', answerResults).then(
                 (resultsId) ->
-                    wipeResults()
+                    self.reset()
                     q.resolve(resultsId)
                     self.getResults(resultsId)
                 ,

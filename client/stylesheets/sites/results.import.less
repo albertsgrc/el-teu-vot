@@ -1,5 +1,6 @@
 #resultsContainer {
     margin-top: 30px;
+    margin-bottom: 30px;
 
     .graphMinTitle.opened {
         color: @orange;
@@ -137,7 +138,37 @@
     }
 
     .graphMinContainer {
+
+        #parlamentaryRepresentationContainer {
+            svg { width: 65% !important; }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
         text-align: center;
+
+        svg {
+            float: none;
+        }
+
+        #locationGraphSvgWrapper {
+            padding-top: 10%;
+            margin: 0 auto !important;
+        }
+
+        &.topicCoincidenceMinGraph {
+            svg {
+                padding: 0 15% 0 15%;
+            }
+        }
+
+        &.partyCoincidenceMinGraph {
+            svg {
+                padding: 8% 20% 0 20%;
+            }
+        }
     }
 
     .imgContainer {

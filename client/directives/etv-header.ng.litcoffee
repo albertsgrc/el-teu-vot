@@ -20,10 +20,10 @@
 
             scope.logoUrl = -> if scope.isSmallHeader() then SMALL_HEADER_LOGO else NORMAL_HEADER_LOGO
 
-            updateHeader = ->
+            updateHeader = _.throttle( ->
                 if scope.isFixedHeader()
                     if not isScrollOnTop()
-                        unless scope.smallHeader
+                        if not scope.smallHeader and $(window).height() + 120 < $("html").height()
                             scope.$apply( ->
                                 scope.smallHeader = true
                             )
@@ -34,6 +34,7 @@
                             scope.$apply( ->
                                 scope.smallHeader = false
                             )
+            , 250)
 
             scope.$on('scroll', updateHeader)
 

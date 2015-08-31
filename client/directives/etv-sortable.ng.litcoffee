@@ -8,7 +8,7 @@
         link: (scope, element, attrs) ->
             answeredOptions = {}
 
-            getAnswer = -> ($(elem).attr("etv-value") for elem in $(element).find('li'))
+            getAnswer = -> ($(elem).attr("etv-value") for elem in $(element).find('li[etv-value]'))
 
             element.find("ul").sortable({
                 tolerance: 'touch'
@@ -18,13 +18,12 @@
                         scope.question.answer = getAnswer()
             })
 
-            element.disableSelection()
-
             scope.answerOption = (option) ->
                 answeredOptions[option] = true
                 if _.size(answeredOptions) is scope.topics.length
                     scope.setQuestionAnswer(scope.question, getAnswer())
 
-            scope.isAnswered = (option) -> answeredOptions[option]
+            scope.isAnswered = (option) ->
+                answeredOptions[option] or (scope.question.answer? and scope.question.answer.indexOf(option) isnt -1)
 
     app.directive('etvSortable', [sortableDirective])

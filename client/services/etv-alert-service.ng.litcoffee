@@ -18,7 +18,7 @@
                 $compile(angular.element(".etv-alert"))($rootScope)
                 $(".etv-alert").modal("show")
                 alertOpened = true
-                $("body").on('click', closeUnlessAlert)
+                setTimeout((-> $("body").on('click', closeUnlessAlert)), 300)
             else if text? and text isnt currentText
                 currentText = text
                 self.closeAlert()

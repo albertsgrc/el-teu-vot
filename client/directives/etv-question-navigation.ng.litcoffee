@@ -22,7 +22,7 @@
             )
 
             questionNavigationService.goToQuestion = scope.goToQuestion = _.throttle( (questionNumber, callback) ->
-                globalQuestion = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:nth-child(#{questionNumber})")
+                globalQuestion = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer").eq(questionNumber - 1)
                 question = globalQuestion.find(".politicalQuestionContainer")
                 questionOffset = $(globalQuestion).offset().top
                 headerHeight = $("header").outerHeight(true)

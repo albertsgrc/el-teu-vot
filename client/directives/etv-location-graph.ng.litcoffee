@@ -39,7 +39,7 @@
 
                 WRAPPER_SIZE = VIEWBOX_SIZE + 5
 
-                AXIS_WIDTH = 1
+                AXIS_WIDTH = if attrs.miniature? then 3 else 1
 
                 CIRCLE_OVERLAP_RADIUS_DECREASE = 5
 
@@ -117,71 +117,71 @@
                 .style("top", (d) -> "#{yPosition(d.nationalLocation, d.decreased, true)}%")
                 .style("margin-top", (d) -> "#{5*d.nationalLocation/10}px")
 
+                unless attrs.miniature?
+                    legendContainer = parent.append("div")
+                    .attr("class", "legend")
 
-                legendContainer = parent.append("div")
-                .attr("class", "legend")
+                    legendData = []
 
-                legendData = []
+                    legendData.push
+                        text: "elTeuVot"
+                        image: "/images/etv-circle-logo.png"
+                        etv: true
 
-                legendData.push
-                    text: "elTeuVot"
-                    image: "/images/etv-circle-logo.png"
-                    etv: true
+                    for elem in data.parties.sort( (a, b) -> return b.value - a.value )
+                        legendData.push(
+                            text: elem.party
+                            color: elem.color
+                        )
 
-                for elem in data.parties.sort( (a, b) -> return b.value - a.value )
-                    legendData.push(
-                        text: elem.party
-                        color: elem.color
+                    legend = legendContainer.selectAll("div")
+                    .data(legendData)
+                    .enter().append("div")
+                    .attr("class", "legendPartyContainer")
+
+                    partyName = legend.append("p")
+                    .attr("class", "legendPartyName")
+                    .attr("translate", (d) -> "#{d.text}" )
+                    .attr("etv-translate-tooltip", (d) -> if d.etv then undefined else d.text)
+
+                    legend
+                    .filter((d) -> d.etv)
+                    .append("div")
+                    .attr("class", "locationLegendCircle")
+                    .style("background-image", (d) -> "url('#{d.image}')")
+
+                    legend.append("div")
+                    .attr("class", "locationLegendCircle")
+                    .filter((d) -> not d.etv)
+                    .append("svg")
+                    .attr("viewBox", "0 0 100 100")
+                    .attr("width", "100%")
+                    .append("circle")
+                    .attr("r", "49")
+                    .attr("cx", "50")
+                    .attr("cy", "50")
+                    .attr("fill", (d) -> d.color)
+
+                    $compile(angular.element(".legendPartyName"))(scope)
+
+
+                    axisText = wrapper.selectAll("p")
+                    .data(["left", "right", "independentism", "unionism"])
+                    .enter()
+                    .append("p")
+                    .style("position", "absolute")
+                    .attr("class", (d) ->
+                        specialClass =
+                            switch d
+                                when "left", "right" then d
+                                when "independentism" then "top"
+                                when "unionism" then "bottom"
+
+                        "#{specialClass} axisIndicator"
                     )
+                    .attr("translate", (d) -> "#{d}")
 
-                legend = legendContainer.selectAll("div")
-                .data(legendData)
-                .enter().append("div")
-                .attr("class", "legendPartyContainer")
-
-                partyName = legend.append("p")
-                .attr("class", "legendPartyName")
-                .attr("translate", (d) -> "#{d.text}" )
-                .attr("etv-translate-tooltip", (d) -> if d.etv then undefined else d.text)
-
-                legend
-                .filter((d) -> d.etv)
-                .append("div")
-                .attr("class", "locationLegendCircle")
-                .style("background-image", (d) -> "url('#{d.image}')")
-
-                legend.append("div")
-                .attr("class", "locationLegendCircle")
-                .filter((d) -> not d.etv)
-                .append("svg")
-                .attr("viewBox", "0 0 100 100")
-                .attr("width", "100%")
-                .append("circle")
-                .attr("r", "49")
-                .attr("cx", "50")
-                .attr("cy", "50")
-                .attr("fill", (d) -> d.color)
-
-                $compile(angular.element(".legendPartyName"))(scope)
-
-
-                axisText = wrapper.selectAll("p")
-                .data(["left", "right", "independentism", "unionism"])
-                .enter()
-                .append("p")
-                .style("position", "absolute")
-                .attr("class", (d) ->
-                    specialClass =
-                        switch d
-                            when "left", "right" then d
-                            when "independentism" then "top"
-                            when "unionism" then "bottom"
-
-                    "#{specialClass} axisIndicator"
-                )
-                .attr("translate", (d) -> "#{d}")
-
-                $compile(angular.element(".axisIndicator"))(scope)
+                    $compile(angular.element(".axisIndicator"))(scope)
 
 
 

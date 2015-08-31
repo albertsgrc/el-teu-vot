@@ -1,11 +1,17 @@
 # Personal questions angular controller
 
-    PersonalQuestionsCtrl = ($scope, $state, resultsService, questionsService, $meteor, etvAlertService, $timeout) ->
+    PersonalQuestionsCtrl = ($scope, $state, resultsService, questionsService, $meteor, etvAlertService, $timeout, $stateParams) ->
+        $state.go('politicalQuestions') unless $stateParams.cameFromVerification is 'sedawidaiov'
+
         MAX_SEND_RESULTS_SECONDS_DELAY = 20
 
         sendResultsStarted = false
 
         errorSending = false
+
+        nFailures = 0
+
+        MAX_FAILURES = 5
 
         $scope.loadingCounter = 1
         $scope.error = false
@@ -64,36 +70,44 @@
             $scope.endQuestionaireText = "endQuestionaireText"
             sendResultsStarted = false
             errorSending = true
-            etvAlertService.openAlert("sendResultsError")
+            ++nFailures
+            if nFailures is MAX_FAILURES + 1
+                etvAlertService.openAlert("sendResultsErrorNoMoreClick")
+            else
+                etvAlertService.openAlert("sendResultsError")
 
         $scope.goToResults = ->
             if allQuestionsAnswered() and not sendResultsStarted
-                $scope.endQuestionaireText = "sendingResults"
-                sendResultsStarted = true
+                if nFailures <= MAX_FAILURES
+                    $scope.endQuestionaireText = "sendingResults"
+                    sendResultsStarted = true
 
+                    $timeout( ->
+                        if $state.includes('personalQuestions') and not errorSending
+                            NProgress.done()
+                            $scope.endQuestionaireText = "endQuestionaireText"
+                            sendResultsStarted = false
+                            etvAlertService.openAlert('sendResultsTooLongDelay')
+                    , 1000*MAX_SEND_RESULTS_SECONDS_DELAY)
 
-                $timeout( ->
-                    if $state.includes('personalQuestions') and not errorSending
-                        NProgress.done()
-                        $scope.endQuestionaireText = "endQuestionaireText"
-                        sendResultsStarted = false
-                        etvAlertService.openAlert('sendResultsTooLongDelay')
-                , 1000*MAX_SEND_RESULTS_SECONDS_DELAY)
+                    NProgress.start()
 
-                NProgress.start()
-
-                if errorSending
-                    resultsService.sendResultsToServerAndGetNewResults().then(
-                        onSendResultsSuccess
-                        ,
-                        onSendResultsFailure
-                    )
+                    if errorSending
+                        resultsService.sendResultsToServerAndGetNewResults().then(
+                            onSendResultsSuccess
+                            ,
+                            onSendResultsFailure
+                        )
+                    else
+                        resultsService.sendPersonalResults($scope.questions).then(
+                            onSendResultsSuccess
+                            ,
+                            onSendResultsFailure
+                        )
                 else
-                    resultsService.sendPersonalResults($scope.questions).then(
-                        onSendResultsSuccess
-                        ,
-                        onSendResultsFailure
-                    )
+                    questionsService.reset()
+                    resultsService.reset()
+                    $state.go('politicalQuestions')
 
             else
                 goToMandatoryQuestions = ( ->
@@ -114,4 +128,4 @@
 
 
 
-    app.controller('PersonalQuestionsCtrl', ['$scope', '$state', 'resultsService', 'questionsService', '$meteor', 'etvAlertService', '$timeout', PersonalQuestionsCtrl])
+    app.controller('PersonalQuestionsCtrl', ['$scope', '$state', 'resultsService', 'questionsService', '$meteor', 'etvAlertService', '$timeout', '$stateParams', PersonalQuestionsCtrl])

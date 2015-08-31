@@ -1,6 +1,6 @@
 # Results page angular controller
 
-    ResultsCtrl = ($scope, $translate, graphService, topicsService, resultsService, politicalPartiesService, $stateParams, $location) ->
+    ResultsCtrl = ($scope, $translate, graphService, topicsService, resultsService, politicalPartiesService, $stateParams, $location, etvAlertService) ->
         $scope.loadingCounter = 3
         $scope.validResultsId = false
         $scope.error = false
@@ -89,24 +89,30 @@
 
             return true
 
+        isIe = ->
+            ua = window.navigator.userAgent
+            return ua.indexOf("MSIE ") > 0 or ua.indexOf(" Edge") > 0
+
         $scope.downloadGraph = (graphName) ->
-            scroll = $(window).scrollTop()
-            $(window).scrollTop(0)
+            if isIe()
+                etvAlertService.openAlert("downloadForIeNotSupported")
+                return true
+            else
+                scroll = $(window).scrollTop()
+                $(window).scrollTop(0)
 
-            html2canvas($("##{graphName}"),
-                onrendered: (canvas) ->
+                html2canvas($("##{graphName}"),
+                    onrendered: (canvas) ->
+                        canvas.toBlob((blob) ->
+                            saveAs(blob, "etv_#{$translate.instant(graphName + "Download")}.png")
+                        )
+                        $(window).scrollTop(scroll)
 
-                    link = d3.select("body").append("a").attr("id", "graphDownloadLink")
-                    link.attr('download', "etv_#{$translate.instant(graphName + "Download")}.png")
-                    link.attr('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"))
-                    $("#graphDownloadLink")[0].click()
-                    $("#graphDownloadLink").remove()
-                    $(window).scrollTop(scroll)
-
-                background: "white"
-            )
+                    background: "white"
+                    allowTaint: true
+                )
 
         $scope.$on('$destroy', -> graphService.reset())
 
 
-    app.controller('ResultsCtrl', ['$scope', '$translate', 'graphService', 'topicsService', 'resultsService', 'politicalPartiesService', '$stateParams', '$location', ResultsCtrl])
+    app.controller('ResultsCtrl', ['$scope', '$translate', 'graphService', 'topicsService', 'resultsService', 'politicalPartiesService', '$stateParams', '$location', 'etvAlertService', ResultsCtrl])
