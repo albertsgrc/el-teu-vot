@@ -12,7 +12,7 @@
                         i.mdi.mdi-arrow-down-bold-circle-outline(ng-click="downloadGraph(graph + topic._id)")
                         i.mdi.mdi-close(ng-if="$first" ng-click="toggleGraph(graph, true)")
                     //span.text-divider &nbsp;&nbsp;|&nbsp;&nbsp;
-                .graphContainer(etv-topic-coincidence-graph="{{ topic._id }}" id="{{ graph + topic._id }}")
+                .graphContainer.topicCoincidenceGraph(etv-topic-coincidence-graph="{{ topic._id }}" id="{{ graph + topic._id }}")
 
         span(ng-switch-default="")
             div.shareButtons

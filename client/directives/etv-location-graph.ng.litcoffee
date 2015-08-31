@@ -52,10 +52,10 @@
 
                 parent = d3.select(element[0])
 
-                container = parent.append("div")
+                wrapper = parent.append("div")
                 .attr("id", "locationGraphSvgWrapper")
 
-                svg = container.append("svg")
+                svg = wrapper.append("svg")
                 .attr("id", "locationGraphSvg")
                 .attr("width", "100%")
                 .attr("viewBox", "0 0 #{VIEWBOX_SIZE} #{VIEWBOX_SIZE}")
@@ -90,10 +90,13 @@
                 .data(data.parties)
                 .enter()
                 .append("circle")
+                .attr("class", "locationCircle")
                 .attr("cx", (d) -> xPosition(d.ideologicalLocation) )
                 .attr("cy", (d) -> yPosition(d.nationalLocation) )
                 .attr("fill", (d) -> d.color )
                 .attr("r", (d) -> CIRCLE_RADIUS)
+
+                $compile(angular.element(".locationCircle"))(scope)
 
                 data.user[0].decreased = false
 
@@ -102,7 +105,7 @@
                         data.user[0].decreased = true
                         break
 
-                elTeuVotCircle = container.selectAll("img")
+                elTeuVotCircle = wrapper.selectAll("img")
                 .data(data.user)
                 .enter()
                 .append("img")
@@ -118,23 +121,69 @@
                 legendContainer = parent.append("div")
                 .attr("class", "legend")
 
+                legendData = []
+
+                legendData.push
+                    text: "elTeuVot"
+                    image: "/images/etv-circle-logo.png"
+                    etv: true
+
+                for elem in data.parties.sort( (a, b) -> return b.value - a.value )
+                    legendData.push(
+                        text: elem.party
+                        color: elem.color
+                    )
+
                 legend = legendContainer.selectAll("div")
-                .data(-> return data.parties.sort( (a, b) ->
-                    return b.value - a.value
-                ))
+                .data(legendData)
                 .enter().append("div")
                 .attr("class", "legendPartyContainer")
 
                 partyName = legend.append("p")
                 .attr("class", "legendPartyName")
-                .attr("translate", (d) -> "{{ '#{d.party}' }}" )
-                .attr("etv-translate-tooltip", (d) -> d.party)
+                .attr("translate", (d) -> "#{d.text}" )
+                .attr("etv-translate-tooltip", (d) -> if d.etv then undefined else d.text)
+
+                legend
+                .filter((d) -> d.etv)
+                .append("div")
+                .attr("class", "locationLegendCircle")
+                .style("background-image", (d) -> "url('#{d.image}')")
 
                 legend.append("div")
                 .attr("class", "locationLegendCircle")
-                .style("background-color", (d) -> d.color)
+                .filter((d) -> not d.etv)
+                .append("svg")
+                .attr("viewBox", "0 0 100 100")
+                .attr("width", "100%")
+                .append("circle")
+                .attr("r", "49")
+                .attr("cx", "50")
+                .attr("cy", "50")
+                .attr("fill", (d) -> d.color)
 
                 $compile(angular.element(".legendPartyName"))(scope)
+
+
+                axisText = wrapper.selectAll("p")
+                .data(["left", "right", "independentism", "unionism"])
+                .enter()
+                .append("p")
+                .style("position", "absolute")
+                .attr("class", (d) ->
+                    specialClass =
+                        switch d
+                            when "left", "right" then d
+                            when "independentism" then "top"
+                            when "unionism" then "bottom"
+
+                    "#{specialClass} axisIndicator"
+                )
+                .attr("translate", (d) -> "#{d}")
+
+                $compile(angular.element(".axisIndicator"))(scope)
+
+
 
 
     app.directive('etvLocationGraph', ['$timeout', '$compile', 'resultsService', 'politicalPartiesService', locationGraph])

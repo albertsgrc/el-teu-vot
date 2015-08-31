@@ -107,7 +107,7 @@
     )
 
     Schemas.Result = new SimpleSchema(
-        userId:
+        sessionId:
             type: String
             index: true
 

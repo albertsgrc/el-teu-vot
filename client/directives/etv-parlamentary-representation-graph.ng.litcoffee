@@ -79,112 +79,67 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                 hemicycle = [3.5, 8, 9, 10, 7, 8, 8, 6, 5]
                 hemicycleSeats = [7, 16, 18, 26, 20, 16, 16, 12, 10]
 
-                paint = _.debounce( ->
-
+                paint = ->
                     parent = d3.select(element[0])
 
-                    $(element[0]).empty()
+                    COLORS =
+                        GREY: "#a7a9ac"
 
-                    containerSize = $(".graphContainer").width()
+                    VIEWBOX_WIDTH = 635
+                    VIEWBOX_HEIGHT = 635
 
-                    s = {}
+                    ELLIPSE_CENTER_X = 318
+                    ELLIPSE_CENTER_Y = 578
 
-                    ( calcSizes = (size, r) ->
-                        r.circleRadius = ( ->
-                            Math.min 12, size/60
-                        )()
+                    ELLIPSE_COUNT = 8
 
-                        r.circleDiameter = 2*r.circleRadius
+                    SPACE_BETWEEN_ELLIPSES = 31
+                    SPACE_BETWEEN_ELLIPSE_CIRCLES = 3.55555555555555555555 + 0.416
+                    SPACE_BETWEEN_LINE_CIRCLES = 24
 
-                        r.ellipseCount = ( ->
-                            8
-                        )()
+                    CIRCLE_RADIUS = 12
+                    CIRCLE_DIAMETER = 2*CIRCLE_RADIUS
 
-                        r.ellipseToLineSpacing = ( ->
-                            2.1*r.circleDiameter
-                        )()
+                    INNERMOST_ELLIPSE_X_RADIUS = 151
+                    INNERMOST_ELLIPSE_Y_RADIUS = 179
 
-                        r.spaceBetweenEllipses = ( ->
-                            (1.295)*r.circleDiameter
-                        )()
+                    MIDDLE_CORRIDOR_CIRCLE_RADIUS = 2*CIRCLE_RADIUS/3
 
-                        r.spaceBetweenCircles = ( ->
-                            (8/27)*r.circleRadius
-                        )()
-
-                        r.spaceBetweenLineCircles = ( ->
-                            r.circleDiameter
-                        )()
-
-                        r.innerEllipseXRadius = ( ->
-                            6.3*r.circleDiameter
-                        )()
-
-                        r.innerEllipseYRadius = ( ->
-                            1.185*r.innerEllipseXRadius
-                        )()
-
-                        r.svgHeight = ( ->
-                            Math.ceil 1+r.innerEllipseYRadius + (r.ellipseCount - 1)*(r.spaceBetweenEllipses) + r.ellipseCount*(r.circleDiameter) - r.circleRadius
-                        )()
-
-                        r.svgWidth = ( ->
-                            1.1*r.svgHeight
-                        )()
-
-                        r.svgHeight += r.circleDiameter + r.ellipseToLineSpacing
-
-                        r.ellipseCenter = ( ->
-                            cx: r.svgWidth/2
-                            cy: r.svgHeight - r.circleDiameter - r.ellipseToLineSpacing
-                        )()
-
-                    )(containerSize, s)
-
-                    colors =
-                        grey: "#a7a9ac"
 
                     graphContainer = parent.append("div")
                     .attr("id", "parlamentaryRepresentationContainer")
-                    .style("display", "inline-block")
-
 
                     svg = graphContainer.append("svg")
-                    .attr("width", s.svgWidth)
-                    .attr("height", s.svgHeight)
+                    .attr("viewBox", "0 0 #{VIEWBOX_WIDTH} #{VIEWBOX_HEIGHT}")
 
                     paths = []
 
                     shapeEllipses = (obj, number) ->
-
                         shapeEllipse = (obj, rx, ry) ->
-                            cx = s.ellipseCenter.cx
-                            cy = s.ellipseCenter.cy
+                            cx = ELLIPSE_CENTER_X
+                            cy = ELLIPSE_CENTER_Y
 
                             obj.attr("d",
-                                    """
+                                """
                                     M #{cx - rx}, #{cy}
                                     a #{rx}, #{ry} 0 1,0 #{2*rx},0
                                     a #{rx}, #{ry} 0 1,0 #{-2*rx},0
                                 """)
 
                         for ellipse in [0..number-1]
-                            path = obj.append("path")
+                            path = obj.append("path").attr("fill", "none")
                             paths.push(path)
 
                             ellipseRadius = (baseRadius) ->
-                                baseRadius + (s.spaceBetweenEllipses + s.circleRadius*2)*ellipse
-                            xRadius = ellipseRadius(s.innerEllipseXRadius)
-                            yRadius = ellipseRadius(s.innerEllipseYRadius)
+                                baseRadius + (SPACE_BETWEEN_ELLIPSES + CIRCLE_DIAMETER)*ellipse
+
+                            xRadius = ellipseRadius(INNERMOST_ELLIPSE_X_RADIUS)
+                            yRadius = ellipseRadius(INNERMOST_ELLIPSE_Y_RADIUS)
                             shapeEllipse(path, xRadius, yRadius)
 
-                    path = svg
-                    .call(shapeEllipses, s.ellipseCount)
-                    .attr("stroke", "none")
-                    .attr("fill", "none")
+                    path = svg.call(shapeEllipses, ELLIPSE_COUNT)
 
                     hemicycleVector = []
-
 
                     k = 0
                     putHemicycleCircles = ( ->
@@ -194,47 +149,65 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
 
                             pal = (length) -> pathn.getPointAtLength(length)
 
-                            lengthTillNow = 0.5*l + s.circleRadius
+                            lengthTillNow = 0.5*l + CIRCLE_RADIUS
 
                             inRange = (v, a, b, offset = 0) -> offset + a <= v <= offset + b
 
                             shouldPutCircle = (hemicycleLevel, circleNumber, middleCircleNumber) ->
                                 return false if circleNumber is middleCircleNumber
-                                if inRange(circleNumber, -hemicycle[hemicycleLevel], hemicycle[hemicycleLevel], middleCircleNumber)
-                                    return true
-                                return true if hemicycleLevel is 4 and inRange(circleNumber, -7, -5, middleCircleNumber-hemicycle[hemicycleLevel])
-                                return true if hemicycleLevel is 4 and inRange(circleNumber, 5, 7, middleCircleNumber+hemicycle[hemicycleLevel])
+                                return true if inRange(circleNumber, -hemicycle[hemicycleLevel], hemicycle[hemicycleLevel], middleCircleNumber)
+                                if hemicycleLevel is 4
+                                    return true if inRange(circleNumber, -7, -5, middleCircleNumber-hemicycle[hemicycleLevel])
+                                    return true if inRange(circleNumber, 5, 7, middleCircleNumber+hemicycle[hemicycleLevel])
                                 return false
 
-                            i = 1
-                            j = 0
-                            while lengthTillNow < l
-                                if shouldPutCircle(it + 1, i, 10 + it*3)
-                                    hemicycleVector[k] = svg.append("circle")
-                                    .attr("fill", colors.grey)
-                                    .attr("r", s.circleRadius)
-                                    .attr("cx", pal(lengthTillNow).x)
-                                    .attr("cy", pal(lengthTillNow).y)
-                                    ++j
+                            middleCircle = (level) -> 10 + level*3
 
-                                    ++k
+                            i = 1; j = 0
+                            while lengthTillNow < l
+                                currentMiddleCircle = middleCircle(it)
+                                radius = if i is currentMiddleCircle then MIDDLE_CORRIDOR_CIRCLE_RADIUS else CIRCLE_RADIUS
+
+                                if shouldPutCircle(it + 1, i, currentMiddleCircle)
+                                    cx = pal(lengthTillNow).x
+                                    cy = pal(lengthTillNow).y
+
+                                    circleElement = svg.append("circle")
+                                    .attr("r", radius)
+                                    .attr("cx", cx)
+                                    .attr("cy", cy)
+
+                                    hemicycleVector[k] =
+                                        circle: circleElement
+                                        cx: cx
+                                        cy: cy
+
+                                    ++j; ++k;
                                 ++i
-                                lengthTillNow += s.circleDiameter + (s.spaceBetweenCircles + it*(s.spaceBetweenCircles/(3200/243) - it*s.spaceBetweenCircles/(20000/117)))
+                                lengthTillNow += 2*radius + SPACE_BETWEEN_ELLIPSE_CIRCLES + it*(0.167 - it*0.013)
                     )()
 
                     putLineCircles = ( ->
                         nCircles = 2*hemicycle[0]
-                        sideSpacing = (s.svgWidth - (s.circleDiameter*nCircles + s.spaceBetweenLineCircles*(nCircles - 1)))/2
+                        sideSpacing = (VIEWBOX_WIDTH - (CIRCLE_DIAMETER*nCircles + SPACE_BETWEEN_LINE_CIRCLES*(nCircles - 1)))/2
 
-                        position = sideSpacing + s.circleRadius
+                        position = sideSpacing + CIRCLE_RADIUS
+
                         for circle in [1..nCircles]
-                            hemicycleVector[k] = svg.append("circle")
-                            .attr("r", s.circleRadius)
-                            .attr("cx", position)
-                            .attr("cy", s.svgHeight - s.circleRadius - 2)
-                            position += s.circleDiameter + s.spaceBetweenLineCircles
-                            ++k
+                            cy = VIEWBOX_HEIGHT - CIRCLE_RADIUS - 2
 
+                            circleElement = svg.append("circle")
+                            .attr("r", CIRCLE_RADIUS)
+                            .attr("cx", position)
+                            .attr("cy", cy)
+
+                            hemicycleVector[k] =
+                                circle: circleElement
+                                cx: position
+                                cy: cy
+
+                            position += CIRCLE_DIAMETER + SPACE_BETWEEN_LINE_CIRCLES
+                            ++k
                     )()
 
                     paintCircles = ( ->
@@ -249,33 +222,24 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                         currentLevelPos = [0,0,0,0,0,0,0,0,0]
 
                         hemicycleVector.sort((a, b) ->
-                            if b.attr('cx') is a.attr('cx')
-                                a.attr('cy') - b.attr('cy')
-                            b.attr('cx') - a.attr('cx')
+                            if b.cx is a.cx
+                                return a.cy - b.cy
+                            return b.cx - a.cx
                         )
 
-                        partiesCopy = JSON.parse(JSON.stringify(partiesIds))
-
                         for seat in hemicycleVector
-                            partiesCopy.shift() while partiesCopy.length and partyToInfo[partiesCopy[0]].seats is 0
+                            partiesIds.shift() while partiesIds.length and partyToInfo[partiesIds[0]].seats is 0
 
-                            break if partiesCopy.length is 0
+                            break if partiesIds.length is 0
 
-                            seat.attr("fill", partyToInfo[partiesCopy[0]].color)
-                            --partyToInfo[partiesCopy[0]].seats
-
+                            seat.circle.attr("fill", partyToInfo[partiesIds[0]].color)
+                            --partyToInfo[partiesIds[0]].seats
                     )()
 
                     putLegend = ( ->
                         legendContainer = graphContainer
                         .append("div")
-                        .style("margin-top", "25px")
-                        .style("margin-bottom", "2.5%")
-                        .style("margin-left", "20px")
-                        .style("margin-right", "20px")
                         .attr("id", "parlamentaryRepresentationLegend")
-
-                        containerWidth = $("#resultsContainer").width() - 2 - 30
 
                         legend = legendContainer.selectAll("div")
                         .data(-> return data.sort( (a, b) ->
@@ -283,9 +247,6 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
                         ))
                         .enter().append("div")
                         .attr("class", "legendPartyContainer")
-                        .style("margin-bottom", "10px")
-                        .style("margin-left", "8px")
-                        .style("margin-right", "8px")
 
                         partyName = legend.append("p")
                         .attr("class", "legendPartyName")
@@ -299,10 +260,8 @@ Half the number of 'escons' for every hemicycle level starting from level 0 (str
 
                         $compile(angular.element(".legendPartyName"))(scope)
                     )()
-                , 250)
 
                 $timeout(paint)
-                scope.$on('resize', paint)
 
 
 

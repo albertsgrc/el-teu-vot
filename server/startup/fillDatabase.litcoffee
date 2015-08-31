@@ -465,19 +465,25 @@
     createPersonalQuestions = ->
         PERSONAL_QUESTIONS = [
             { _id: "age", mandatory: true, type: "button", order: 1, options: [
-                "age0"
-                "age1"
-                "age2"
-                "age3"
-                "age4"
-                "age5"
-                "age6"
+                "<18"
+
+                "18-24"
+
+                "25-34"
+
+                "35-44"
+
+                "45-54"
+
+                "55-64"
+
+                "+64"
                 ]
             }
             { _id: "genre", mandatory: true, type: "button", order: 2, options:  [
                 "male"
                 "female"
-                "intersexual"
+                "otherSex"
                 ]
             }
             { _id: "postalCode", mandatory: true, type: "input", order: 3, validate: "^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$", errorMessageId: "incorrectPostalCode" }

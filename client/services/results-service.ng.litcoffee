@@ -14,7 +14,7 @@
 
         (wipeResults = ->
             answerResults = {
-                userId: Random.id()
+                sessionId: Random.id()
 
                 political:
 

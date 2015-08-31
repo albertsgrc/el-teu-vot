@@ -97,7 +97,7 @@
                 onrendered: (canvas) ->
 
                     link = d3.select("body").append("a").attr("id", "graphDownloadLink")
-                    link.attr('download', "#{$translate.instant(graphName + "Download")}.png")
+                    link.attr('download', "etv_#{$translate.instant(graphName + "Download")}.png")
                     link.attr('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"))
                     $("#graphDownloadLink")[0].click()
                     $("#graphDownloadLink").remove()

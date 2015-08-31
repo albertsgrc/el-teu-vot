@@ -1,34 +1,5 @@
 # Party coincidence graph directive
 
-    calcSize = -> Math.min 550, 0.7*$("#resultsContainer").width()
-    calcSpacing = (size) -> .022
-    calcRadius = (size) -> size/2
-    calcBlankSpacing = (size) -> .08
-    calcFontSize = (size) -> 14
-
-    calcBigFontSize = -> calcFontSize()*1.7
-
-    calcSizes = ->
-        width = calcSize()
-        height = width
-        spacing = calcSpacing(width)
-        blankSpacing = calcBlankSpacing(width)
-        radius = calcRadius(width)
-        font = calcFontSize($("#resultsContainer").width())
-        bigFont = font*1.7
-        arcOffset = 0.05
-
-        {
-            width: width
-            height: height
-            spacing: spacing
-            blankSpacing: blankSpacing
-            radius: radius
-            font: font
-            bigFont: bigFont
-            arcOffset: arcOffset
-        }
-
     topicCoincidenceGraphDirective = ($timeout, $compile, politicalPartiesService, resultsService) ->
         restrict: 'EA'
         scope: {
@@ -50,81 +21,67 @@
                                     color: party.color
                                     value: _.find(topicResultsInfo, (elem) -> elem.party is party._id ).value
                                 )
+
+                            $timeout(paint)
                     )
             )
 
-            paint = _.debounce( ->
+            paint = ->
+                results.sort( (a, b) ->
+                    return a.value - b.value
+                )
 
-                $(element[0]).empty()
+                ARC_OFFSET = 0.05
 
-                self = @
+                OUTERMOST_INNER_RADIUS = 250
 
-                @sizes = calcSizes()
+                VIEWBOX_SIZE = 500
+
+                ARC_SPACING = .022
+
+                BLANK_SPACING = .08
 
                 title = d3.select(element[0])
                 .append("p")
-                .style("font-size", self.sizes.bigFont + "px")
-                .style("color", "#a7a9ac")
                 .attr("class", "text-uppercase topicGraphTitle")
-                .style("margin-bottom", "30px", "important")
-                .style("margin-left", "20px", "important")
-                .style("margin-right", "20px", "important")
                 .attr("translate", scope.topic)
 
                 $compile(angular.element(".topicGraphTitle"))(scope)
 
-                @arc = d3.svg.arc()
+                arc = d3.svg.arc()
                 .startAngle(0)
-                .endAngle((d) -> sizes.arcOffset + d.value*(2*Math.PI - sizes.arcOffset))
-                .innerRadius((d) -> d.index*self.sizes.radius)
-                .outerRadius((d) -> (d.index + self.sizes.spacing)*self.sizes.radius)
+                .innerRadius((d) -> d.index*OUTERMOST_INNER_RADIUS)
+                .outerRadius((d) -> (d.index + ARC_SPACING)*OUTERMOST_INNER_RADIUS)
 
-                @backgroundArc = d3.svg.arc()
-                .startAngle(0)
-                .endAngle((d) -> 2*Math.PI)
-                .innerRadius((d) -> d.index*self.sizes.radius)
-                .outerRadius((d) -> (d.index + self.sizes.spacing)*self.sizes.radius)
+                index = 1 - BLANK_SPACING*results.length
+                for obj in results
+                    obj.index = index
+                    index += BLANK_SPACING
 
-                @fields = ->
-                    results.sort( (a, b) ->
-                        return a.value - b.value
-                    )
-
-                    index = 1 - self.sizes.blankSpacing*results.length
-                    for obj in results
-                        obj.index = index
-                        index += self.sizes.blankSpacing
-
-                    return results
-
-                @svg = d3.select(element[0])
+                svg = d3.select(element[0])
                 .append("svg")
-                .attr("width", self.sizes.width)
-                .attr("height", self.sizes.height)
+                .attr("viewBox", "0 0 #{VIEWBOX_SIZE} #{VIEWBOX_SIZE}")
+                .attr("width", "100%")
                 .append("g")
-                .attr("transform", "translate(#{self.sizes.width/2},#{self.sizes.height/2})")
+                .attr("transform", "translate(#{VIEWBOX_SIZE/2},#{VIEWBOX_SIZE/2})")
 
-                @field = svg.selectAll("g")
-                .data(fields)
+                field = svg.selectAll("g")
+                .data(results)
                 .enter().append("g")
 
-                @field.append("path")
-                .attr("d", self.backgroundArc)
+                field.append("path")
+                .attr("d", arc.endAngle((d) -> 2*Math.PI))
                 .style("fill", "#e6e6e7")
 
-                @field.append("path")
-                .attr("d", self.arc)
+                field.append("path")
+                .attr("d", arc.endAngle((d) -> ARC_OFFSET + d.value*(2*Math.PI - ARC_OFFSET)))
                 .style("fill", (d) -> d.color)
+
+legend
 
                 legendContainer = d3.select(element[0])
                 .append("div")
-                .style("margin-top", "5%")
-                .style("margin-bottom", "2.5%")
-                .style("margin-left", "20px")
-                .style("margin-right", "20px")
                 .attr("id", "topicCoincidenceLegend")
-
-                containerWidth = $("#resultsContainer").width() - 2 - 30
 
                 legend = legendContainer.selectAll("div")
                 .data(-> return results.sort( (a, b) ->
@@ -132,9 +89,6 @@
                 ))
                 .enter().append("div")
                 .attr("class", "legendPartyContainer")
-                .style("margin-bottom", "10px")
-                .style("margin-left", "8px")
-                .style("margin-right", "8px")
 
                 partyName = legend.append("p")
                 .attr("class", "legendPartyName")
@@ -147,9 +101,5 @@
                 .html((d) -> "#{+(d.value*100).toFixed(1)} %")
 
                 $compile(angular.element(".legendPartyName"))(scope)
-            , 250)
-
-            $timeout(paint)
-            scope.$on('resize', paint)
 
     app.directive('etvTopicCoincidenceGraph', ['$timeout', '$compile', 'politicalPartiesService', 'resultsService', topicCoincidenceGraphDirective])

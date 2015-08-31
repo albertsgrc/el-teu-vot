@@ -7,6 +7,6 @@
 
         $scope.basicAnswers = _.without(PoliticalQuestions.BASIC_QUESTION_OPTIONS, PoliticalQuestions.NO_ANSWER)
 
-        $scope.tableNumbers = [1..5]
+        $scope.tableNumbers = [0, 0.2, 1, 4, 5]
 
     app.controller('HowItsDoneCtrl', ['$scope', HowItsDoneCtrl])

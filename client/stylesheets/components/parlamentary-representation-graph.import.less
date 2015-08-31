@@ -1,18 +1,45 @@
 #parlamentaryRepresentationContainer {
-    @media(max-width: @screen-xs-max) {
-        margin-top: 20px;
-        margin-bottom: 20px;
+    display: inline-block;
+
+    width: 100%;
+
+    max-width: 800px;
+
+    margin-top: 2%;
+    margin-bottom: 6%;
+
+    svg {
+        max-width: 500px;
+
+        @media (min-width: @screen-md-min) {
+            float: left;
+        }
     }
 
-    @media(min-width: @screen-sm-min) {
-        margin-top: 30px;
-        margin-bottom: 50px;
+
+    @media(max-width: @screen-xxs-max) {
+        font-size: 14px;
+        svg { width: 85%; }
+    }
+
+    @media(min-width: @screen-xs-min) and (max-width: @screen-md-max) {
+        font-size: 16px;
+        svg { width: 75%; }
+    }
+
+    @media(min-width: @screen-lg-min) {
+        font-size: 18px;
+        svg { width: 65%; }
     }
 }
 
 #parlamentaryRepresentationLegend {
+
+    @media (max-width: @screen-sm-max) {
+        margin: 6% 20px 0 20px;
+    }
+
     @media (min-width: @screen-md-min) {
-        max-width: 199px;
         float: right;
         margin-top: 0 !important;
 
@@ -21,5 +48,13 @@
             margin-left: 0 !important;
             margin-right: 0 !important;
         }
+    }
+
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+        max-width: 220px;
+    }
+
+    @media (min-width: @screen-lg-min) {
+        max-width: 247px;
     }
 }

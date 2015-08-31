@@ -1,4 +1,7 @@
 .axisIndicator {
+    margin-bottom: 0 !important;
+    color: @strongGrey;
+
     &.left {
         .translate(-100%, -50%);
 
@@ -34,32 +37,105 @@
 
 #locationGraphSvgWrapper {
     position: relative;
-
     margin-bottom: -5px;
 
     img#elTeuVotCircle {
         position: absolute;
-        transform:translateY(-5px);
+        transform: translateY(-5px);
+    }
+}
+
+.styleAxisIndicators(@topBottom, @leftRight) {
+    .axisIndicator {
+        &.left { left: -@leftRight; }
+        &.right { right: -@leftRight; }
+        &.top { top: -@topBottom; }
+        &.bottom { bottom: -@topBottom; }
+    }
+}
+
+#locationGraphSvgWrapper {
+    display: block;
+    .lrMargin(auto);
+    width: 80%;
+    max-width: 400px;
+    margin-top: 5em;
+    margin-bottom: 6em;
+    .styleAxisIndicators(0.5em, 1em);
+}
+
+@media(min-width: 550px) {
+    #locationGraphSvgWrapper {
+        width: 60% !important;
+        .styleAxisIndicators(1em, 1em);
+        .axisIndicator {
+            &.left, &.right {
+                margin-top: -3px !important;
+            }
+        }
+    }
+}
+
+@media(max-width: @screen-xxs-max) {
+    .legend {
+        .lrMargin(15px);
+    }
+
+    #locationGraphSvgWrapper {
+        font-size: 12px;
+
+        margin-top: 5em;
+        margin-bottom: 6em;
+    }
+}
+
+@media(min-width: @screen-xs-min) and (max-width: @screen-md-max) {
+    .legend {
+        .lrMargin(30px);
+    }
+
+    #locationGraphSvgWrapper {
+        width: 70%;
+        font-size: 14px;
+
+        margin-top: 4em;
+        margin-bottom: 6em;
+    }
+}
+
+@media(min-width: @screen-lg-min) {
+    .legend {
+        .lrMargin(100px);
+    }
+
+    #locationGraphSvgWrapper {
+        font-size: 16px;
+        .styleAxisIndicators(1.5em, 3em);
+
+        margin-top: 4em;
+        margin-bottom: 6em;
     }
 }
 
 .legend {
+    margin-bottom: 30px;
     margin-top: 50px;
 
-    .legendPartyContainer {
-        margin-bottom: 10px;
-        margin-left: 8px;
-        margin-right: 8px;
-    }
-
     .locationLegendCircle {
-        width: 16px !important;
-        height: 16px !important;
-        border-radius: 50% !important;
+        width: 1.1em;
+        height: 1.1em;
         float: right;
         position: relative;
         top: 50%;
         .translateY(-50%);
+    }
+
+    & > .legendPartyContainer:first-child {
+        .locationLegendCircle {
+            width: 1.2em;
+            height: 1.2em;
+            background-size: contain;
+        }
     }
 }
 

@@ -183,7 +183,7 @@
                 "El proyecto de <i>El teu Vot</i> se construye sobre dos \
                 pilares fundamentales:<br/>la <strong>metodología</strong>, \
                 esto es, el modo como se ha creado esta <strong>aplicación \
-                de orientación del voto;</strong><br/>y la \
+                de orientación del voto</strong>;<br/>y la \
                 <strong>independencia</strong> respecto a partidos políticos \
                 e instituciones públicas.<br/><br/>
                 Estos dos elementos dotan a esta iniciativa del rigor y la \
@@ -438,7 +438,7 @@
                 propera a les seves preferències a la Pregunta X és Totalment
                 d’acord (TDA = 5). De la mateixa manera, la resposta més \
                 llunyana a les seves preferències és Totalment en desacord
-                (TED = 1). Per tant, si un enquestat respon a la pregunta X \
+                (TED = 0). Per tant, si un enquestat respon a la pregunta X \
                 que hi està totalment d’acord, aquesta resposta aproparà les
                 seves preferències a les del partit Y. Aquesta taula estarà \
                 feta per cada totes les preguntes del qüestionari i tots els
@@ -455,14 +455,16 @@
                 subjectiva que els hi doni. Es farà el mateix amb les \
                 diferents candidatures. Aquesta darrera pregunta ponderarà els
                 diferents blocs segons la importància que l’usuari els doni \
-                (veure <u>operacionalització</u> dels resultats) i permetrà \
+                (veure <a target='_blank' \
+                href='/documents/operacionalitzacio_resultats.pdf'>\
+                <u>operacionalització</u></a> dels resultats) i permetrà \
                 definir millor la proximitat entre partit i elector."
 
                 "Según esta matriz, para la Candidatura Y la respuesta más \
                 próxima a sus preferencias en lo que a la Pregunta X respecta \
                 es Totalmente De Acuerdo (TDA = 5). Por el contrario, la \
                 respuesta más alejada de sus preferencias es Totalmente En \
-                Desacuerdo (TED = 1). Por lo tanto, si un encuestado responde \
+                Desacuerdo (TED = 0). Por lo tanto, si un encuestado responde \
                 a la Pregunta X que está Totalmente De Acuerdo, esta respuesta \
                 acercará sus preferencias a las de la Candidatura Y. \
                 Ésta tabla se reproduce para todas las preguntas del \
@@ -483,7 +485,9 @@
                 orden de preferencias para cada candidatura, esta pregunta \
                 nos permitirá ponderar los diferentes bloques según su \
                 importancia subjetiva a la hora de decidir el voto \
-                (ver <u>operacionalización</u> de los resultados) y permitirá \
+                (ver <a target='_blank' \
+                href='/documents/operacionalizacion_resultados.pdf'>\
+                <u>operacionalización</u></a> de los resultados) y permitirá \
                 definir mejor la proximidad entre candidatura y elector."
             ]
 
@@ -493,9 +497,9 @@
 
         tO.politicalQuestions =
             politicalQuestionsError: [
-                "Ho sentim, s'ha produït un error durant la càrrega del qüestionari. Comprovi la seva connexió a Internet i recarregui la pàgina."
+                "Ho sentim, s'ha produït un error durant la càrrega del qüestionari. Torni-ho a intentar."
 
-                "Lo sentimos, se ha producido un error durante la carga del cuestionario. Compruebe su conexión a Internet y recargue la página."
+                "Lo sentimos, se ha producido un error durante la carga del cuestionario. Vuelva a intentarlo."
             ]
 
 
@@ -781,19 +785,19 @@
                 "Edad:"
             ]
 
-            age0: "<18"
+            "<18": "<18"
 
-            age1: "18-24"
+            "18-24": "18-24"
 
-            age2: "25-34"
+            "25-34": "25-34"
 
-            age3: "35-44"
+            "35-44": "35-44"
 
-            age4: "45-54"
+            "45-54": "45-54"
 
-            age5: "55-64"
+            "55-64": "55-64"
 
-            age6: "+64"
+            "+64": "+64"
 
             genre: [
                 "Gènere:"
@@ -813,7 +817,7 @@
                 "Femenino"
             ]
 
-            intersexual: [
+            otherSex: [
                 "Altres",
 
                 "Otros"
@@ -971,9 +975,9 @@
 
         tO.results =
             resultsError: [
-                "Ho sentim, s'ha produït un error en carregar els resultats. Comprovi la seva connexió a Internet i torni a carregar la pàgina."
+                "Ho sentim, s'ha produït un error en carregar els resultats. Torni a intentar-ho."
 
-                "Lo sentimos, se ha producido un error en cargar los resultados. Compruebe su conexión a Internet y vuelva a cargar la página."
+                "Lo sentimos, se ha producido un error en cargar los resultados. Torni a intentar-ho."
             ]
 
             resultsLoading: [
@@ -1200,9 +1204,9 @@
         tO.other =
             spaces: "&nbsp;&nbsp;"
 
-            catalan: "català"
+            catalanLangOption: "català"
 
-            spanish: "castellano"
+            spanishLangOption: "castellano"
 
         globalTranslations = {}
 

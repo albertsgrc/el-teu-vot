@@ -12,10 +12,10 @@ header.container-fluid(ng-class="{ 'fixedHeader': isFixedHeader(), 'smallHeader'
                 img#logo.center-block(ng-src="{{ logoUrl() }}" alt="Logo ETV" ng-class="{ 'compactLogo': isFixedHeader() }")
 
         .col-xs-4.languageSelection(ng-if="!hasSidenav()")
-            a(href="" ng-click="setLanguage('ca')" translate="catalan")
+            a(href="" ng-click="setLanguage('ca')" translate="catalanLangOption")
             span.showOnNonxxs &nbsp;|&nbsp;
             br.showOnxxs
-            a(href="" ng-click="setLanguage('es')" translate="spanish")
+            a(href="" ng-click="setLanguage('es')" translate="spanishLangOption")
 
         .col-xs-4.menuButtonContainer(ng-if="hasSidenav()")
             a#menuButton(href="" ng-click="openSidenav()")

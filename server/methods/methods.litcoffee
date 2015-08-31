@@ -21,7 +21,7 @@
             Topics.find({}, { fields: { createdAt: 0, updatedAt: 0 } }).fetch()
 
         sendResults: (results) ->
-            possiblePreviousSavedResult = Results.findOne({ userId: results.userId }, { fields: { _id: 1, createdAt: 1 }, sort: { createdAt: -1 } })
+            possiblePreviousSavedResult = Results.findOne({ sessionId: results.sessionId }, { fields: { _id: 1, createdAt: 1 }, sort: { createdAt: -1 } })
 
             if possiblePreviousSavedResult? and not isOlderThan(60, possiblePreviousSavedResult.createdAt)
                 return possiblePreviousSavedResult._id
@@ -119,6 +119,7 @@ Sum the score of the party in every topic to the total score and to the topic sc
                     )
 
             computeResults()
+
 
             Schemas.Result.clean(results)
 
