@@ -1,5 +1,12 @@
 # Angular route configuration
 
+    app.run(["$rootScope", "$state", ($rootScope, $state) ->
+        $rootScope.$on("$stateChangeError", (event, next, nextParams, previous, previousParams, error) ->
+            if error is "AUTH_REQUIRED"
+                $state.go("admLogin")
+        )
+    ])
+
     Router = ($stateProvider, $urlRouterProvider, $locationProvider) ->
         $stateProvider
             .state('layout',
@@ -54,6 +61,31 @@
                 templateUrl: 'client/views/partials/results.html'
                 controller: 'ResultsCtrl'
             )
+
+        $stateProvider
+        .state('admin',
+            abstract: true
+            template: '<ui-view/>'
+            controller: 'AdmMainCtrl'
+        )
+        .state('adm',
+            parent: 'admin'
+            url: '/adm'
+            templateUrl: 'client/views/partials/adm/index.html'
+            controller: 'AdmCtrl'
+            resolve:
+                auth: ['$meteor', ($meteor) ->
+                    return $meteor.requireUser()
+                ]
+        )
+        .state('admLogin',
+            parent: 'admin'
+            url: '/adm/login'
+            templateUrl: 'client/views/partials/adm/login.html'
+            controller: 'AdmLoginCtrl'
+        )
+
+
 
         $urlRouterProvider.otherwise('/');
 

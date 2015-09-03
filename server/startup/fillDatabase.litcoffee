@@ -1,5 +1,7 @@
 # Fills the database with the data if currently empty
 
+    self = @
+
     createTopics = ->
         TOPICS = [
             "regeneracioDemocratica"
@@ -543,10 +545,19 @@
                 )
 
 
+    createAdminUser = ->
+        unless Meteor.users.findOne({ username: 'admin' })?
+            Accounts.createUser(
+                username: 'admin'
+                password: 'etv-admin'
+            )
+
+
     Meteor.startup( ->
         createTopics()
         createPoliticalParties()
         createPoliticalQuestions()
         createPersonalQuestions()
+        createAdminUser()
     )
 

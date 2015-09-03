@@ -1,0 +1,9 @@
+.adm-toolbar
+   p.text-bold.text-uppercase Administració
+
+.content
+   .loginForm.text-center
+      form(name="adminLogin")
+            p.errorText(ng-if="error" ng-class="{ errorBold: errorBold }") La contrasenya és incorrecta
+            input.input(type="password" name="password" ng-model="password" ng-class="{ error: error }")
+            input.button(type="submit" value="Entra" ng-click="login()")

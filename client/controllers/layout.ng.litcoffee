@@ -6,7 +6,9 @@
 
         $rootScope.isFixedHeader = -> not $state.includes('elTeuVot')
 
-        $rootScope.hasSidenav = -> $state.includes('questions') || $state.includes('results')
+        $rootScope.hasSidenav = -> $state.includes('questions') or $state.includes('results')
+
+        $rootScope.isAdm = false
 
 Language setter
 
