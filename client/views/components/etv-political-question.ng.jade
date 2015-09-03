@@ -1,4 +1,4 @@
-.globalPoliticalQuestionContainer(index="{{ question.number - 1 }}" etv-watch-height-change="watchHeightChangeOn")
+.globalPoliticalQuestionContainer(index="{{ question.number - 1 }}")
    .divider
 
    .politicalQuestionContainer
@@ -24,7 +24,7 @@
             etv-slider(left-text="centralizedState" right-text="ownState" ng-model="question.answer")
 
          span(ng-switch-when="topicSort")
-            etv-sortable
+            etv-sortable#topicSort
 
 
    .divider(ng-if="$last")

@@ -3,6 +3,8 @@
     PersonalQuestionsCtrl = ($scope, $state, resultsService, questionsService, $meteor, etvAlertService, $timeout, $stateParams) ->
         $state.go('politicalQuestions') unless $stateParams.cameFromVerification is 'sedawidaiov'
 
+        ga('send', 'pageview', { 'page': '/questionari', 'title': 'Qüestionari personal' })
+
         MAX_SEND_RESULTS_SECONDS_DELAY = 20
 
         sendResultsStarted = false
@@ -61,11 +63,15 @@
             return _.every($scope.questions, (question) -> not question.mandatory or (question.answer? and (question.type isnt 'input' or $scope.isValid(question))))
 
         onSendResultsSuccess = (id) ->
+            ga('send','event','navigation','send-results-success')
+
             NProgress.done()
             $state.go('results', { id: id, justCreated: true })
             errorSending = false
 
         onSendResultsFailure = ->
+            console.error "Send results failure nº #{nFailures}"
+
             NProgress.done()
             $scope.endQuestionaireText = "endQuestionaireText"
             sendResultsStarted = false
@@ -84,6 +90,7 @@
 
                     $timeout( ->
                         if $state.includes('personalQuestions') and not errorSending
+                            ga('send', 'event', 'delay', 'send-results-too-long-delay')
                             NProgress.done()
                             $scope.endQuestionaireText = "endQuestionaireText"
                             sendResultsStarted = false
@@ -111,6 +118,7 @@
 
             else
                 goToMandatoryQuestions = ( ->
+                    ga('send','event','user-error', 'personal-questions-not-answered')
                     SCROLL_ANIMATION_TIME = 400
 
                     getMandatoryQuestionsPos = ->

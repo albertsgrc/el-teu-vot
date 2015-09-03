@@ -4,6 +4,7 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
+linto:jquery-ui
 meteor-platform
 coffeescript
 mquandalle:jade
@@ -19,11 +20,10 @@ less
 angular:angular-sanitize
 meteorhacks:fast-render
 fastclick
-linto:jquery-ui
 d3js:d3
 new3rs:html2canvas
 dsyko:jquery-ui-touch-punch
 mrt:nprogress
 meteorhacks:kadira
 meteorhacks:zones
-okgrow:analytics
+tmeasday:publish-counts

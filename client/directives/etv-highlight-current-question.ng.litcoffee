@@ -33,7 +33,6 @@
             , 250)
 
             $timeout(highlightCurrentQuestion)
-            scope.$on('politicalQuestionHeightChange', highlightCurrentQuestion)
             scope.$on('resize', highlightCurrentQuestion)
             scope.$on('scroll', highlightCurrentQuestion)
 

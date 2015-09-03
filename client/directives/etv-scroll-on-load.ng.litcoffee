@@ -3,10 +3,11 @@
     scrollOnLoad = ->
         restrict: 'A'
         link: (scope, element, attrs) ->
-            SCROLL_ANIMATION_TIME = 400
+            if not attrs.etvScrollOnLoad.length or attrs.etvScrollOnLoad is "true"
+                SCROLL_ANIMATION_TIME = 400
 
-            graphOffset = $(element).offset().top - $("header.fixedHeader").outerHeight(true)
+                offset = $(element).offset().top - $("header.fixedHeader").outerHeight(true)
 
-            $('html, body').animate({ scrollTop: graphOffset }, SCROLL_ANIMATION_TIME)
+                $('html, body').animate({ scrollTop: offset }, SCROLL_ANIMATION_TIME)
 
     app.directive('etvScrollOnLoad', scrollOnLoad)

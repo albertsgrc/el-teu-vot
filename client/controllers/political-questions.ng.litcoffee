@@ -4,7 +4,12 @@
         $scope.loadingCounter = 2
         $scope.error = false
 
+        NProgress.start()
+
+        ga('send', 'pageview', { 'page': '/questionari', 'title': 'Qüestionari polític' })
+
         notifyError = ->
+            console.error "Error loading some data from the server"
             $scope.error = true
             NProgress.done()
 
@@ -12,7 +17,6 @@
             --$scope.loadingCounter
             NProgress.done() unless $scope.loadingCounter
 
-        NProgress.start()
         questionsService.getPoliticalQuestions().then(
             (data) ->
                 $scope.questions = data
@@ -68,6 +72,7 @@
                 resultsService.sendPoliticalResults($scope.questions)
                 $state.go('personalQuestions', { cameFromVerification: 'sedawidaiov' })
             else
+                ga('send', 'event', 'user-error', 'political-questions-not-answered')
                 goToFirstUnAnsweredQuestion = ( ->
                     showAlert = ->
                         $timeout((-> etvAlertService.openAlert('politicalQuestionsAlert')), 100)

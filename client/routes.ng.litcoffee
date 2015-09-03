@@ -11,6 +11,7 @@
                 parent: 'layout'
                 url: '/'
                 templateUrl: 'client/views/partials/el-teu-vot.html'
+                controller: 'ElTeuVotCtrl'
             )
             .state('howItsDone',
                 parent: 'layout'

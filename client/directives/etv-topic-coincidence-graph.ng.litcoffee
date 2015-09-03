@@ -22,7 +22,7 @@
                                     value: _.find(topicResultsInfo, (elem) -> elem.party is party._id ).value
                                 )
 
-                            $timeout(paint)
+                            paint()
                     )
             )
 

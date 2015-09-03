@@ -1,6 +1,11 @@
 #elTeuVotContainer(etv-offset-on-element="header")
+    p.text-center#countText(ng-if="count > 0")
+        span.text-bold.text-orange {{ count }}&nbsp;&nbsp;
+        span(translate="countText")
     p#welcomeText(translate="welcomeText")
 
     //p#soonText.text-uppercase(translate="{{ 'soonText' }}")
-    button#startButton(ui-sref="politicalQuestions")
+    button#startButton(ng-click="goToPoliticalQuestions()")
         span.text-uppercase(translate="welcomeStart")
+
+    .spinner

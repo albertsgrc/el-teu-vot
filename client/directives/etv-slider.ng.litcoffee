@@ -9,10 +9,10 @@
             sliderSet = false
             shouldNotChangeSliderValue = false
 
-            setSlider = _.debounce( ->
+            setSlider = ->
                 width = window.innerWidth
 
-                ORIENTATION_THRESHOLD = 650
+                ORIENTATION_THRESHOLD = 700
 
                 if sliderSet is "horizontal"
                     return if width > ORIENTATION_THRESHOLD
@@ -48,7 +48,7 @@
                 .slider("pips", {
                         rest: "label"
                 })
-            , 100)
+
 
             scope.$on('resize', ->
                 shouldNotChangeSliderValue = true

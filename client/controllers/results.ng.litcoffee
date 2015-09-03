@@ -1,6 +1,8 @@
 # Results page angular controller
 
     ResultsCtrl = ($scope, $translate, graphService, topicsService, resultsService, politicalPartiesService, $stateParams, $location, etvAlertService) ->
+        ga('send', 'pageview', { 'page': '/resultats', 'title': "Resultats #{if $stateParams.justCreated then 'desde qüestionari' else 'desde fora'}" })
+
         $scope.loadingCounter = 3
         $scope.validResultsId = false
         $scope.error = false
@@ -12,6 +14,7 @@
             NProgress.done() unless $scope.loadingCounter
 
         notifyError = ->
+            console.error "Error loading results data"
             $scope.error = true
             NProgress.done()
 
@@ -68,7 +71,7 @@
         $scope.imageSrc = (miniature) -> "/images/graph_min_#{miniature}_bg.png"
 
         $scope.shareGraph = (socialMedia, graphName) ->
-
+            ga('send', 'event', 'click', 'share-results')
             url = $scope.link
             url = encodeURIComponent(url) if socialMedia is "twitter"
 
@@ -95,9 +98,11 @@
 
         $scope.downloadGraph = (graphName) ->
             if isIe()
+                ga('send', 'event', 'click', 'download-graph-not-supported')
                 etvAlertService.openAlert("downloadForIeNotSupported")
                 return true
             else
+                ga('send', 'event', 'click', 'download-graph')
                 scroll = $(window).scrollTop()
                 $(window).scrollTop(0)
 

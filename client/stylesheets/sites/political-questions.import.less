@@ -34,7 +34,6 @@
     }
 }
 #politicalQuestionsContainer {
-
     visibility: hidden;
 
     .typeContainer {
@@ -64,6 +63,10 @@
     }
 
     @media (max-width: @screen-xxs-max) {
+        #topicSort .sortable {
+            height: 190px;
+        }
+
         #politicalQuestionsListContainer {
             padding-left: 15px;
             padding-right: 15px;
@@ -137,6 +140,7 @@
     }
 
     @media (min-width: @screen-xxs-max) and (max-width: 630px) {
+
         .answerButton {
             width: 165px !important;
             font-size: 11px !important;
@@ -154,6 +158,10 @@
     }
 
     @media (min-width: @screen-xxs-max) and (max-width: @screen-md-max) {
+        #topicSort .sortable {
+            height: 280px;
+        }
+
         #politicalQuestionsListContainer {
             margin-left: 15%;
             margin-right: 15%;
@@ -212,6 +220,10 @@
     }
 
     @media (min-width: @screen-lg-min) {
+        #topicSort .sortable {
+            height: 315px;
+        }
+
         #politicalQuestionsListContainer {
             margin-left: 10%;
             margin-right: 10%;

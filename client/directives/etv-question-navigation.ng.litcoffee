@@ -16,10 +16,7 @@
 
             scope.$on('scroll', offset)
             scope.$on('resize', offset)
-            $timeout(->
-                $(element).css("visibility", "visible")
-                offset()
-            )
+            $timeout(offset)
 
             questionNavigationService.goToQuestion = scope.goToQuestion = _.throttle( (questionNumber, callback) ->
                 globalQuestion = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer").eq(questionNumber - 1)

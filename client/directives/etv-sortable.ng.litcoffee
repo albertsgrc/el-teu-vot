@@ -16,6 +16,7 @@
                 update: (e, ui) ->
                     if scope.question.answer?
                         scope.question.answer = getAnswer()
+
             })
 
             scope.answerOption = (option) ->

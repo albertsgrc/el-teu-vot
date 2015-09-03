@@ -1,11 +1,11 @@
-.graphGlobalContainer.col-xs-12(ng-class="graph" etv-scroll-on-load="")
+.graphGlobalContainer.col-xs-12(ng-class="graph")
     .divider
 
     p.text-uppercase.text-bold.text-xl.inline(translate="{{ graph }}")
 
     span(ng-switch="graph")
         span.topicRepeatContainer(ng-switch-when="topicCoincidence")
-            div.topicGlobalContainer(ng-repeat="topic in topics")
+            div.topicGlobalContainer(ng-repeat="topic in topics" etv-scroll-on-load="{{ $index == 0 }}")
                 div.shareButtons.topicCoincidence(ng-class="{ 'goToRight': $first }")
                     .downloadContainer.inline
                         span(translate="download")
@@ -14,7 +14,7 @@
                     //span.text-divider &nbsp;&nbsp;|&nbsp;&nbsp;
                 .graphContainer.topicCoincidenceGraph(etv-topic-coincidence-graph="{{ topic._id }}" id="{{ graph + topic._id }}")
 
-        span(ng-switch-default="")
+        span(ng-switch-default="" etv-scroll-on-load="")
             div.shareButtons
                 .downloadContainer.inline
                     span(translate="download")

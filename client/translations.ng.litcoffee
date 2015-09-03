@@ -31,6 +31,12 @@
                 y decide cual será tu voto"
             ]
 
+            countText: [
+                "qüestionaris resolts fins ara. I tu, a què esperes?"
+
+                "cuestionarios resueltos hasta ahora. Y tú, a qué esperas?"
+            ]
+
             welcomeStart: [
                 "Comença"
                 "Empezar"
@@ -542,7 +548,7 @@
             tda: [
                 "Completament d'acord"
 
-                "Totalmente en desacuerdo"
+                "Totalmente de acuerdo"
             ]
 
             nsnc: [
@@ -1080,10 +1086,10 @@
 
             resultsCodeText: [
                 "Guarda aquest enllaç. Et permetrà recuperar els teus \
-                resultats quan vulguis"
+                resultats quan vulguis."
 
                 "Guarda este enlace. Te permitirá recuperar tus \
-                resultados cuando quieras"
+                resultados cuando lo desees."
             ]
 
         tO.locationGraph =

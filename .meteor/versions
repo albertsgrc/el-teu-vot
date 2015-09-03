@@ -60,7 +60,6 @@ nemo64:bootstrap@3.3.5_2
 nemo64:bootstrap-data@3.3.5
 new3rs:html2canvas@0.0.1
 observe-sequence@1.0.6
-okgrow:analytics@0.3.0
 ordered-dict@1.0.3
 planettraining:angular-translate@2.7.2
 random@1.0.3
@@ -74,6 +73,7 @@ session@1.1.0
 spacebars@1.0.6
 spacebars-compiler@1.0.6
 templating@1.1.1
+tmeasday:publish-counts@0.7.1
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3

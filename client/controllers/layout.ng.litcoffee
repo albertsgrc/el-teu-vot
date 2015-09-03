@@ -11,6 +11,7 @@
 Language setter
 
         $scope.setLanguage = (lang) ->
+            ga('send', 'event', 'button', 'click', "translation to #{lang}")
             $translate.use(lang)
             $rootScope.$broadcast('languageChange')
 
