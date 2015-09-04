@@ -549,7 +549,7 @@
         unless Meteor.users.findOne({ username: 'admin' })?
             Accounts.createUser(
                 username: 'admin'
-                password: 'etv-admin'
+                password: 'ElTeuVot2015+9377'
             )
 
 

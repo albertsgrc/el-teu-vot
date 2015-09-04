@@ -8,6 +8,7 @@
 
         onComplete = (err) ->
             if err
+                $scope.password = ""
                 $scope.error = true
                 $scope.errorBold = true
                 setTimeout((-> $scope.$apply( -> $scope.errorBold = false)), 500)

@@ -1,0 +1,7 @@
+.adm-toolbar
+    p.text-bold.text-uppercase Descàrrega de dades
+    i.mdi.mdi-logout.logout(ng-click="logout()")
+
+.content
+    button.downloadButton(ng-click="downloadData()") Baixa les dades
+    .spinner(ng-if="downloading")

@@ -5,6 +5,12 @@
         return now - date >= minutesOld*60000
 
     Meteor.methods(
+        getAllResults: ->
+            if @userId? and @userId is Meteor.users.findOne({ username: 'admin' })._id
+                return Results.find({}, { fields: { _id: 1, political: 1, personal: 1, createdAt: 1 }, sort: { createdAt: 1 } }).fetch()
+            else
+                throw new Meteor.Error("AUTH_ERROR", "NO_USER")
+
         getResults: (id) ->
             Results.findOne({ _id: id }, { fields: { partyCoincidence: 1, topicAndPartyCoincidence: 1, "political.ideologicalLocation": 1, "political.nationalLocation": 1, "political.topicOrder": 1 } })
 

@@ -1,0 +1,51 @@
+.loginForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    .translate(-50%, -50%);
+
+    .input {
+        font-size: 17px;
+        padding: 4px;
+        text-align: center;
+        color: black;
+        display: block;
+        border: solid 2px @adm-1;
+        height: 40px;
+        width: 250px;
+        outline: none !important;
+    }
+
+    .input:focus {
+        border-color: @orange;
+    }
+
+    .input.error {
+        border-color: @red !important;
+    }
+
+    p.errorText {
+        color: @red;
+        margin-bottom: 15px;
+    }
+
+    p.errorText.errorBold {
+        font-weight: bold;
+    }
+
+    .button {
+        border: none;
+        outline: none;
+        background-color: @adm-1;
+        font-weight: bold;
+        text-transform: uppercase;
+        width: 100px;
+        height: 40px;
+        //border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .button:hover {
+        background-color: @orange;
+    }
+}

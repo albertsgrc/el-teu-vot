@@ -13,7 +13,7 @@
 $.getJSON("http://jsonip.com/?callback=?", function(data) {
     ga('create', 'UA-66980014-1', {
         'storage': 'none',
-        'clientId': data.ip
+        'clientId': Random.id()
     });
     ga('send', 'pageview');
 

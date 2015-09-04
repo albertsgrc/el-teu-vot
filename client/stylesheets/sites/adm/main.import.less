@@ -1,0 +1,67 @@
+@adm-1: @blue;
+@adm-2: #303F9F;
+@adm-3: #1976D2;
+@adm-background: white;
+@toolbar-height: 50px;
+
+body.adm {
+    .adm-toolbar {
+        background-color: @blue;
+        height: @toolbar-height;
+        width: 100%;
+        position: fixed;
+        top: 0;
+
+        p {
+            font-size: 16px;
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            .translateY(-50%);
+            margin: 0;
+        }
+    }
+
+    .content {
+        position: absolute;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        .translate(-50%, -50%);
+    }
+
+    .downloadButton {
+        text-transform: uppercase;
+        font-weight: bold;
+        height: 50px;
+        width: 200px;
+        outline: none;
+        border: none;
+        background-color: @blue;
+    }
+
+    .downloadButton:hover {
+        cursor: pointer;
+        background-color: @orange;
+    }
+
+    .logout {
+        font-size: 20px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        .translateY(-50%);
+    }
+
+    .logout:hover {
+        cursor: pointer;
+    }
+
+    color: white;
+
+    background-color: @adm-background;
+
+    .spinner {
+        display: block;
+    }
+}
