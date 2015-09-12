@@ -18,18 +18,14 @@
         $scope.loadingCounter = 1
         $scope.error = false
 
-        NProgress.start()
-
         questionsService.getPersonalQuestions().then(
             (result) ->
                 $scope.questions = result
                 --$scope.loadingCounter
-                NProgress.done()
                 $scope.error = false
             ,
             (err) ->
                 $scope.error = true
-                NProgress.done()
         )
 
         $scope.endQuestionaireText = "endQuestionaireText"
@@ -65,14 +61,12 @@
         onSendResultsSuccess = (id) ->
             ga('send','event','navigation','send-results-success')
 
-            NProgress.done()
             $state.go('results', { id: id, justCreated: true })
             errorSending = false
 
         onSendResultsFailure = ->
             console.error "Send results failure nº #{nFailures}"
 
-            NProgress.done()
             $scope.endQuestionaireText = "endQuestionaireText"
             sendResultsStarted = false
             errorSending = true
@@ -91,13 +85,10 @@
                     $timeout( ->
                         if $state.includes('personalQuestions') and not errorSending
                             ga('send', 'event', 'delay', 'send-results-too-long-delay')
-                            NProgress.done()
                             $scope.endQuestionaireText = "endQuestionaireText"
                             sendResultsStarted = false
                             etvAlertService.openAlert('sendResultsTooLongDelay')
                     , 1000*MAX_SEND_RESULTS_SECONDS_DELAY)
-
-                    NProgress.start()
 
                     if errorSending
                         resultsService.sendResultsToServerAndGetNewResults().then(

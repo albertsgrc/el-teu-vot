@@ -5,3 +5,5 @@
 .content
     button.downloadButton(ng-click="downloadData()") Baixa les dades
     .spinner(ng-if="downloading")
+    p.errorText(ng-if="error" ng-class="{ errorBold: errorBold }") S'ha produit un error en la baixada dels resultats
+    p.infoText(ng-show="downloading") {{ infoText }}

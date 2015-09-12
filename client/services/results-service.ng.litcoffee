@@ -109,6 +109,19 @@
 
             return q.promise
 
+        ###
+        @sendRandomResults = ->
+            q = $q.defer()
+            etvRandomResults(
+                (results) ->
+                    answerResults = results
+                    self.sendResultsToServerAndGetNewResults().then(
+                        (res) -> q.resolve(res)
+                    )
+            )
+            return q.promise
+        ###
+
         @sendResultsToServerAndGetNewResults = (q = $q.defer()) ->
             questionsService.reset()
 

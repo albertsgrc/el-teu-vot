@@ -7,7 +7,6 @@
             isOffseted = false
             MARGIN = 15
             offset = _.throttle( ->
-                console.log "offset #{isOffseted}"
                 elemTop = $(element).offset().top - parseFloat($(element).css("margin-top"))
                 targetBottom = $(attrs.etvOffsetOnElement).outerHeight(true)
                 if elemTop <= targetBottom + MARGIN
@@ -17,7 +16,6 @@
                     isOffseted = false
                     $(element).css("margin-top", "0px")
             , 25)
-
 
             scope.$on('resize', offset)
             scope.$on('load', offset)

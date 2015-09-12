@@ -16,6 +16,11 @@ If this array changes, then the Party coincidence - answer scoring matrix should
                                                   "tda"
                                                   "nsnc"]
 
+    PoliticalQuestions.BASIC_QUESTION_OPTIONS_SET = {}
+
+    for value in PoliticalQuestions.BASIC_QUESTION_OPTIONS
+        PoliticalQuestions.BASIC_QUESTION_OPTIONS_SET[value] = true
+
     PoliticalQuestions.QUESTION_COUNT = PoliticalQuestions.BASIC_QUESTION_OPTIONS.length
 
     PoliticalQuestions.VALID_QUESTION_COUNT = PoliticalQuestions.QUESTION_COUNT - 1

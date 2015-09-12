@@ -12,7 +12,7 @@
 
         answer:
             type: String
-            custom: -> return "The answer value is incorrect" unless @value in PoliticalQuestions.BASIC_QUESTION_OPTIONS
+            custom: -> return "The answer value is incorrect" unless @value of PoliticalQuestions.BASIC_QUESTION_OPTIONS_SET
 
     )
 
@@ -23,8 +23,7 @@
             custom: ->
                 basicActivePoliticalQuestionsIds = _.pluck(@politicalQuestions, '_id')
                 answersIds = _.pluck(@value, 'questionId')
-                return "The result lacks some basic political questions or has extra or incorrect ones" unless _.intersection(basicActivePoliticalQuestionsIds, answersIds).length is basicActivePoliticalQuestionsIds.length and basicActivePoliticalQuestionsIds.length is answersIds.length
-
+                return "The result lacks some basic political questions or has extra or incorrect ones" unless etvHaveSameStringElements(basicActivePoliticalQuestionsIds, answersIds)
         ideologicalLocation:
             type: Number
             min: RANGE_QUESTION_RANGE[0]
@@ -40,7 +39,7 @@
         topicOrder:
             type: [String]
             custom: ->
-                return "Some topic is missing or is incorrect or there are extra topics" unless _.intersection(@value, @topics).length is @topics.length and @topics.length is @value.length
+                return "Some topic is missing or is incorrect or there are extra topics" unless etvHaveSameStringElements(@value, @topics)
     )
 
     Schemas.PersonalAnswer = new SimpleSchema(
@@ -111,25 +110,33 @@
         personal:
             type: Schemas.PersonalResult
 
-        partyCoincidence:
+        partyCoincidence: {
             optional: true
-
+            type: [Object]
+            blackbox: true
+            ###
             type: [Schemas.PartyCoincidence]
 
             custom: ->
                 if @isSet
                     actualPartiesIds = _.pluck(@value, 'party')
                     return "Some political party is or there are extra or incorrect ones" unless _.intersection(@politicalParties, actualPartiesIds).length is @politicalParties.length and @politicalParties.length is actualPartiesIds.length
+            ###
+        }
 
-        topicAndPartyCoincidence:
+        topicAndPartyCoincidence: {
             optional: true
-
+            type: [Object]
+            blackbox: true
+            ###
             type: [Schemas.TopicAndPartyCoincidence]
 
             custom: ->
                 if @isSet
                     actualTopicsIds = _.pluck(@value, 'topic')
                     return "Some topic is missing or there are extra or incorrect ones" unless _.intersection(actualTopicsIds, @topics).length is @topics.length and @topics.length is actualTopicsIds.length
+            ###
+        }
 
         createdAt:
             type: Date

@@ -7,16 +7,12 @@
         $scope.validResultsId = false
         $scope.error = false
 
-        NProgress.start()
-
         onDataLoad = ->
             --$scope.loadingCounter
-            NProgress.done() unless $scope.loadingCounter
 
         notifyError = ->
             console.error "Error loading results data"
             $scope.error = true
-            NProgress.done()
 
         topicsService.getTopics().then(
             (results) ->

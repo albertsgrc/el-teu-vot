@@ -4,18 +4,15 @@
         $scope.loadingCounter = 2
         $scope.error = false
 
-        NProgress.start()
 
         ga('send', 'pageview', { 'page': '/questionari', 'title': 'Qüestionari polític' })
 
         notifyError = ->
             console.error "Error loading some data from the server"
             $scope.error = true
-            NProgress.done()
 
         onDataLoad = ->
             --$scope.loadingCounter
-            NProgress.done() unless $scope.loadingCounter
 
         questionsService.getPoliticalQuestions().then(
             (data) ->
@@ -63,6 +60,13 @@
             _.find($scope.questions, (question) -> question.number is number).answer?
 
         $scope.goToPersonalQuestions = ->
+            ###
+            if "localhost" is window.location.hostname
+                resultsService.sendRandomResults().then(
+                    (res) -> $state.go('results', { id: res })
+                )
+                return
+            ###
             firstUnAnsweredQuestion = ( ->
                 return parseInt(i) + 1 for i, x of $scope.questions when not x.answer?
                 return null
