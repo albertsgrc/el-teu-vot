@@ -6,24 +6,24 @@
         templateUrl: "client/views/components/etv-slider.html"
 
         link: (scope, element, attrs) ->
-            sliderSet = false
-            shouldNotChangeSliderValue = false
+            falseZero = false
+
+            sliderOrientation = ->
+                if window.innerWidth <= ORIENTATION_THRESHOLD then "vertical" else "horizontal"
+
+            ORIENTATION_THRESHOLD = 700
+            currentOrientation = "none"
 
             setSlider = ->
-                width = window.innerWidth
+                nextOrientation = sliderOrientation()
 
-                ORIENTATION_THRESHOLD = 700
+                return if nextOrientation is currentOrientation
 
-                if sliderSet is "horizontal"
-                    return if width > ORIENTATION_THRESHOLD
-                else if sliderSet is "vertical"
-                    return if width <= ORIENTATION_THRESHOLD
-
-                sliderSet = (if width <= ORIENTATION_THRESHOLD then "vertical" else "horizontal")
+                currentOrientation = nextOrientation
 
                 scope.$apply( ->
-                    scope.__sliderLeftText = if sliderSet is "vertical" then attrs.rightText else attrs.leftText
-                    scope.__sliderRightText = if sliderSet is "vertical" then attrs.leftText else attrs.rightText
+                    scope.__sliderLeftText = if currentOrientation is "vertical" then attrs.rightText else attrs.leftText
+                    scope.__sliderRightText = if currentOrientation is "vertical" then attrs.leftText else attrs.rightText
                 )
 
                 accessObject = (object, string) ->
@@ -34,12 +34,19 @@
                         result = result[property]
                     result
 
+                currentValue = accessObject(scope, attrs.ngModel)
+
+                setDefault = ->
+                    falseZero = true
+                    return 0
+
+
                 $(element[0]).find(".etv-slider").slider({
-                    value: accessObject(scope, attrs.ngModel) or 0
+                    value: currentValue or setDefault()
                     max: 10
-                    orientation: sliderSet
+                    orientation: currentOrientation
                 }).off('slidechange').on('slidechange', (event, ui) ->
-                    return unless ui.value? and not isNaN(ui.value) and not shouldNotChangeSliderValue
+                    return unless ui.value? and not isNaN(ui.value) and not falseZero
 
                     scope.$apply( ->
                         scope.setQuestionAnswer(scope.question, ui.value)
@@ -49,12 +56,16 @@
                         rest: "label"
                 })
 
+                falseZero = false
 
             scope.$on('resize', ->
-                shouldNotChangeSliderValue = true
                 setSlider()
-                shouldNotChangeSliderValue = false
             )
+
+            scope.$on('destroy', ->
+                $(element[0]).off('slidechange')
+            )
+
             $timeout(setSlider)
 
     app.directive('etvSlider', ['$timeout', sliderDirective])
