@@ -1,88 +1,92 @@
 # Meteor methods file
 
+    jsZip = Meteor.npmRequire('jszip')
+
     isOlderThan = (minutesOld, date) ->
         now = new Date
         return now - date >= minutesOld*60000
 
     toCsv = (results) ->
-        personalQuestions = PersonalQuestions.find().fetch()
-        topics = Topics.find().fetch()
-
-        quote = (text) -> "\"#{text}\""
-
-        translate = (text) -> "#tl#{text}#etl"
-
-        columns = []
-        columns.push quote("id")
-        columns.push quote("Pregunta #{question}") for question in [1..23]
-        columns.push quote("Ubicació ideològica")
-        columns.push quote("Ubicació nacional")
-        columns.push quote(translate(topic._id)) for topic in topics
-        columns.push quote(translate(question._id)) for question in personalQuestions
-        columns.push quote("Data")
+        personalQuestions = _cc.PersonalQuestions.full
+        topics = _cc.Topics.full
+        translations = _cc.Translations.client
 
         csv = ""
-        csv += columns.join(",")
+        DELIMITER = ";"
 
-        resultsArray = []
+        pqOrderById = {}
+        for question in personalQuestions
+            pqOrderById[question._id] = question.order
 
-        arrayFromResult = (result) ->
-            array = []
+        localeOffsetInHours = ((new Date()).getTimezoneOffset() + 120)/60
 
-            array.push quote(result._id)
+        translate = (s) ->
+            tr = translations[s]
+            if tr
+                if Array.isArray(tr) then tr[0] else tr
+            else s
 
-            for answer in result.political.basicAnswers.sort((a, b) -> b.number - a.number)
-                array.push quote(answer.answer)
+        addHeaders = ->
+            csv += "Id"
+            csv += "#{DELIMITER}Pregunta #{question}" for question in [1..23]
+            csv += "#{DELIMITER}Ubicació ideològica#{DELIMITER}Ubicació nacional"
+            csv += "#{DELIMITER}#{translate(topic._id)}" for topic in topics
+            csv += "#{DELIMITER}#{translate(question._id + "Export")}" for question in personalQuestions.sort((a, b) -> a.order - b.order)
+            csv += "#{DELIMITER}Data"
 
-            array.push quote(result.political.ideologicalLocation)
-            array.push quote(result.political.nationalLocation)
+        addData = ->
+            for result, i in results
+                csv += "\n#{result._id}"
 
-            for topic in topics
-                array.push(quote(Topics.TOPIC_WEIGHT_BY_ORDER_INDEX[result.political.topicOrder.indexOf(topic._id)].toString().replace(".", ",")))
+                for answer in result.political.basicAnswers.sort((a, b) -> b.number - a.number)
+                    csv += "#{DELIMITER}#{answer.answer}"
 
-            for answer in result.personal.answers
-                array.push quote(translate(answer.answer or ""))
+                csv += "#{DELIMITER}#{result.political.ideologicalLocation}#{DELIMITER}#{result.political.nationalLocation}"
 
-            date = new Date(result.createdAt)
+                for topic in topics
+                    csv += "#{DELIMITER}#{Topics.TOPIC_WEIGHT_BY_ORDER_INDEX_STRING[result.political.topicOrder.indexOf(topic._id)]}"
 
-            pad = (n, width, z = '0') ->
-                n = n + '';
-                return (if n.length >= width then n else new Array(width - n.length + 1).join(z) + n)
+                for answer in result.personal.answers.sort((a, b) -> pqOrderById[a.questionId] - pqOrderById[b.questionId])
+                    csv += "#{DELIMITER}"
+                    csv += "#{translate(answer.answer)}" if answer.answer
 
-            array.push quote("#{pad(date.getDate(), 2)}/#{pad(date.getMonth() + 1,2)}/#{pad(date.getFullYear(), 4)} #{pad(date.getHours(), 2)}:#{pad(date.getMinutes(), 2)}:#{pad(date.getSeconds(), 2)}.#{pad(date.getMilliseconds(), 3)}")
+                date = new Date(result.createdAt)
+                date.setUTCHours(date.getUTCHours() + localeOffsetInHours)
 
-            array
+                pad = (n) -> if n < 10 then '0' + n else n
 
+                csv += "#{DELIMITER}#{pad(date.getDate())}/#{pad(date.getMonth() + 1)}/#{date.getFullYear()} #{pad(date.getHours())}:#{pad(date.getMinutes())}:#{pad(date.getSeconds())}.#{(date.getMilliseconds()/ 1000).toFixed(3).slice(2, 5)}"
 
-        resultsArray.push(arrayFromResult(result)) for result in results
-
-        for array in resultsArray
-            csv += "\n"
-            csv += array.join(",")
+        addHeaders()
+        addData()
 
         csv
 
     Meteor.methods(
         getAllResults: ->
             if @userId? and @userId is Meteor.users.findOne({ username: 'admin' })._id
-                return toCsv(Results.find({}, { fields: { _id: 1, political: 1, personal: 1, createdAt: 1 }, sort: { createdAt: 1 } }).fetch())
+                csv = toCsv(Results.find({}, { fields: { _id: 1, political: 1, personal: 1, createdAt: 1 }, sort: { createdAt: 1 } }).fetch())
+                zip = new jsZip()
+                zip.file('resultats.csv', csv)
+
+                zip.generate({ type: "base64", compression: "DEFLATE", compressionOptions: { level: 9 } })
             else
                 throw new Meteor.Error("AUTH_ERROR", "NO_USER")
 
         getResults: (id) ->
             Results.findOne({ _id: id }, { fields: { partyCoincidence: 1, topicAndPartyCoincidence: 1, "political.ideologicalLocation": 1, "political.nationalLocation": 1, "political.topicOrder": 1 } })
 
-        getPoliticalParties: ->
-            PoliticalParties.find({}, { fields: { createdAt: 0, updatedAt: 0 } }).fetch()
+        getPoliticalParties: -> _cc.PoliticalParties.client
 
-        getPersonalQuestions: ->
-            PersonalQuestions.find({}, { fields: { createdAt: 0, updatedAt: 0 }, sort: { order: 1 } }).fetch()
+        getPersonalQuestions: -> _cc.PersonalQuestions.client
 
-        getPoliticalQuestions: ->
-            PoliticalQuestions.find({ currentlyActive: true }, { sort: { number: 1 }, fields: { answerResemblanceToPartyMatrix: 0, currentlyActive: 0, createdAt: 0, updatedAt: 0 } }).fetch()
+        getPoliticalQuestions: -> _cc.PoliticalQuestions.client
 
-        getTopics: ->
-            Topics.find({}, { fields: { createdAt: 0, updatedAt: 0 } }).fetch()
+        getTopics: -> _cc.Topics.client
+
+        getTranslations: -> _cc.Translations.client
+
+        updateCollectionCache: (collections...) -> CollectionCache.update(collections...)
 
         sendResults: (results) ->
             possiblePreviousSavedResult = Results.findOne({ sessionId: results.sessionId }, { fields: { _id: 1, createdAt: 1 }, sort: { createdAt: -1 } })
@@ -90,10 +94,10 @@
             if possiblePreviousSavedResult? and not isOlderThan(60, possiblePreviousSavedResult.createdAt)
                 return possiblePreviousSavedResult._id
 
-            politicalParties = _.pluck(PoliticalParties.find().fetch(), '_id')
-            topics = _.pluck(Topics.find().fetch(), '_id')
-            politicalQuestions = PoliticalQuestions.find({ currentlyActive: true, type: 'basic' }).fetch()
-            personalQuestionsArray = PersonalQuestions.find().fetch()
+            politicalParties = _.pluck(_cc.PoliticalParties.client, '_id')
+            topics = _.pluck(_cc.Topics.client, '_id')
+            politicalQuestions = _.where(_cc.PoliticalQuestions.full, { type: 'basic' })
+            personalQuestionsArray = _cc.PersonalQuestions.full
 
 Need to calculate results based on the answered questions
 

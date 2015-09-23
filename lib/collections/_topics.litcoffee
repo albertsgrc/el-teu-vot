@@ -3,6 +3,7 @@
     @Topics = new Mongo.Collection('Topics')
 
     Topics.TOPIC_WEIGHT_BY_ORDER_INDEX = [0.25, 0.225, 0.2, 0.175, 0.15]
+    Topics.TOPIC_WEIGHT_BY_ORDER_INDEX_STRING = ["0,25", "0,225", "0,2", "0,175", "0,15"]
 
     Schemas.Topic = new SimpleSchema(
         _id:

@@ -10,41 +10,25 @@
         $scope.logout = ->
             Meteor.logout(onLogout)
 
-        translate = (text) -> $('<div/>').html($translate.instant(text)).text()
-
-
-        toPqTitle = (text) ->
-            text = text.replace(":", "")
-
-            text = "Record de vot" if text.indexOf("Record de vot") >= 0
-            text = "Intenció de vot" if text.indexOf("Intenció de vot") >= 0
-
-            return text
-
-        translateCsv = (csv) ->
-            $translate.use('ca')
-
-            csv = csv.replace(/^(.*)$/m, (match, word) ->
-                return word.replace(/#tl([^#]*)#etl/gi, (match, word) ->
-                    return toPqTitle(translate(word))
-                )
-            )
-
-            csv = csv.replace(/#tl([^#]*)#etl/gi, (match, word) ->
-                return translate(word)
-            )
-
-            csv
-
-
         downloadCsv = (csv) ->
-            csv = translateCsv(csv)
-
             date = new Date
             dateString = "#{date.getHours()}:#{date.getMinutes()}_#{date.getDay()}-#{date.getMonth()}-#{date.getFullYear()}"
 
-            blob = new Blob([csv], {type: "text/csv;charset=utf-8"})
-            saveAs(blob, "resultats_etv_#{dateString}.csv")
+            base64ToBlob = (base64String) ->
+                byteCharacters = atob(base64String)
+                byteNumbers    = new Array(byteCharacters.length)
+                i              = 0
+                while i < byteCharacters.length
+                    byteNumbers[i] = byteCharacters.charCodeAt(i)
+                    i++
+                byteArray = new Uint8Array(byteNumbers)
+                return blob = new Blob([byteArray],
+                    type: "zip"
+                )
+
+            blob = base64ToBlob(csv)
+
+            saveAs(blob, "resultats_etv_#{dateString}.zip")
 
             $scope.$apply( ->
                 $scope.downloading = false
@@ -59,6 +43,7 @@
 
         $scope.downloadData = ->
             unless $scope.downloading
+                $scope.error = false
                 $scope.downloading = true
                 $scope.infoText = "S'estàn baixant les dades del servidor..."
 
