@@ -1232,7 +1232,9 @@
 
         globalTranslations = {}
 
-        _.extend(globalTranslations, (value for attr, value of tO)...)
+        for elem in (value for attr, value of tO)
+            for key, v of elem
+                globalTranslations[key] = v
 
         String::latinize = ->
             translate_re = /[àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ]/g

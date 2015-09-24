@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "jszip": {
+      "version": "2.4.0",
+      "dependencies": {
+        "pako": {
+          "version": "0.2.8"
+        }
+      }
+    }
+  }
+}
