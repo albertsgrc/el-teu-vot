@@ -43,15 +43,6 @@
                 url: '/questionari'
                 templateUrl: 'client/views/partials/political-questions.html'
             )
-            .state('personalQuestions',
-                controller: 'PersonalQuestionsCtrl'
-                parent: 'questions'
-                url: '/questionari/'
-                params: {
-                    cameFromVerification: null
-                }
-                templateUrl: 'client/views/partials/personal-questions.html'
-            )
             .state('results',
                 parent: 'layout'
                 url: '/resultats/:id'

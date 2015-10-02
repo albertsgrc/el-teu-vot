@@ -287,6 +287,10 @@
 
 // Utils
 
+.disabled {
+    cursor: default;
+}
+
 .text-orange {
     color: @orange;
 }
@@ -479,6 +483,10 @@
 
 // Styling
 
+[ng-click] {
+    cursor: pointer;
+}
+
 @-ms-viewport       { width: device-width; }
 
 body.etv {
@@ -497,9 +505,11 @@ body.etv {
         background-color: @blue !important;
     }
 
+    /*
     button.active, button:hover {
         font-weight: bold;
     }
+    */
 
     p {
         margin: 0 0 15px !important;

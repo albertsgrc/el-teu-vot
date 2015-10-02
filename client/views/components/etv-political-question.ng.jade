@@ -14,7 +14,7 @@
       span(ng-switch="question.type")
          .row.center-text(ng-switch-when="basic")
             .col-md-4.col-xs-6.col-xxs-12.answerButtonContainer(ng-repeat="option in BASIC_QUESTION_OPTIONS", ng-class="{ 'col-lg-2-4': !isNoAnswer(option), 'col-lg-12 nsncButton': isNoAnswer(option) }")
-               button.answerButton(ng-click="setQuestionAnswer(question, option)" ng-class="{ answered: isAnsweredWith(question, option), longText: isLongAnswer(option) }")
+               button.disabled.answerButton(ng-class="{ longText: isLongAnswer(option) }")
                   span(translate="{{ ::option }}")
          //.row.center-text(ng-switch-when="basic")
             .col-md-4.col-xs-6.col-xxs-12.col-lg-2-4.answerButtonContainer

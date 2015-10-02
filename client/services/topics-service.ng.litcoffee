@@ -1,7 +1,13 @@
 # Topics service
 
     topicsService = ($meteor, $q) ->
-        topics = null
+        topics = [
+            { _id: "regeneracioDemocratica" }
+            { _id: "modelTerritorial" }
+            { _id: "estatDelBenestar" }
+            { _id: "ciutadania" }
+            { _id: "territoriEcologiaIMediAmbient" }
+        ]
         error = false
 
         pendingRequests = []
@@ -16,19 +22,6 @@
 
             pendingRequests = []
 
-        (getTopics = ->
-            $meteor.call('getTopics').then(
-                (result) ->
-                    topics = result
-                    error = false
-                    resolvePendingRequests(topics, false)
-                ,
-                (err) ->
-                    resolvePendingRequests(error, true)
-                    error = true
-            )
-        )()
-
         @getTopics = ->
             q = $q.defer()
 
@@ -36,7 +29,6 @@
                 q.resolve(topics)
             else
                 pendingRequests.push q
-                getTopics() if error
 
             return q.promise
 

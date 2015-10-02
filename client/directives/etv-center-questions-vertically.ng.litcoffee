@@ -17,10 +17,9 @@
                 firstQuestionHeight = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:first-child .politicalQuestionContainer").outerHeight(INCLUDE_MARGIN)
                 lastQuestionHeight = $("#politicalQuestionsListContainer .globalPoliticalQuestionContainer:last-child .politicalQuestionContainer").outerHeight(INCLUDE_MARGIN)
                 dividerHeight = 2
-                endButtonHeight = $("#endTestButtonContainer").height()
 
                 questionsTopMargin = Math.max(30, (windowHeight - 2*mainTopPadding - (firstQuestionHeight + 2*dividerHeight))/2)
-                questionsBottomMargin = Math.max(40, (windowHeight - 2*mainTopPadding - (lastQuestionHeight + 2*dividerHeight))/2 + mainTopPadding - endButtonHeight)
+                questionsBottomMargin = Math.max(40, (windowHeight - 2*mainTopPadding - (lastQuestionHeight + 2*dividerHeight))/2 + mainTopPadding)
 
                 return { questions: { top: questionsTopMargin, bottom: questionsBottomMargin } }
 

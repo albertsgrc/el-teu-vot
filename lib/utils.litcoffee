@@ -2,6 +2,7 @@
 
     @etvPrint = (elem) -> JSON.stringify(elem, null, 2)
 
+    ###
     @etvHaveSameStringElements = (arrayA, arrayB) ->
         if arrayA.length is arrayB.length
             setA = {}
@@ -26,7 +27,6 @@
 
         return array
 
-    ###
     @etvRandomResults = (cb) ->
         results = {}
         Meteor.call('getTopics', (err, topics) ->
@@ -69,4 +69,4 @@
                 )
             )
         )
-        ###
+    ###

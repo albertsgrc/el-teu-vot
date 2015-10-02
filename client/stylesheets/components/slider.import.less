@@ -1,4 +1,8 @@
 .etv-slider {
+    .ui-slider-pips, .ui-slider-pip {
+        cursor: default !important;
+    }
+
     border: none;
     background: @blue;
 
@@ -20,12 +24,6 @@
         display: inherit !important;
     }
 
-
-
-    .ui-slider-handle:hover{
-        cursor: pointer;
-    }
-
     .ui-slider-pip {
         color: @blue;
     }
@@ -41,6 +39,7 @@
     .ui-slider-label {
         color: @blue !important;
         font-size: 14px;
+        font-weight: normal !important;
     }
 
     .ui-slider-label:hover, .ui-slider-line:hover, .ui-slider-pip:hover {
