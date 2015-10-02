@@ -5,5 +5,8 @@
     p#welcomeText(translate="welcomeText")
 
     //p#soonText.text-uppercase(translate="{{ 'soonText' }}")
-    button#startButton(ng-click="goToPoliticalQuestions()")
+    button.mainPageButton(ng-click="goToPoliticalQuestions()")
         span.text-uppercase(translate="welcomeStart")
+
+    button.mainPageButton(ng-click="goToElectionResults()")
+        span.text-uppercase(translate="seeElectionResults")
