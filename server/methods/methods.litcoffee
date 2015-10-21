@@ -69,7 +69,7 @@
                 zip = new jsZip()
                 zip.file('resultats.csv', csv)
 
-                zip.generat e({ type: "base64", compression: "DEFLATE", compressionOptions: { level: 9 } })
+                zip.generate({ type: "base64", compression: "DEFLATE", compressionOptions: { level: 9 } })
             else
                 throw new Meteor.Error("AUTH_ERROR", "NO_USER")
 
