@@ -1,12 +1,44 @@
-#elTeuVotContainer(etv-offset-on-element="header")
+#elTeuVotContainer.container.globalTextContainer(etv-offset-on-element="header")
     p.text-center#countText(ng-if="count > 0")
         span.text-bold.text-orange {{ count }}&nbsp;&nbsp;
         span(translate="countText")
-    p#welcomeText(translate="welcomeText")
+    p#explanationText(translate="projectExplanation")
 
     //p#soonText.text-uppercase(translate="{{ 'soonText' }}")
-    button.mainPageButton(ng-click="goToPoliticalQuestions()")
+    //button.mainPageButton(ng-click="goToPoliticalQuestions()")
         span.text-uppercase(translate="welcomeStart")
 
-    //button.mainPageButton(ng-click="goToElectionResults()")
-        span.text-uppercase(translate="seeElectionResults")
+    ul.linkList
+        li
+            a(target="_blank" href="http://www.vilaweb.cat/noticies/amb-qui-coincideixo-mes-politicament-2/")
+                img(src="/images/vilaweb.png")
+        li
+            a(target="_blank" href="http://www.elperiodico.cat/ca/noticias/xarxes/neix-teu-vot-aplicacio-per-saber-qui-votar-27s-4478961")
+                img(src="/images/elperiodico.jpg")
+        li
+            a(target="_blank" href="http://wiki.apps4citizens.org/ca/el-teu-vot-que-candidatura-es-la-que-mejor-te-representa-en-las-elecciones-catalanas/")
+                img(src="/images/logo_apps4citizens.png")
+        li
+            a(target="_blank" href="http://www.xavierpeytibi.com/2015/09/14/el-teu-vot-recomendador-de-voto/") Blog de Xavier Peytibi
+        li
+            a(target="_blank" href="http://www.gutierrez-rubi.es/tag/elteuvot/" translate="blog1") Blog d'Antoni Gutiérrez-Rubí
+        li
+            a(target="_blank" href="http://www.8tv.cat/8aldia/videos/internet/encara-no-saps-a-qui-votar-el-27s/")
+                img(src="/images/8aldia.jpg")
+        li
+            a(target="_blank" href="http://www.ccma.cat/catradio/alacarta/el-mati-de-catalunya-radio/clicats-lapli-mobil-de-la-setmana-amb-albert-cuesta-aplicacions-per-seguir-el-27-s/audio/893772/")
+                img(src="/images/catalunya-radio.png")
+        li
+            a(target="_blank" href="http://www.btv.cat/btvnoticies/2015/09/25/un-web-creat-per-politolegs-ajuda-a-decidir-el-vot-als-indecisos/")
+                img(src="/images/btv.png")
+        li
+            a(target="_blank" href="http://www.elcritic.cat/blogs/sentitcritic/2015/10/30/el-teu-vot-els-resultats-del-web-dubicacio-del-votant-de-les-eleccions-catalanes/")
+                img(src="/images/critic.png")
+
+    .buttonContainer
+        button.center-block.mainPageButton(ng-click="goToPoliticalQuestions()")
+            span.text-uppercase(translate="seeQuestionaire")
+
+        button.center-block.mainPageButton.longText(ng-click="viewGraphExample()")
+            span.text-uppercase(translate="viewGraphs")
+

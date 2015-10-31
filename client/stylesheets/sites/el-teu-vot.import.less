@@ -1,34 +1,63 @@
 #elTeuVotContainer {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    margin: auto;
-
     text-align: center;
 
-    max-width: 100%;
-    width: 100%;
-    min-width: @min-page-width;
-
-    top: 50%;
-    .translate(0, -50%);
-
-    @media (min-height: 550px) {
-        .translate(0, -60%);
+    .mainPageButton {
+        width: 250px !important;
+        margin-top: 20px;
+        font-size: 0.9em !important;
     }
 
-    .mainPageButton {
-        margin-top: 20px;
+    .mainPageButton:hover {
+        font-weight: bold;
     }
 
     #countText {
         margin-top: 30px !important;
         margin-bottom: 20px !important;
     }
-}
 
+    #explanationText {
+        @media (max-width: @screen-xs-max) {
+            font-size: 1.2em;
+        }
+
+        font-size: 1.4em;
+        margin-bottom: 50px !important;
+
+        a {
+            color: @orange;
+        }
+    }
+
+    ul.linkList {
+        margin-bottom: 40px !important;
+        padding-left: 0 !important;
+        li {
+            .tbMargin(15px);
+
+            display: inline-block;
+            .lrMargin(20px);
+
+            img {
+                width: 200px;
+
+                @media(max-width: @screen-xxs-max) {
+                    width: 150px;
+                }
+            }
+
+            a {
+                color: @orange;
+                font-size: 1.4em;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .buttonContainer {
+        margin-bottom: 20px;
+    }
+}
 
 @media (max-width: @screen-xs-max) {
     #elTeuVotContainer {
@@ -75,7 +104,7 @@
 @media (min-width: @screen-xs-max) {
     #elTeuVotContainer {
         #welcomeText {
-            font-size: 30px;
+            font-size: 20px;
         }
 
         .mainPageButton {

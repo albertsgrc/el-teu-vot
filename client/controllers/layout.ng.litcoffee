@@ -4,7 +4,7 @@
 
 ## Header and navigation
 
-        $rootScope.isFixedHeader = -> not $state.includes('elTeuVot')
+        $rootScope.isFixedHeader = -> true
 
         $rootScope.hasSidenav = -> $state.includes('questions') or $state.includes('results')
 

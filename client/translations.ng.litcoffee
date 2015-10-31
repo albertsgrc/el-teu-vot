@@ -1220,7 +1220,38 @@
             UDCTooltip: [
                 "Unió Democràtica de Catalunya"
 
-                "Unión Democrática de Cataluña"
+                "Unaión Democrática de Cataluña"
+            ]
+
+        tO.postProjecte =
+            seeQuestionaire: [
+                "Veure el qüestionari"
+
+                "Ver el cuestionario"
+            ]
+
+            viewGraphs: [
+                "Veure una mostra dels gràfics"
+
+                "Ver una muestra de los gráficos"
+            ]
+
+            projectExplanation: [
+                "El teu Vot és una Aplicació d’Orientació del Vot (Voting Advice Application) d’àmbit català. Creat en el marc de les eleccions al Parlament de Catalunya del 27 de setembre de 2015, El teu Vot constava d’un qüestionari de 26 preguntes que l’usuari havia de respondre per poder ubicar-se en l’escenari electoral català.
+                 El projecte d’El teu Vot sorgeix d’<a href=\"www.elteuparlament.cat\">El teu Parlament</a> i <a href=\"http://apps4citizens.org/\">apps4citizens</a> i es construeix des del rigor metodològic i la independència respecte partits polítics i institucions publiques, dos trets distintius essencials per tal de garantir uns resultats fidedignes als usuaris.
+                 El teu Vot va estar en funcionament des del 31 d’agost fins al 27 de setembre, dia de les eleccions. El qüestionari va ser respost per més de 40.000 persones i les dades, tot i no ser representatives del comportament general de la població catalana, van ser presentades a La Nit d’El teu Vot, un acte celebrat a l’Impact Hub de Barcelona.
+                 El projecte va tenir força repercussió als mitjans. Si vols tenir més informació pots consultar els següents enllaços:"
+
+                "El teu Vot es una Aplicación de Orientación del Voto (Voting Advice Application) de ámbito catalán. Creado en el marco de las elecciones al Parlament de Catalunya del 27 de Septiembre de 2015, El teu Vot constaba de un cuestionario de 26 preguntas que el usuario tenía que responder para poder ubicarse en el escenario electoral catalán.
+                 El proyecto de El teu Vot surge de <a href=\"www.elteuparlament.cat\">El teu Parlament</a> y <a href=\"http://apps4citizens.org/\">apps4citizens</a> y se construye desde el rigor metodológico y la independencia respecto a partidos políticos e instituciones públicas, dos características esenciales para garantizar unos resultados fidedignos a los usuarios.
+                 El teu Vot estuvo en funcionamiento desde el 31 de agosto hasta el 27 de Septiembre, día de las elecciones. El cuestionario fue respondido por más de 40.000 personas y los datos, a pesar de no ser representativos del comportamiento general de la población catalana, fueron presentadas en La Nit d’El teu Vot, un acto celebrado en el Impact Hub de Barcelona.
+                 El proyecto tuvo una fuerte repercusión en los medios. Si deseas obtener más información puedes consultar los siguientes enlaces:"
+            ]
+
+            blog1: [
+                "Blog d'Antoni Gutiérrez-Rubí"
+
+                "Blog de Antoni Gutiérrez-Rubí"
             ]
 
         tO.other =
