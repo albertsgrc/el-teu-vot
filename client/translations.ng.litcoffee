@@ -1248,12 +1248,6 @@
                  El proyecto tuvo una fuerte repercusión en los medios. Si deseas obtener más información puedes consultar los siguientes enlaces:"
             ]
 
-            blog1: [
-                "Blog d'Antoni Gutiérrez-Rubí"
-
-                "Blog de Antoni Gutiérrez-Rubí"
-            ]
-
         tO.other =
             spaces: "&nbsp;&nbsp;"
 

@@ -32,23 +32,21 @@
     ul.linkList {
         margin-bottom: 40px !important;
         padding-left: 0 !important;
+
+        li:first-child {
+            display: block;
+            margin: 0 auto;
+        }
+
         li {
             .tbMargin(15px);
 
             display: inline-block;
             .lrMargin(20px);
 
-            img {
-                width: 200px;
-
-                @media(max-width: @screen-xxs-max) {
-                    width: 150px;
-                }
-            }
-
             a {
-                color: @orange;
-                font-size: 1.4em;
+                color: black;
+                font-size: 1.8em;
                 font-weight: bold;
             }
         }
@@ -56,6 +54,47 @@
 
     .buttonContainer {
         margin-bottom: 20px;
+    }
+
+    #critic img {
+        width: 240px;
+        margin-bottom: 20px;
+    }
+
+    #vilaweb img {
+        width: 150px;
+    }
+
+    #elperiodico img {
+        width: 250px;
+
+        @media(max-width: @screen-xxs-max) {
+            width: 200px;
+        }
+    }
+
+    #elpais img {
+        width: 190px;
+    }
+
+    #vuitaldia img {
+        width: 130px;
+    }
+
+    #btv img {
+        width: 200px;
+    }
+
+    #apps4citizens img {
+        width: 250px;
+
+        @media(max-width: @screen-xxs-max) {
+            width: 210px;
+        }
+    }
+
+    #catradio img {
+        width: 150px;
     }
 }
 

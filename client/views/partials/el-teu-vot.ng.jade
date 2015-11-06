@@ -9,31 +9,36 @@
         span.text-uppercase(translate="welcomeStart")
 
     ul.linkList
-        li
-            a(target="_blank" href="http://www.vilaweb.cat/noticies/amb-qui-coincideixo-mes-politicament-2/")
-                img(src="/images/vilaweb.png")
-        li
-            a(target="_blank" href="http://www.elperiodico.cat/ca/noticias/xarxes/neix-teu-vot-aplicacio-per-saber-qui-votar-27s-4478961")
-                img(src="/images/elperiodico.jpg")
-        li
-            a(target="_blank" href="http://wiki.apps4citizens.org/ca/el-teu-vot-que-candidatura-es-la-que-mejor-te-representa-en-las-elecciones-catalanas/")
-                img(src="/images/logo_apps4citizens.png")
-        li
-            a(target="_blank" href="http://www.xavierpeytibi.com/2015/09/14/el-teu-vot-recomendador-de-voto/") Blog de Xavier Peytibi
-        li
-            a(target="_blank" href="http://www.gutierrez-rubi.es/tag/elteuvot/" translate="blog1") Blog d'Antoni Gutiérrez-Rubí
-        li
-            a(target="_blank" href="http://www.8tv.cat/8aldia/videos/internet/encara-no-saps-a-qui-votar-el-27s/")
-                img(src="/images/8aldia.jpg")
-        li
-            a(target="_blank" href="http://www.ccma.cat/catradio/alacarta/el-mati-de-catalunya-radio/clicats-lapli-mobil-de-la-setmana-amb-albert-cuesta-aplicacions-per-seguir-el-27-s/audio/893772/")
-                img(src="/images/catalunya-radio.png")
-        li
-            a(target="_blank" href="http://www.btv.cat/btvnoticies/2015/09/25/un-web-creat-per-politolegs-ajuda-a-decidir-el-vot-als-indecisos/")
-                img(src="/images/btv.png")
-        li
+        li#critic
             a(target="_blank" href="http://www.elcritic.cat/blogs/sentitcritic/2015/10/30/el-teu-vot-els-resultats-del-web-dubicacio-del-votant-de-les-eleccions-catalanes/")
                 img(src="/images/critic.png")
+        li#vilaweb
+            a(target="_blank" href="http://www.vilaweb.cat/noticies/amb-qui-coincideixo-mes-politicament-2/")
+                img(src="/images/vilaweb.png")
+        li#elperiodico
+            a(target="_blank" href="http://www.elperiodico.cat/ca/noticias/xarxes/neix-teu-vot-aplicacio-per-saber-qui-votar-27s-4478961")
+                img(src="/images/elperiodico.png")
+        li#elpais
+            a(target="_blank" href="http://blogs.elpais.com/micropolitica/2015/09/chequeos-ideologicos.html")
+                img(src="/images/elpais.png")
+        li#vuitaldia
+            a(target="_blank" href="http://www.8tv.cat/8aldia/videos/internet/encara-no-saps-a-qui-votar-el-27s/")
+                img(src="/images/8aldia.jpg")
+        li#btv
+            a(target="_blank" href="http://www.btv.cat/btvnoticies/2015/09/25/un-web-creat-per-politolegs-ajuda-a-decidir-el-vot-als-indecisos/")
+                img(src="/images/btv.png")
+        li#apps4citizens
+            a(target="_blank" href="http://wiki.apps4citizens.org/ca/el-teu-vot-que-candidatura-es-la-que-mejor-te-representa-en-las-elecciones-catalanas/")
+                img(src="/images/logo_apps4citizens.png")
+        li#catradio
+            a(target="_blank" href="http://www.ccma.cat/catradio/alacarta/el-mati-de-catalunya-radio/clicats-lapli-mobil-de-la-setmana-amb-albert-cuesta-aplicacions-per-seguir-el-27-s/audio/893772/")
+                img(src="/images/catalunya-radio.png")
+        li.blog
+            a(target="_blank" href="http://www.gutierrez-rubi.es/tag/elteuvot/") @antonigr
+        li.blog
+            a(target="_blank" href="http://www.xavierpeytibi.com/2015x  /09/14/el-teu-vot-recomendador-de-voto/") @xpeytibi
+        li.blog
+            a(target="_blank" href="http://ict4rd.net/el-teu-vot-i-la-transcendencia-ideologica-del-mateix") @ricardespelt
 
     .buttonContainer
         button.center-block.mainPageButton(ng-click="goToPoliticalQuestions()")
