@@ -1,4 +1,4 @@
-# Header directive
+    # Header directive
 
     headerDirective = ($window, $state) ->
         replace: true,
