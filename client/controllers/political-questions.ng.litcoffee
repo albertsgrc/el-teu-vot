@@ -17,10 +17,11 @@
         questionsService.getPoliticalQuestions().then(
             (data) ->
                 $scope.questions = data
-                onDataLoad()
+                $timeout(onDataLoad)
             ,
             notifyError
         )
+
 
         topicsService.getTopics().then(
             (data) ->

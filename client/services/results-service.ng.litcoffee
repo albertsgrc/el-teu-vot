@@ -15,7 +15,7 @@
         (@reset = ->
             answerResults = {
                 sessionId: Random.id()
-
+                
                 political:
 
                     basicAnswers: []

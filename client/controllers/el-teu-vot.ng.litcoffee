@@ -12,8 +12,6 @@
         )
 
         $scope.goToPoliticalQuestions = ->
-            $("#elTeuVotContainer").addClass("loading")
             $timeout(-> $state.go('politicalQuestions'))
-
 
     app.controller('ElTeuVotCtrl', ['$scope', '$meteor', '$state', '$stateParams', '$timeout', elTeuVotCtrl])

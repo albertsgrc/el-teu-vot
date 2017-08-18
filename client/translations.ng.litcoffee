@@ -698,9 +698,9 @@
                 "En el contexto actual, las cuotas de paridad de género son necesarias para asegurar la igualdad de representación entre mujeres y hombres."
             ]
             question20: [
-                "Per tal de reduir certes activitats delictives s'hauria de combatre la immigració il·legal."
+                "Per tal de reduir certes activitats delictives s'hauria de combatre la immigració irregular."
 
-                "Con el objetivos de reducir determinados comportamientos delictivos se debería combatir la inmigración ilegal."
+                "Con el objetivos de reducir determinados comportamientos delictivos se debería combatir la inmigración irregular."
             ]
             question21: [
                 "El Govern hauria de prioritzar la inversió en Rodalies, en lloc de l'Alta Velocitat."
@@ -1232,7 +1232,9 @@
 
         globalTranslations = {}
 
-        _.extend(globalTranslations, (value for attr, value of tO)...)
+        for elem in (value for attr, value of tO)
+            for key, v of elem
+                globalTranslations[key] = v
 
         String::latinize = ->
             translate_re = /[àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ]/g

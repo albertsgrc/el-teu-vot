@@ -1,21 +1,40 @@
-.globalPoliticalQuestionContainer(index="{{ question.number - 1 }}")
+.globalPoliticalQuestionContainer(index="{{ ::question.number - 1 }}")
    .divider
 
    .politicalQuestionContainer
       .numberContainer
-         p {{ question.number }}:
+         p {{ ::question.number }}:
 
       .typeContainer.text-center.text-uppercase.center-block
-         p(translate="{{ questionTopic(question) }}")
+         p(translate="{{ ::questionTopic(question) }}")
 
       .textContainer.text-center
-         p(translate="{{ questionText(question) }}")
+         p(translate="{{ ::questionText(question) }}")
 
       span(ng-switch="question.type")
          .row.center-text(ng-switch-when="basic")
             .col-md-4.col-xs-6.col-xxs-12.answerButtonContainer(ng-repeat="option in BASIC_QUESTION_OPTIONS", ng-class="{ 'col-lg-2-4': !isNoAnswer(option), 'col-lg-12 nsncButton': isNoAnswer(option) }")
                button.answerButton(ng-click="setQuestionAnswer(question, option)" ng-class="{ answered: isAnsweredWith(question, option), longText: isLongAnswer(option) }")
-                  span(translate="{{ option }}")
+                  span(translate="{{ ::option }}")
+         //.row.center-text(ng-switch-when="basic")
+            .col-md-4.col-xs-6.col-xxs-12.col-lg-2-4.answerButtonContainer
+               button.answerButton(ng-click="setQuestionAnswer(question, 'ted')", ng-class="{ answered: isAnsweredWith(question, 'ted') }")
+                  span(translate="ted")
+            .col-md-4.col-xs-6.col-xxs-12.col-lg-2-4.answerButtonContainer
+               button.answerButton(ng-click="setQuestionAnswer(question, 'ed')", ng-class="{ answered: isAnsweredWith(question, 'ed') }")
+                  span(translate="ed")
+            .col-md-4.col-xs-6.col-xxs-12.col-lg-2-4.answerButtonContainer
+               button.answerButton(ng-click="setQuestionAnswer(question, 'nand')", ng-class="{ answered: isAnsweredWith(question, 'nand'), longText: isLongAnswer('nand') }")
+                  span(translate="nand")
+            .col-md-4.col-xs-6.col-xxs-12.col-lg-2-4.answerButtonContainer
+               button.answerButton(ng-click="setQuestionAnswer(question, 'da')", ng-class="{ answered: isAnsweredWith(question, 'da') }")
+                  span(translate="da")
+            .col-md-4.col-xs-6.col-xxs-12.col-lg-2-4.answerButtonContainer
+               button.answerButton(ng-click="setQuestionAnswer(question, 'tda')", ng-class="{ answered: isAnsweredWith(question, 'tda') }")
+                  span(translate="tda")
+            .col-md-4.col-xs-6.col-xxs-12.col-lg-12.answerButtonContainer
+               button.answerButton(ng-click="setQuestionAnswer(question, 'nsnc')", ng-class="{ answered: isAnsweredWith(question, 'nsnc') }")
+                  span(translate="nsnc")
 
          .sliderContainer(ng-switch-when="ideologicalLocation")
             etv-slider(left-text="extremeLeft" right-text="extremeRight" ng-model="question.answer")

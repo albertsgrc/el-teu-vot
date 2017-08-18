@@ -2,5 +2,5 @@
     .wrapper
         .questionNavigationItem(ng-repeat="question in questions" ng-click="goToQuestion(question.number)" ng-class="{ answered: isAnswered(question.number) }")
             .questionNavigationNumber
-                span {{ $index + 1 }}
+                span {{ ::$index + 1 }}
             .questionNavigationCircle

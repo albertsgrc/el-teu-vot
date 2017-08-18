@@ -2,12 +2,16 @@
 
     @Translations = new Mongo.Collection('Translations')
 
-    Schemas.Translations = new SimpleSchema(
-        ca:
-            type: String
-        es:
-            type: String
+    LANGUAGES = ["ca", "es"]
 
+    Schemas.LanguageTranslation = new SimpleSchema(
+        lang:
+            type: String
+            allowedValues: LANGUAGES
+
+        value:
+            type: String
+            min: 1
     )
 
     Schemas.Translation = new SimpleSchema(
@@ -16,8 +20,27 @@
             min: 1
             max: 200
 
+        type:
+            type: String
+            min: 1
+            max: 200
+
         translations:
-            type: Schemas.Translations
+            type: [Schemas.LanguageTranslation]
+
+        createdAt:
+            type: Date
+            autoValue: ->
+                if @isUpsert then return { $setOnInsert: new Date }
+                else if @isInsert then return new Date
+                else return new Date
+
+        updatedAt:
+            type: Date
+            autoValue: ->
+                if @isUpdate then return new Date
+            denyInsert: true
+            optional: true
 
     )
 

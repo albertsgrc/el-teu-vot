@@ -21,10 +21,9 @@
 
                 currentOrientation = nextOrientation
 
-                scope.$apply( ->
-                    scope.__sliderLeftText = if currentOrientation is "vertical" then attrs.rightText else attrs.leftText
-                    scope.__sliderRightText = if currentOrientation is "vertical" then attrs.leftText else attrs.rightText
-                )
+                scope.__sliderLeftText = if currentOrientation is "vertical" then attrs.rightText else attrs.leftText
+                scope.__sliderRightText = if currentOrientation is "vertical" then attrs.leftText else attrs.rightText
+                scope.$digest()
 
                 accessObject = (object, string) ->
                     properties = string.split(".")
@@ -48,9 +47,8 @@
                 }).off('slidechange').on('slidechange', (event, ui) ->
                     return unless ui.value? and not isNaN(ui.value) and not falseZero
 
-                    scope.$apply( ->
-                        scope.setQuestionAnswer(scope.question, ui.value)
-                    )
+                    scope.setQuestionAnswer(scope.question, ui.value)
+                    scope.$apply()
                 )
                 .slider("pips", {
                         rest: "label"

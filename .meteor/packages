@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 linto:jquery-ui
-meteor-platform
 coffeescript
 mquandalle:jade
 civilframe:angular-jade
@@ -25,5 +24,24 @@ new3rs:html2canvas
 dsyko:jquery-ui-touch-punch
 tmeasday:publish-counts
 accounts-password
-meteorhacks:kadira
-meteorhacks:zones
+pfafman:filesaver
+meteorhacks:npm
+
+
+npm-container
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+planettraining:material-design-icons
+arboleya:electrify
