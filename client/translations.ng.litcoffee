@@ -47,6 +47,11 @@
                 "Próximamente"
             ]
 
+            example: [
+                "Exemple"
+                "Ejemplo"
+            ]
+
         tO.whoWeAre =
             whoWeAreMainText: [
                 "El teu Vot és una Aplicació d’Orientació del Vot \

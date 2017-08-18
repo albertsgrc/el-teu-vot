@@ -5,5 +5,8 @@
     p#welcomeText(translate="welcomeText")
 
     //p#soonText.text-uppercase(translate="{{ 'soonText' }}")
-    button#startButton(ng-click="goToPoliticalQuestions()")
+    button.etvButton(ng-click="goToPoliticalQuestions()")
         span.text-uppercase(translate="welcomeStart")
+
+    button.etvButton#exampleButton(ng-click="goToExample()")
+        span.text-uppercase(translate="example")

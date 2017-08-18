@@ -63,6 +63,8 @@
         csv
 
     Meteor.methods(
+        getResult: -> Results.findOne({}, { fields: { _id: 1 } })?._id
+
         getAllResults: ->
             if @userId? and @userId is Meteor.users.findOne({ username: 'admin' })._id
                 csv = toCsv(Results.find({}, { fields: { _id: 1, political: 1, personal: 1, createdAt: 1 }, sort: { createdAt: 1 } }).fetch())

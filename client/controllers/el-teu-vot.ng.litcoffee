@@ -1,6 +1,6 @@
 # El teu Vot controller
 
-    elTeuVotCtrl = ($scope, $meteor, $state, $stateParams, $timeout) ->
+    elTeuVotCtrl = ($scope, $meteor, $state, $stateParams, $timeout, $location) ->
         ga('send', 'pageview', '/')
 
         $scope.count = 0
@@ -14,4 +14,10 @@
         $scope.goToPoliticalQuestions = ->
             $timeout(-> $state.go('politicalQuestions'))
 
-    app.controller('ElTeuVotCtrl', ['$scope', '$meteor', '$state', '$stateParams', '$timeout', elTeuVotCtrl])
+        $scope.goToExample = ->
+            $meteor.call('getResult').then((id) ->
+                console.log id
+                $location.path("/resultats/#{id}")
+            )
+
+    app.controller('ElTeuVotCtrl', ['$scope', '$meteor', '$state', '$stateParams', '$timeout', '$location', elTeuVotCtrl])
