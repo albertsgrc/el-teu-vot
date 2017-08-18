@@ -1,2 +1,3 @@
-# ETV
-Repositori de la pàgina web El Teu Vot
+# El Teu Vot
+
+A Voting Advice Application for the 27 September Catalan Parliamentary Election http://www.elteuvot.cat
